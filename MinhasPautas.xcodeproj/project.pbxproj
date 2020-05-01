@@ -26,6 +26,8 @@
 		0F9A8D27245C8A3A005B2E2B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A8D26245C8A3A005B2E2B /* GoogleService-Info.plist */; };
 		0F9A8D2B245C986A005B2E2B /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D2A245C986A005B2E2B /* RegisterViewModel.swift */; };
 		0F9A8D2D245C9E48005B2E2B /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D2C245C9E48005B2E2B /* RegisterModel.swift */; };
+		0F9A8D30245CB26D005B2E2B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */; };
+		0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */; };
 		5A0BBEB9CDD8F307824085B2 /* Pods_MinhasPautasUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A15F63711F02DE65337747CA /* Pods_MinhasPautasUITests.framework */; };
 		89DB636853A73D7DD37F8C5C /* Pods_MinhasPautas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D157D14C59AED33859E767 /* Pods_MinhasPautas.framework */; };
 		C44309197BCFC13C43D798D6 /* Pods_MinhasPautasTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02EAA2503BDB5CA0F1E9A19 /* Pods_MinhasPautasTests.framework */; };
@@ -74,6 +76,8 @@
 		0F9A8D26245C8A3A005B2E2B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F9A8D2A245C986A005B2E2B /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		0F9A8D2C245C9E48005B2E2B /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		306C1DF2BA0A57041AA2FE96 /* Pods-MinhasPautas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinhasPautas.debug.xcconfig"; path = "Target Support Files/Pods-MinhasPautas/Pods-MinhasPautas.debug.xcconfig"; sourceTree = "<group>"; };
 		674AAA9380FD49084D4A5D79 /* Pods-MinhasPautasUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinhasPautasUITests.debug.xcconfig"; path = "Target Support Files/Pods-MinhasPautasUITests/Pods-MinhasPautasUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B6A3E20A79EA4CB223DEC82 /* Pods-MinhasPautasTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinhasPautasTests.debug.xcconfig"; path = "Target Support Files/Pods-MinhasPautasTests/Pods-MinhasPautasTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				0F9A8D24245C72AE005B2E2B /* StringExt.swift */,
+				0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				0F3BB69E245BC09F00CFF81D /* ResetPasswordViewController.swift */,
+				0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */,
 			);
 			path = ResetPassword;
 			sourceTree = "<group>";
@@ -464,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */,
 				0F3BB69D245BC07A00CFF81D /* RegisterViewController.swift in Sources */,
 				0F9A8D25245C72AE005B2E2B /* StringExt.swift in Sources */,
 				0F3BB694245B9FEA00CFF81D /* LoginViewController.swift in Sources */,
@@ -473,6 +480,7 @@
 				0F3BB667245B32C400CFF81D /* MinhasPautas.xcdatamodeld in Sources */,
 				0F3BB692245B72D200CFF81D /* LoginViewModel.swift in Sources */,
 				0F9A8D2D245C9E48005B2E2B /* RegisterModel.swift in Sources */,
+				0F9A8D30245CB26D005B2E2B /* ResetPasswordViewModel.swift in Sources */,
 				0F3BB69F245BC09F00CFF81D /* ResetPasswordViewController.swift in Sources */,
 				0F3BB65F245B32C400CFF81D /* AppDelegate.swift in Sources */,
 				0F3BB699245BADD700CFF81D /* Constants.swift in Sources */,

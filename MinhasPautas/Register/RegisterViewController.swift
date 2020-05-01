@@ -24,6 +24,7 @@ class RegisterViewController: UIViewController {
     
     // Variables and Constants
     var registerViewModel: RegisterViewModel?
+    private var spinner: UIView? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
         guard let _ = registerViewModel else { fatalError("ViewModel not implemented") }
+        spinner = self.view.showSpinnerGray()
         let registerData = RegisterModel(
             name: name.text ?? "hugao pelo app",
             email: email.text ?? "hugo2@gmail.com",
@@ -49,12 +51,14 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController: RegisterViewControlerDelegate {
     func registerSuccess() {
+        spinner?.removeSpinner()
         "Seu cadastro foi finalizado com sucesso. Você já pode realizar o login com sua nova conta.".alert(self, title: "Cadastro realizado com sucesso") { UIAlertAction in
             self.dismiss(animated: true, completion: nil)
         }
     }
     
     func registerError(message: String) {
+        spinner?.removeSpinner()
         message.alert(self)
     }
 }

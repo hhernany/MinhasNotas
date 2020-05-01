@@ -48,7 +48,6 @@ struct LoginViewModel {
                 self.loginError(message: errorMessage)
                 return
             }
-            
             // POST DATA
             // ESSE NOME NÃO VAI TER MAIS NO LOGIN DEPOIS QUE FIZER A NOVA API
 //            "nome": userData.displayName ?? "",

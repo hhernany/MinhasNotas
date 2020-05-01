@@ -15,11 +15,14 @@ protocol LoginViewControlerDelegate: class {
 
 class LoginViewController: UIViewController {
 
+    // Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    // Variables and Constants
     var loginViewModel: LoginViewModel?
-    
+    private var spinner: UIView? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
@@ -33,6 +36,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func didTapConnectButton(_ sender: UIButton) {
         guard let _ = loginViewModel else { fatalError("ViewModel not implemented")}
+        spinner = self.view.showSpinnerGray()
         guard let email = emailTextField.text else {
             "Informe o e-mail de acesso.".alert(self)
             return
@@ -41,20 +45,20 @@ class LoginViewController: UIViewController {
             "Informe a senha de acesso.".alert(self)
             return
         }
-        print("chamando o send Credentials")
-        //loginViewModel?.sendCredentials(email: email, password: password)
-        loginViewModel?.sendCredentials(email: "hugo@gmail.com", password: "123456")
+        loginViewModel?.sendCredentials(email: email, password: password)
     }
 }
 
 extension LoginViewController: LoginViewControlerDelegate {
     func loginSuccess() {
+        spinner?.removeSpinner()
+        // Chamar a segue pra tela seguinte
         "LOGIN FEITO COM SUCESSO - CONFERIR NO BANCO".alert(self)
         // activityIndicator.stopAnimating()
     }
     
     func loginError(message: String) {
+        spinner?.removeSpinner()
         message.alert(self)
-        // activityIndicator.stopAnimating()
     }
 }
