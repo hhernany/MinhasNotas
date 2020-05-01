@@ -22,5 +22,5 @@ struct LoginModel: Codable {
         let foto: String?
     }
     
-    let user: [Usuario]
+    let user: [User]
 }

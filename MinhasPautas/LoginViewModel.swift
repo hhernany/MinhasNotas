@@ -61,6 +61,6 @@ extension LoginViewModel: LoginViewModelDelegate {
     // Talvez criar um completion handler aqui, que ao finalizar a execução da chamada da API, executar a closure passada.
     // Onde a closure será mostrar ou não mostrar os spinners de carregamento por exemplo. Algo assim.
     func sendCredentials(email: String, password: String) {
-        performLogin(email: email, password: password)
+        //performLogin(email: email, password: password)
     }
 }

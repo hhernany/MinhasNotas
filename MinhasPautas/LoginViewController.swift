@@ -14,6 +14,9 @@ protocol LoginViewControlerDelegate: class {
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     var loginViewModel: LoginViewModel?
     
     override func viewDidLoad() {
