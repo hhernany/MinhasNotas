@@ -10,7 +10,8 @@ import Foundation
 import Moya
 
 public enum LoginAPI {
-    case login(email: String, password: String)
+    case login(data: [String:String])
+    case register(data: [String:String])
 }
 
 extension LoginAPI: TargetType {
@@ -23,12 +24,14 @@ extension LoginAPI: TargetType {
         switch self {
         case .login:
             return "login"
+        case .register:
+            return "login" // Aqui tem que mudar para a nova api de registrar
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .login:
+        case .login, .register:
             return .post
         }
     }
@@ -39,9 +42,8 @@ extension LoginAPI: TargetType {
     
     public var task: Task {
         switch self {
-        case .login(let email, let password):
-            // Aqui tem que ver como que faz um POST
-            return .requestPlain
+        case .login(let data), .register(let data):
+            return .requestParameters(parameters: data, encoding: JSONEncoding.default)
         }
     }
     

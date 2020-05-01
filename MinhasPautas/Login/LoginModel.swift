@@ -12,15 +12,11 @@ struct LoginModel: Codable {
     let success: Bool
     let message: String
     let token_jwt: String
-    
+    let usuario: User
+
     struct User: Codable {
-        let id_usuario: Int
         let nome: String
-        let sobrenome: String?
         let email: String
         let receber_notificacao: String
-        let foto: String?
     }
-    
-    let user: [User]
 }

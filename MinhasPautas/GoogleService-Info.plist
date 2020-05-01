@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>360666682698-91dfn0h5a5jg50n7kefqn3f04l96f95m.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.360666682698-91dfn0h5a5jg50n7kefqn3f04l96f95m</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDUex81E0Qs_sbtj7cc9OBUAh8WR44Z0EU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>360666682698</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hugohernany.MinhasPautas</string>
+	<key>PROJECT_ID</key>
+	<string>minhasnotas</string>
+	<key>STORAGE_BUCKET</key>
+	<string>minhasnotas.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:360666682698:ios:ec6d526278872a976d1db3</string>
+	<key>DATABASE_URL</key>
+	<string>https://minhasnotas.firebaseio.com</string>
+</dict>
+</plist>

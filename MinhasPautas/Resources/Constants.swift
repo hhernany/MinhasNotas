@@ -24,3 +24,8 @@ struct Network {
 struct Segue {
     static let issuesToDetail = "issueDetailSegue"
 }
+
+// Login error code
+struct LoginError {
+
+}
