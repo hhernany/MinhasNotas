@@ -14,6 +14,9 @@ protocol SchedulesViewModelDelegate: class {
     func getInitialData()
     func getMoreData()
     func updateTableView()
+    func hideResultLabel(state: Bool)
+    func expandedCell(index: Int, status: Bool)
+    func updateScheduleStatus(index: Int, status: String)
 }
 
 class SchedulesViewModel {
@@ -34,7 +37,7 @@ class SchedulesViewModel {
             
             switch result {
             case .success(let response):
-                print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any])
+                //print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any])
                 do {
                     self?.schedulesList += try response.map(SchedulesResults<SchedulesModel>.self).items
                     self?.updateTableView()
@@ -48,6 +51,10 @@ class SchedulesViewModel {
             }
         }
     }
+    
+    private func updateStatus() {
+        
+    }
 }
 
 extension SchedulesViewModel: SchedulesViewModelDelegate {
@@ -59,10 +66,8 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
     }
     
     func getMoreData() {
-        print("more data")
         // Dont make recursive call while scrolling tableView/collectionView.
         if isLoading {
-            print("is loading está ativo ainda")
             return
         }
         isLoading = true
@@ -86,8 +91,16 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
         }
     }
     
-    func expandedCell(status: Bool, index: Int) {
+    func expandedCell(index: Int, status: Bool) {
         schedulesList[index].expandedCell(status)
+    }
+    
+    // Status: Aberto e Fechado
+    func updateScheduleStatus(index: Int, status: String) {
+        let newStatus = schedulesList[index].status == "Fechado" ? "Aberto" : "Fechado"
+        schedulesList[index].updateStatus(newStatus)
+        viewModelDelegate?.reloadTableView()
+        // AGORA CHAMAR A API DE STATUS AQUI
     }
 }
 
