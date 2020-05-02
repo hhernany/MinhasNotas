@@ -29,6 +29,8 @@
 		0F9A8D30245CB26D005B2E2B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */; };
 		0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */; };
 		0F9A8D37245CC02B005B2E2B /* Schedules.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */; };
+		0FB4947B245DB0320079201D /* SchedulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB49479245DB0320079201D /* SchedulesTableViewCell.swift */; };
+		0FB4947C245DB0320079201D /* SchedulesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FB4947A245DB0320079201D /* SchedulesTableViewCell.xib */; };
 		0FEBF488245CF3C4009E3F19 /* SchedulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEBF487245CF3C4009E3F19 /* SchedulesViewController.swift */; };
 		0FEBF48B245CF64E009E3F19 /* SchedulesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEBF48A245CF64E009E3F19 /* SchedulesAPI.swift */; };
 		0FEBF48D245CFAE4009E3F19 /* SchedulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEBF48C245CFAE4009E3F19 /* SchedulesViewModel.swift */; };
@@ -84,6 +86,8 @@
 		0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Schedules.storyboard; sourceTree = "<group>"; };
+		0FB49479245DB0320079201D /* SchedulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesTableViewCell.swift; sourceTree = "<group>"; };
+		0FB4947A245DB0320079201D /* SchedulesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchedulesTableViewCell.xib; sourceTree = "<group>"; };
 		0FEBF487245CF3C4009E3F19 /* SchedulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesViewController.swift; sourceTree = "<group>"; };
 		0FEBF48A245CF64E009E3F19 /* SchedulesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesAPI.swift; sourceTree = "<group>"; };
 		0FEBF48C245CFAE4009E3F19 /* SchedulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesViewModel.swift; sourceTree = "<group>"; };
@@ -238,12 +242,22 @@
 		0F9A8D33245CBE94005B2E2B /* Schedules */ = {
 			isa = PBXGroup;
 			children = (
+				0FB49478245DAFD80079201D /* Cells */,
 				0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */,
 				0FEBF487245CF3C4009E3F19 /* SchedulesViewController.swift */,
 				0FEBF48C245CFAE4009E3F19 /* SchedulesViewModel.swift */,
 				0FEBF48E245CFED7009E3F19 /* SchedulesModel.swift */,
 			);
 			path = Schedules;
+			sourceTree = "<group>";
+		};
+		0FB49478245DAFD80079201D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0FB49479245DB0320079201D /* SchedulesTableViewCell.swift */,
+				0FB4947A245DB0320079201D /* SchedulesTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		0FEBF489245CF633009E3F19 /* Network */ = {
@@ -388,6 +402,7 @@
 			files = (
 				0F3BB69B245BB10100CFF81D /* Login.storyboard in Resources */,
 				0F9A8D37245CC02B005B2E2B /* Schedules.storyboard in Resources */,
+				0FB4947C245DB0320079201D /* SchedulesTableViewCell.xib in Resources */,
 				0F3BB66C245B32C500CFF81D /* LaunchScreen.storyboard in Resources */,
 				0F9A8D27245C8A3A005B2E2B /* GoogleService-Info.plist in Resources */,
 				0F3BB669245B32C500CFF81D /* Assets.xcassets in Resources */,
@@ -502,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FB4947B245DB0320079201D /* SchedulesTableViewCell.swift in Sources */,
 				0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */,
 				0F3BB69D245BC07A00CFF81D /* RegisterViewController.swift in Sources */,
 				0F9A8D25245C72AE005B2E2B /* StringExt.swift in Sources */,

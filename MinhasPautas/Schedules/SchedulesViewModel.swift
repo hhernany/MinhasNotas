@@ -31,9 +31,10 @@ class SchedulesViewModel {
     
     private func getData() {
         provider.request(.getData(page: page)) { [weak self] result in
-            print("hugo")
+            
             switch result {
             case .success(let response):
+                print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any])
                 do {
                     self?.schedulesList += try response.map(SchedulesResults<SchedulesModel>.self).items
                     self?.updateTableView()
@@ -58,8 +59,10 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
     }
     
     func getMoreData() {
+        print("more data")
         // Dont make recursive call while scrolling tableView/collectionView.
         if isLoading {
+            print("is loading está ativo ainda")
             return
         }
         isLoading = true
@@ -68,17 +71,23 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
     }
     
     func updateTableView() {
+        isLoading = false
         viewModelDelegate?.reloadTableView()
     }
     
     // Show message only when there are no results (when list is empty).
     func hideResultLabel(state: Bool) {
+        isLoading = false
         if schedulesList.count == 0 {
             viewModelDelegate?.reloadTableView()
             viewModelDelegate?.resultLabelIsHidden(state: false, message: "Você ainda não possui nenhuma pauta cadastrada.")
         } else {
             viewModelDelegate?.reloadTableView()
         }
+    }
+    
+    func expandedCell(status: Bool, index: Int) {
+        schedulesList[index].expandedCell(status)
     }
 }
 

@@ -22,7 +22,8 @@ class SchedulesViewController: UIViewController {
     // Variables and Constants
     var schedulesViewModel: SchedulesViewModel?
     private var spinner: UIView? = nil
-
+    private var lastCellOpen: IndexPath?
+    
     // Refresh Control
     private lazy var refreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
@@ -32,6 +33,14 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
         schedulesViewModel = SchedulesViewModel(delegate: self)
         setupLayout()
         getSchedules()
@@ -39,7 +48,7 @@ class SchedulesViewController: UIViewController {
     
     func setupLayout() {
         noResultLabel.isHidden = true
-        //tableView.register(UINib(nibName: "SchedulesTableViewCell", bundle: nil), forCellReuseIdentifier: "schedulesCell")
+        tableView.register(UINib(nibName: "SchedulesTableViewCell", bundle: nil), forCellReuseIdentifier: "scheduleCell")
         tableView.refreshControl = refreshControl
         tableView.tableFooterView = UIView() // Remove blank lines in tableView footer
     }
@@ -58,7 +67,11 @@ class SchedulesViewController: UIViewController {
 
 extension SchedulesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,16 +79,25 @@ extension SchedulesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "schedulesCell", for: indexPath) as! SchedulesTableViewCell
-//        cell.scheduleModel = schedulesViewModel.schedulesList[indexPath.row]
-//        return cell
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! SchedulesTableViewCell
+        cell.scheduleModel = schedulesViewModel?.schedulesList[indexPath.row]
+        return cell
     }
 }
 
 extension SchedulesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: "issueDetailSegue", sender: self)
+        // Colapse last cell open
+        if lastCellOpen != nil && lastCellOpen?.row != indexPath.row {
+            schedulesViewModel?.expandedCell(status: false, index: lastCellOpen!.row)
+            tableView.reloadRows(at: [lastCellOpen!], with: .fade)
+        }
+        
+        // Expand/Colapse cell
+        schedulesViewModel?.expandedCell(status: !schedulesViewModel!.schedulesList[indexPath.row].expanded, index: indexPath.row)
+        tableView.reloadRows(at: [indexPath], with: .fade)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true) // Testando se o resultado fica legal
+        lastCellOpen = indexPath // Update last cell open
     }
 }
 
@@ -89,14 +111,6 @@ extension SchedulesViewController: UIScrollViewDelegate {
 }
 
 extension SchedulesViewController: SchedulesViewControlerDelegate {
-    // Situações
-    // 1 - Tentei obter e não achou nada. Tem que remover o spinner (Não precisa do reloadData)
-    // 2 - Tentar obter e achar dados. Precisa remover o spinner.
-    // 3 - Quando obter mais dados enquanto rola, não vai ter spinner (Então não precisa remover aqui)
-    // 4 - Quando eu puxar um handleRefresh, ele não vai ter spinner (Então não precisa remover aqui).
-    
-    // Resumindo - Só vai ter um spinner aqui na primeira vez que chamar.
-    // Atualizando - Depois que atualizar o status de uma pauta expandida, a tableView vai ser recarregada, mas não precisa de spinner também. Vai atualizar só localmente e dar reloadData().
     func reloadTableView() {
         spinner?.removeSpinner() // Só vai ser chamado se tiver um spinner ativo. Então não tem problema ser chamado aqui sempre.
         refreshControl.endRefreshing()
