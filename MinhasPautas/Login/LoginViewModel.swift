@@ -28,6 +28,7 @@ struct LoginViewModel {
     init(delegate: LoginViewControlerDelegate?) {
         viewModelDelegate = delegate
         self.logoutUserFirebase()
+        self.removeLocalData()
     }
     
     // Logout user on Firebase when loginVC are presented.
@@ -36,6 +37,26 @@ struct LoginViewModel {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
+        }
+    }
+    
+    // Save local data (UserDefaults)
+    private func saveLocalData(data: LoginModel) {
+        UserDefaults.standard.set(data.token_jwt, forKey: "token_jwt")
+        UserDefaults.standard.set(data.usuario.nome, forKey: "nome_usuario")
+        UserDefaults.standard.set(data.usuario.email, forKey: "email_usuario")
+    }
+    
+    // Remove local data from UserDefaults
+    private func removeLocalData() {
+        let chaves = [
+            "nome_usuario",
+            "token_jwt",
+            "email_usuario"
+        ]
+        
+        for key in chaves {
+            UserDefaults.standard.removeObject(forKey: key)
         }
     }
     
@@ -48,15 +69,11 @@ struct LoginViewModel {
                 self.loginError(message: errorMessage)
                 return
             }
+            
             // POST DATA
-            // ESSE NOME NÃO VAI TER MAIS NO LOGIN DEPOIS QUE FIZER A NOVA API
-//            "nome": userData.displayName ?? "",
-
             let data: [String:String] = [
-                "nome": userData.displayName ?? "TESTANDO PELO APP",
                 "email": email,
-                "token_autenticacao": userData.uid,
-                "token_notificacao": "NOTIFICACAO TESTE"
+                "token_autenticacao": userData.uid
             ]
             
             self.performLogin(data)
@@ -73,18 +90,22 @@ struct LoginViewModel {
                         self.loginError(message: login.message)
                         return
                     }
+                    self.saveLocalData(data: login)
                     self.loginSuccess()
                 } catch {
-//                    {
-//                        message = "Informe o nome do usu\U00e1rio";
-//                        success = 0;
-//                    }
-                    // QUANDO UM CAMPO TA FALTANDO VEM ISSO ACIMA. CONFERIR.
-                    self.loginError(message: "Não foi possível realizar o login. Por favor, entre em contato com o suporte.")
-                    print("Erro ao mapear resultados: \(error.localizedDescription)")
+                    guard let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any] else {
+                        self.loginError(message: "Não foi possível realizar o login. Por favor, tente novamente mais tarde.")
+                        return
+                    }
+                    if json["success"] as? Bool == false {
+                        self.loginError(message: json["message"] as? String ?? "Não foi possível realizar o login. Por favor, tente novamente mais tarde.")
+                        return
+                    }
+                    print(json)
+                    print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
                 }
             case .failure:
-                self.loginError(message: "Não foi possível realizar o login. Por favor, entre em contato com o suporte.")
+                self.loginError(message: "Não foi possível realizar o login. Por favor, tente novamente mais tarde.")
                 print("Erro ao obter dados: \(result.error.debugDescription)")
             }
         }
@@ -93,14 +114,14 @@ struct LoginViewModel {
     // Firebase error code
     private func firebaseErrorCode(_ error: NSError) -> String {
         switch error.code {
-        case 17008:
-            return "E-mail inválido."
-        case 17009:
-            return "Senha inválida."
-        case 17011:
+        case AuthErrorCode.invalidEmail.rawValue:
+            return "O e-mail informado não é uma e-mail válido."
+        case AuthErrorCode.wrongPassword.rawValue:
+            return "A senha informada está incorreta."
+        case AuthErrorCode.userNotFound.rawValue:
             return "Conta não cadastrada."
         default:
-            return "Não foi possível realizar o login. Por favor, tente novamente."
+            return "Não foi possível realizar o login. Por favor, tente novamente mais tarde."
         }
     }
 }
@@ -115,8 +136,18 @@ extension LoginViewModel: LoginViewModelDelegate {
     }
     
     func sendCredentials(email: String, password: String) {
+        if email.isEmpty {
+            loginError(message: "Informe o e-mail de acesso.")
+            return
+        }
+        if !email.contains(".") || !email.contains("@") {
+            loginError(message: "E-mail inválido.")
+        }
+        if password.isEmpty {
+            loginError(message: "Informe a senha de acesso.")
+            return
+        }
         loginFirebase(email: email, password: password)
     }
-
 }
 

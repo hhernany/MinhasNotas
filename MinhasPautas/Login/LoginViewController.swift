@@ -37,24 +37,14 @@ class LoginViewController: UIViewController {
     @IBAction func didTapConnectButton(_ sender: UIButton) {
         guard let _ = loginViewModel else { fatalError("ViewModel not implemented")}
         spinner = self.view.showSpinnerGray()
-        guard let email = emailTextField.text else {
-            "Informe o e-mail de acesso.".alert(self)
-            return
-        }
-        guard let password = passwordTextField.text else {
-            "Informe a senha de acesso.".alert(self)
-            return
-        }
-        loginViewModel?.sendCredentials(email: email, password: password)
+        loginViewModel?.sendCredentials(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
     }
 }
 
 extension LoginViewController: LoginViewControlerDelegate {
     func loginSuccess() {
         spinner?.removeSpinner()
-        // Chamar a segue pra tela seguinte
-        "LOGIN FEITO COM SUCESSO - CONFERIR NO BANCO".alert(self)
-        // activityIndicator.stopAnimating()
+        performSegue(withIdentifier: Segue.loginToMain, sender: self)
     }
     
     func loginError(message: String) {

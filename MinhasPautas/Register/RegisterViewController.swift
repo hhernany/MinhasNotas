@@ -39,11 +39,11 @@ class RegisterViewController: UIViewController {
         guard let _ = registerViewModel else { fatalError("ViewModel not implemented") }
         spinner = self.view.showSpinnerGray()
         let registerData = RegisterModel(
-            name: name.text ?? "hugao pelo app",
-            email: email.text ?? "hugo2@gmail.com",
-            emailConfirmation: emailConfirmation.text ?? "hugo2@gmail.com",
-            password: password.text ?? "12345678",
-            passwordConfirmation: passwordConfirmation.text ?? "12345678"
+            name: name.text ?? "",
+            email: email.text ?? "",
+            emailConfirmation: emailConfirmation.text ?? "",
+            password: password.text ?? "",
+            passwordConfirmation: passwordConfirmation.text ?? ""
             )
         registerViewModel?.sendCredentials(data: registerData)
     }

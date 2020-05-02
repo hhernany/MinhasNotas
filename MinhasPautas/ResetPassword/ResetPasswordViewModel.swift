@@ -44,7 +44,7 @@ struct ResetPasswordViewModel {
     // Firebase error code
     private func firebaseRegisterErrorCode(_ error: NSError) -> String {
         switch error.code {
-        case AuthErrorCode.userNotFound.rawValue:
+        case AuthErrorCode.invalidEmail.rawValue:
             return "E-mail informado não cadastrado. Confira os dados informados e tente novamente."
         case AuthErrorCode.userNotFound.rawValue:
             return "Usuário não encontrado. Confira os dados informados e tente novamente."
@@ -61,6 +61,9 @@ extension ResetPasswordViewModel: ResetPasswordViewModelDelegate {
         if email.isEmpty == true {
             resetError(message: "Informe o email.")
             return
+        }
+        if !email.contains(".") || !email.contains("@") {
+            resetError(message: "E-mail inválido.")
         }
         resetPassword(email: email)
     }

@@ -43,8 +43,7 @@ struct RegisterViewModel {
             let userData: [String:String] = [
                 "nome": registerData.name,
                 "email": registerData.email,
-                "token_autenticacao": user.uid,
-                "token_notificacao": "CADASTRO NOTIFICACAO" // TIRAR MESMO PQ PRA FUNCIONAR PRECISARIA SUBIR PRA APPLE STORE POR CAUSA DO CERTIFICADO
+                "token_autenticacao": user.uid
             ]
             self.registerDatabase(userData)
         }
@@ -55,7 +54,6 @@ struct RegisterViewModel {
             switch result {
             case .success(let response):
                 do {
-                    print(try! response.mapJSON())
                     let login = try response.map(LoginModel.self)
                     if login.success == false {
                         self.registerError(message: login.message)
@@ -63,16 +61,19 @@ struct RegisterViewModel {
                     }
                     self.registerSuccess()
                 } catch {
-                    //                    {
-                    //                        message = "Informe o nome do usu\U00e1rio";
-                    //                        success = 0;
-                    //                    }
-                    // QUANDO UM CAMPO TA FALTANDO VEM ISSO ACIMA. CONFERIR.
-                    self.registerError(message: "Não foi possível finalizar o cadastro. Por favor, entre em contato com o suporte.")
-                    print("Erro ao mapear resultados: \(error.localizedDescription)")
+                    guard let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any] else {
+                        self.registerError(message: "Não foi possível finalizar o cadastro. Por favor, tente novamente mais tarde.")
+                        return
+                    }
+                    if json["success"] as? Bool == false {
+                        self.registerError(message: json["message"] as? String ?? "Não foi possível finalizar o cadastro. Por favor, tente novamente mais tarde.")
+                        return
+                    }
+                    print(json)
+                    print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
                 }
             case .failure:
-                self.registerError(message: "Não foi possível finalizar o cadastro. Por favor, entre em contato com o suporte.")
+                self.registerError(message: "Não foi possível finalizar o cadastro. Por favor, tente novamente mais tarde.")
                 print("Erro ao obter dados: \(result.error.debugDescription)")
             }
         }
@@ -81,14 +82,16 @@ struct RegisterViewModel {
     // Firebase error code
     private func firebaseRegisterErrorCode(_ error: NSError) -> String {
         switch error.code {
-        case 17026:
+        case AuthErrorCode.weakPassword.rawValue:
             return "Senha muito fraca. Informe uma senha mais segura."
-        case 17007:
+        case AuthErrorCode.emailAlreadyInUse.rawValue:
             return "E-mail já possui cadastro. Caso tenha esquecido a sua senha, você pode resetá-la através da tela de Login."
-        case 17008:
+        case AuthErrorCode.invalidEmail.rawValue:
             return "O e-mail informado não é uma e-mail válido."
+        case AuthErrorCode.missingEmail.rawValue:
+            return "E-mail não informado."
         default:
-            return "Não foi possível realizar o login. Por favor, tente novamente. Erro desconhecido."
+            return "Não foi possível finalizar o cadastro. Por favor, tente novamente mais tarde."
         }
     }
 }
@@ -102,6 +105,9 @@ extension RegisterViewModel: RegisterViewModelDelegate {
         if data.email.isEmpty == true {
             registerError(message: "Informe o email.")
             return
+        }
+        if !data.email.contains(".") || !data.email.contains("@") {
+            registerError(message: "E-mail inválido.")
         }
         if data.emailConfirmation.isEmpty == true {
             registerError(message: "Informe a confirmação do e-mail.")

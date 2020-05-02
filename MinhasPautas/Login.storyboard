@@ -138,11 +138,20 @@
                     <connections>
                         <outlet property="emailTextField" destination="FIw-A5-VGc" id="qVn-NU-H75"/>
                         <outlet property="passwordTextField" destination="jeA-9u-nMS" id="XHb-hX-kFG"/>
+                        <segue destination="qUf-T2-jZG" kind="show" identifier="mainSegue" id="X2c-If-hSJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ae0-wf-voY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="100" y="125.4872563718141"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="pNF-Uh-CvU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="qUf-T2-jZG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nfV-86-S4H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="855" y="125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Syq-dm-Xx1">

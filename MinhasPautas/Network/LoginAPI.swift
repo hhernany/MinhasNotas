@@ -25,7 +25,7 @@ extension LoginAPI: TargetType {
         case .login:
             return "login"
         case .register:
-            return "login" // Aqui tem que mudar para a nova api de registrar
+            return "register"
         }
     }
     
