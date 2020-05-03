@@ -59,6 +59,12 @@ extension SchedulesAPI: TargetType {
     }
     
     public var headers: [String : String]? {
-        return Network.Headers.contentTypeWithAuthJSON
+        var header = Network.Headers.contentTypeWithAuthJSON
+        header["x-auth-token"] = UserDefaults.standard.object(forKey: "token_jwt") as? String ?? ""
+        print("printandLKAJDLSJALDJALSJDLASJDLKJASDLK")
+        print("printandLKAJDLSJALDJALSJDLASJDLKJASDLK")
+        print("printandLKAJDLSJALDJALSJDLASJDLKJASDLK")
+        print(header)
+        return header
     }
 }

@@ -37,14 +37,9 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+        print("TOKEN NA LISTAGEM: \(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "") ")
+        print("TOKEN NA LISTAGEM: \(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "") ")
+        print("NOME NA LISTAGEM: \(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "") ")
         schedulesViewModel = SchedulesViewModel(delegate: self)
         setupLayout()
         getSchedules()

@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     // Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var connectButton: UIButton!
     
     // Variables and Constants
     var loginViewModel: LoginViewModel?
@@ -27,6 +28,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
 
+        connectButton.layer.cornerRadius = 10
+        connectButton.layer.borderWidth = 1
+        connectButton.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
         loginViewModel = LoginViewModel(delegate: self)
     }
     
