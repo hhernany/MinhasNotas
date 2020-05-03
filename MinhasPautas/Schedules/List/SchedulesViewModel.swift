@@ -15,8 +15,8 @@ protocol SchedulesViewModelDelegate: class {
     func getMoreData()
     func updateTableView()
     func hideResultLabel(state: Bool)
-    func expandedCell(index: Int, status: Bool)
-    func updateScheduleStatus(index: Int, status: String)
+    func expandedCell(index: Int, type: String, status: Bool)
+    func updateScheduleStatus(index: Int, listType: String)
 }
 
 class SchedulesViewModel {
@@ -24,6 +24,8 @@ class SchedulesViewModel {
     var viewModelDelegate: SchedulesViewControlerDelegate? // AQUI TEORICAMENTE TEM QUE SER WEAK - VER O VIDEO DO CAREQUINHA QUE LÁ TEM ISSO E UM COMENTARIO DO CARA.
     fileprivate let provider = MoyaProvider<SchedulesAPI>()
     fileprivate(set) var schedulesList: [SchedulesModel] = [] // ISSO AQUI VAI TER QUE MUDAR. PQ NÃO VAI SER SÓ SET, VAI PODE ALTERAR TBM. (FALEI BOBAGEM?? )
+    fileprivate(set) var schedulesListOpen: [SchedulesModel] = []
+    fileprivate(set) var schedulesListClose: [SchedulesModel] = []
     fileprivate var page = 0
     fileprivate var isLoading = false
     
@@ -39,7 +41,10 @@ class SchedulesViewModel {
             case .success(let response):
                 //print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any])
                 do {
+                    // JOGADA DE MESTRE PRA NÃO DUPLICAR ITENS DA API E LOCAIS
                     self?.schedulesList += try response.map(SchedulesResults<SchedulesModel>.self).items
+                    self?.schedulesListOpen = self?.schedulesList.filter { $0.status == "Aberto" } ?? []
+                    self?.schedulesListClose = self?.schedulesList.filter { $0.status == "Fechado" } ?? []
                     self?.updateTableView()
                 } catch {
                     self?.hideResultLabel(state: true)
@@ -52,14 +57,31 @@ class SchedulesViewModel {
         }
     }
     
-    private func updateStatus() {
-        
+    private func updateStatus(data: [String:Any]) {
+        print(data)
+        provider.request(.update(data: data)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                guard let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any] else {
+                    return
+                }
+                if json["success"] as? Bool == false {
+                    self?.updateError(message: json["message"] as? String ?? "Não foi possível realizar atualizar o status. Recarrege a tela e tente novamente.")
+                    return
+                }
+            case .failure:
+                self?.updateError(message: "Não foi possível realizar atualizar o status. Recarrege a tela e tente novamente.")
+                print("Erro ao obter dados: \(result.error.debugDescription)")
+            }
+        }
     }
 }
 
 extension SchedulesViewModel: SchedulesViewModelDelegate {
     func getInitialData() {
         schedulesList.removeAll() // SE COMÇEAR A CRASHAR, OU VAI TER QUE DAR RELOAD, OU VAI TER QUE LIMPAR DENTRO DO .SUCCESS
+        schedulesListClose.removeAll()
+        schedulesListOpen.removeAll()
         page = 0
         isLoading = true
         getData()
@@ -91,16 +113,45 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
         }
     }
     
-    func expandedCell(index: Int, status: Bool) {
-        schedulesList[index].expandedCell(status)
+    func expandedCell(index: Int, type: String, status: Bool) {
+        if type == "Aberto" {
+            schedulesListOpen[index].expandedCell(status)
+        } else {
+            schedulesListClose[index].expandedCell(status)
+        }
     }
     
     // Status: Aberto e Fechado
-    func updateScheduleStatus(index: Int, status: String) {
-        let newStatus = schedulesList[index].status == "Fechado" ? "Aberto" : "Fechado"
-        schedulesList[index].updateStatus(newStatus)
+    func updateScheduleStatus(index: Int, listType: String) {
+        var newStatus: String!
+        var schedule: Int!
+        
+        if listType == "Aberto" {
+            newStatus = "Fechado"
+            schedule = schedulesListOpen[index].id_pauta
+            
+            schedulesListOpen[index].updateStatus("Fechado") // Update status
+            schedulesListClose.append(schedulesListOpen[index]) // Append in list
+            schedulesListOpen.remove(at: index) // Remove from old list
+        } else {
+            newStatus = "Aberto"
+            schedule = schedulesListClose[index].id_pauta
+            
+            schedulesListClose[index].updateStatus("Aberto") // Update status
+            schedulesListOpen.append(schedulesListClose[index]) // Append in list
+            schedulesListClose.remove(at: index) // Remove from old list
+        }
+        
+        let data: [String:Any] = [
+            "codg_pauta": schedule,
+            "status": newStatus
+        ]
+        updateStatus(data: data)
         viewModelDelegate?.reloadTableView()
-        // AGORA CHAMAR A API DE STATUS AQUI
+    }
+    
+    func updateError(message: String) {
+        viewModelDelegate?.updateError(message: message)
     }
 }
 

@@ -12,7 +12,7 @@ import Moya
 public enum SchedulesAPI {
     case getData(page: Int)
     case create(data: [String:String]) // Todos os dados de inclusão
-    case update(data: [String:String]) // Codigo da pauta e o novo status
+    case update(data: [String:Any]) // Codigo da pauta e o novo status
 }
 
 extension SchedulesAPI: TargetType {
@@ -28,7 +28,7 @@ extension SchedulesAPI: TargetType {
         case .create:
             return "pautas/incluir"
         case .update:
-            return "patuas/status"
+            return "pautas/status"
         }
     }
     
@@ -51,7 +51,9 @@ extension SchedulesAPI: TargetType {
         switch self {
         case .getData(let page):
             return .requestParameters(parameters: ["pagina": page], encoding: URLEncoding.queryString)
-        case .create(let data), .update(let data):
+        case .create(let data):
+            return .requestParameters(parameters: data, encoding: JSONEncoding.default)
+        case .update(let data):
             return .requestParameters(parameters: data, encoding: JSONEncoding.default)
         }
     }

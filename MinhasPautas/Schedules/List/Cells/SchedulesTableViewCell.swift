@@ -30,11 +30,6 @@ class SchedulesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
     
     func fillCell() {
         titleLabel.text = scheduleModel.titulo
@@ -54,6 +49,6 @@ class SchedulesTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapStatusButton(_ sender: UIButton) {
-        schedulesViewModel?.updateScheduleStatus(index: indexPath.row, status: "Fechado")
+        schedulesViewModel?.updateScheduleStatus(index: indexPath.row, listType: scheduleModel.status)
     }
 }

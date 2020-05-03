@@ -11,6 +11,7 @@ import UIKit
 protocol SchedulesViewControlerDelegate {
     func reloadTableView()
     func resultLabelIsHidden(state: Bool, message: String)
+    func updateError(message: String)
 }
 
 class SchedulesViewController: UIViewController {
@@ -72,6 +73,8 @@ class SchedulesViewController: UIViewController {
         } else {
             tabStatus = "Fechado"
         }
+        // Talvez tenha que fechar aqui tbm, chamar a função de fechar a célula antes de trocar efetivamente.
+        lastCellOpen = nil // SO ISSO AQUI JÁ FUNCIONOU, TIRAR PRA VER O QUE DA SEM ELE.
         tableView.reloadData()
     }
 }
@@ -86,19 +89,22 @@ extension SchedulesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return schedulesViewModel?.schedulesList.filter { $0.status == tabStatus }.count ?? 0
+        if tabStatus == "Aberto" {
+            return schedulesViewModel?.schedulesListOpen.count ?? 0
+        } else {
+            return schedulesViewModel?.schedulesListClose.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! SchedulesTableViewCell
         cell.schedulesViewModel = schedulesViewModel // Pass viewModel to the cell
+        cell.indexPath = indexPath
         
-        if segmentedControl.selectedSegmentIndex == 0 {
-            cell.indexPath = indexPath // indexPath for change status (Aberto / Fechado)
-            cell.scheduleModel = schedulesViewModel?.schedulesList.filter { $0.status == tabStatus }[indexPath.row]
+        if tabStatus == "Aberto" {
+            cell.scheduleModel = schedulesViewModel?.schedulesListOpen[indexPath.row]
         } else {
-            cell.indexPath = indexPath // indexPath for change status (Aberto / Fechado)
-            cell.scheduleModel = schedulesViewModel?.schedulesList.filter { $0.status == "Fechado" }[indexPath.row]
+            cell.scheduleModel = schedulesViewModel?.schedulesListClose[indexPath.row]
         }
         return cell
     }
@@ -106,20 +112,21 @@ extension SchedulesViewController: UITableViewDataSource {
 
 extension SchedulesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // TA TENDO UM BUG AQUI PORQUE TÁ PERDENDO A POSIÇÃO EM RELAÇÃO AS ABAS
-        // QUANDO VOU NA ABA E REMOVO UM ITEM, AI DEPOIS TENTO ABRIR UMA OUTRA ABA, ELE VAI TENTAR FECHAR A POSIÇÃO QUE NÃO EXISTE MAIS.
-        // EXEMPLO: ABA FECHADA TEM 2, DAI EU REABRO UMA, DE EM SEGUINDA VOLTO PRA ABA ABERTAS.
-        // QUANDO EU TENTAR ABRIR UMA NOVA CELULA, ELE VAI TENTAR FECHAR A POSIÇÃO QUE EU EXCLUI ANTERIORMENTE.
-        
         // Colapse last cell open
         if lastCellOpen != nil && lastCellOpen?.row != indexPath.row {
-            schedulesViewModel?.expandedCell(index: lastCellOpen!.row, status: false)
+            schedulesViewModel?.expandedCell(index: lastCellOpen!.row, type: tabStatus, status: false)
             tableView.reloadRows(at: [lastCellOpen!], with: .fade)
         }
         
         // Expand/Colapse cell
-        schedulesViewModel?.expandedCell(index: indexPath.row, status: !schedulesViewModel!.schedulesList[indexPath.row].expanded)
+        var newStatus: Bool
+        if tabStatus == "Aberto" {
+            newStatus = !schedulesViewModel!.schedulesListOpen[indexPath.row].expanded
+        } else {
+            newStatus = !schedulesViewModel!.schedulesListClose[indexPath.row].expanded
+
+        }
+        schedulesViewModel?.expandedCell(index: indexPath.row, type: tabStatus, status: newStatus)
         tableView.reloadRows(at: [indexPath], with: .fade)
         //tableView.scrollToRow(at: indexPath, at: .top, animated: true) // Testando se o resultado fica legal (Depois que corrigir tudo referente as abas voltar a testar)
         lastCellOpen = indexPath // Update last cell open
@@ -145,5 +152,11 @@ extension SchedulesViewController: SchedulesViewControlerDelegate {
     func resultLabelIsHidden(state: Bool, message: String = "") {
         noResultLabel.isHidden = state
         noResultLabel.text = message
+    }
+    
+    func updateError(message: String) {
+        message.alert(self, title: "Aviso") { UIAlertAction in
+            self.getSchedules()
+        }
     }
 }

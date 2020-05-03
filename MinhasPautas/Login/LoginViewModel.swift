@@ -101,7 +101,6 @@ struct LoginViewModel {
                         self.loginError(message: json["message"] as? String ?? "Não foi possível realizar o login. Por favor, tente novamente mais tarde.")
                         return
                     }
-                    print(json)
                     print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
                 }
             case .failure:

@@ -16,13 +16,14 @@ struct SchedulesModel: Codable {
     let id_pauta: Int
     let titulo: String
     let descricao: String
+    let detalhes: String
     let nome_usuario: String
     var status: String
     var expanded: Bool = false
 
     // Only fields that will be decode/encode
     enum CodingKeys: String, CodingKey {
-        case id_pauta, titulo, descricao, nome_usuario, status
+        case id_pauta, titulo, descricao, detalhes, nome_usuario, status
     }
     
     mutating func updateStatus(_ status: String) {
