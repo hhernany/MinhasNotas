@@ -24,7 +24,8 @@ class SchedulesViewController: UIViewController {
     // Variables and Constants
     var schedulesViewModel: SchedulesViewModel?
     private var spinner: UIView? = nil
-    private var lastCellOpen: IndexPath?
+    private var lastCellOpenInOpenTab: IndexPath?
+    private var lastCellOpenInCloseTab: IndexPath?
     private var tabStatus = "Aberto"
     
     // Refresh Control
@@ -68,13 +69,18 @@ class SchedulesViewController: UIViewController {
     }
     
     @IBAction func changeTab(_ sender: UISegmentedControl) {
+        resultLabelIsHidden(state: true)
         if sender.selectedSegmentIndex == 0 {
             tabStatus = "Aberto"
+            if schedulesViewModel?.schedulesListOpen.count == 0 {
+                resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta em aberto")
+            }
         } else {
             tabStatus = "Fechado"
+            if schedulesViewModel?.schedulesListClose.count == 0 {
+                resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta encerrada")
+            }
         }
-        // Talvez tenha que fechar aqui tbm, chamar a função de fechar a célula antes de trocar efetivamente.
-        lastCellOpen = nil // SO ISSO AQUI JÁ FUNCIONOU, TIRAR PRA VER O QUE DA SEM ELE.
         tableView.reloadData()
     }
 }
@@ -113,6 +119,7 @@ extension SchedulesViewController: UITableViewDataSource {
 extension SchedulesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Colapse last cell open
+        let lastCellOpen = tabStatus == "Aberto" ? lastCellOpenInOpenTab : lastCellOpenInCloseTab
         if lastCellOpen != nil && lastCellOpen?.row != indexPath.row {
             schedulesViewModel?.expandedCell(index: lastCellOpen!.row, type: tabStatus, status: false)
             tableView.reloadRows(at: [lastCellOpen!], with: .fade)
@@ -128,8 +135,18 @@ extension SchedulesViewController: UITableViewDelegate {
         }
         schedulesViewModel?.expandedCell(index: indexPath.row, type: tabStatus, status: newStatus)
         tableView.reloadRows(at: [indexPath], with: .fade)
-        //tableView.scrollToRow(at: indexPath, at: .top, animated: true) // Testando se o resultado fica legal (Depois que corrigir tudo referente as abas voltar a testar)
-        lastCellOpen = indexPath // Update last cell open
+
+        // Animate when scroll to top
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        }) { (completed) in }
+        
+        // Update last cell open
+        if tabStatus == "Aberto" {
+            lastCellOpenInOpenTab = indexPath
+        } else {
+            lastCellOpenInCloseTab = indexPath
+        }
     }
 }
 

@@ -41,7 +41,6 @@ class SchedulesViewModel {
             case .success(let response):
                 //print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any])
                 do {
-                    // JOGADA DE MESTRE PRA NÃO DUPLICAR ITENS DA API E LOCAIS
                     self?.schedulesList += try response.map(SchedulesResults<SchedulesModel>.self).items
                     self?.schedulesListOpen = self?.schedulesList.filter { $0.status == "Aberto" } ?? []
                     self?.schedulesListClose = self?.schedulesList.filter { $0.status == "Fechado" } ?? []
@@ -130,6 +129,7 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
             newStatus = "Fechado"
             schedule = schedulesListOpen[index].id_pauta
             
+            schedulesListOpen[index].expandedCell(false) // Close cell before append
             schedulesListOpen[index].updateStatus("Fechado") // Update status
             schedulesListClose.append(schedulesListOpen[index]) // Append in list
             schedulesListOpen.remove(at: index) // Remove from old list
@@ -137,6 +137,7 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
             newStatus = "Aberto"
             schedule = schedulesListClose[index].id_pauta
             
+            schedulesListClose[index].expandedCell(false) // Close cell before append
             schedulesListClose[index].updateStatus("Aberto") // Update status
             schedulesListOpen.append(schedulesListClose[index]) // Append in list
             schedulesListClose.remove(at: index) // Remove from old list

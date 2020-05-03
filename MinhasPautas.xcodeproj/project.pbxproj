@@ -32,6 +32,7 @@
 		0FB2EB25245E13D800B8F18A /* CreateScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */; };
 		0FB2EB27245E13EC00B8F18A /* CreateScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */; };
 		0FB2EB2A245E207300B8F18A /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB29245E207300B8F18A /* ResultModel.swift */; };
+		0FB2EB2D245E66DE00B8F18A /* PerfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB2C245E66DE00B8F18A /* PerfilViewController.swift */; };
 		0FB4947B245DB0320079201D /* SchedulesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB49479245DB0320079201D /* SchedulesTableViewCell.swift */; };
 		0FB4947C245DB0320079201D /* SchedulesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FB4947A245DB0320079201D /* SchedulesTableViewCell.xib */; };
 		0FB4947F245E0A430079201D /* CreateScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB4947E245E0A430079201D /* CreateScheduleViewController.swift */; };
@@ -93,6 +94,7 @@
 		0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModel.swift; sourceTree = "<group>"; };
 		0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleViewModel.swift; sourceTree = "<group>"; };
 		0FB2EB29245E207300B8F18A /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
+		0FB2EB2C245E66DE00B8F18A /* PerfilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilViewController.swift; sourceTree = "<group>"; };
 		0FB49479245DB0320079201D /* SchedulesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesTableViewCell.swift; sourceTree = "<group>"; };
 		0FB4947A245DB0320079201D /* SchedulesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchedulesTableViewCell.xib; sourceTree = "<group>"; };
 		0FB4947E245E0A430079201D /* CreateScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 		0F3BB65D245B32C400CFF81D /* MinhasPautas */ = {
 			isa = PBXGroup;
 			children = (
+				0FB2EB2B245E64E600B8F18A /* Perfil */,
 				0FEBF489245CF633009E3F19 /* Network */,
 				0F3BB697245BADC400CFF81D /* Resources */,
 				0F9A8D23245C7299005B2E2B /* Extensions */,
@@ -172,11 +175,12 @@
 				0F9A8D29245C9522005B2E2B /* Register */,
 				0F9A8D33245CBE94005B2E2B /* Schedules */,
 				0F3BB662245B32C400CFF81D /* Main.storyboard */,
+				0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */,
 				0F3BB66A245B32C500CFF81D /* LaunchScreen.storyboard */,
+				0F3BB69A245BB10100CFF81D /* Login.storyboard */,
 				0F3BB66D245B32C500CFF81D /* Info.plist */,
 				0F3BB665245B32C400CFF81D /* MinhasPautas.xcdatamodeld */,
 				0F9A8D26245C8A3A005B2E2B /* GoogleService-Info.plist */,
-				0F3BB69A245BB10100CFF81D /* Login.storyboard */,
 			);
 			path = MinhasPautas;
 			sourceTree = "<group>";
@@ -252,7 +256,6 @@
 			children = (
 				0FB2EB28245E195500B8F18A /* List */,
 				0FB4947D245E09560079201D /* RegisterSchedule */,
-				0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */,
 			);
 			path = Schedules;
 			sourceTree = "<group>";
@@ -266,6 +269,14 @@
 				0FB49478245DAFD80079201D /* Cells */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		0FB2EB2B245E64E600B8F18A /* Perfil */ = {
+			isa = PBXGroup;
+			children = (
+				0FB2EB2C245E66DE00B8F18A /* PerfilViewController.swift */,
+			);
+			path = Perfil;
 			sourceTree = "<group>";
 		};
 		0FB49478245DAFD80079201D /* Cells */ = {
@@ -551,6 +562,7 @@
 				0F3BB69D245BC07A00CFF81D /* RegisterViewController.swift in Sources */,
 				0F9A8D25245C72AE005B2E2B /* StringExt.swift in Sources */,
 				0F3BB694245B9FEA00CFF81D /* LoginViewController.swift in Sources */,
+				0FB2EB2D245E66DE00B8F18A /* PerfilViewController.swift in Sources */,
 				0FB4947F245E0A430079201D /* CreateScheduleViewController.swift in Sources */,
 				0FB2EB2A245E207300B8F18A /* ResultModel.swift in Sources */,
 				0F3BB696245BA6C400CFF81D /* LoginAPI.swift in Sources */,

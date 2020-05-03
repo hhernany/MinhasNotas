@@ -14,7 +14,7 @@
         <!--Login View Controller-->
         <scene sceneID="rTL-d8-REc">
             <objects>
-                <viewController id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginVC" id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UBQ-sa-Sku">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
