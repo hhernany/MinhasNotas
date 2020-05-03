@@ -29,6 +29,7 @@
 		0F9A8D30245CB26D005B2E2B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */; };
 		0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */; };
 		0F9A8D37245CC02B005B2E2B /* Schedules.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */; };
+		0F9FBB2D245F63B20009C9CC /* Perfil.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9FBB2C245F63B20009C9CC /* Perfil.storyboard */; };
 		0FB2EB25245E13D800B8F18A /* CreateScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */; };
 		0FB2EB27245E13EC00B8F18A /* CreateScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */; };
 		0FB2EB2A245E207300B8F18A /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB29245E207300B8F18A /* ResultModel.swift */; };
@@ -91,6 +92,7 @@
 		0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Schedules.storyboard; sourceTree = "<group>"; };
+		0F9FBB2C245F63B20009C9CC /* Perfil.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Perfil.storyboard; sourceTree = "<group>"; };
 		0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModel.swift; sourceTree = "<group>"; };
 		0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleViewModel.swift; sourceTree = "<group>"; };
 		0FB2EB29245E207300B8F18A /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
@@ -166,21 +168,14 @@
 		0F3BB65D245B32C400CFF81D /* MinhasPautas */ = {
 			isa = PBXGroup;
 			children = (
-				0FB2EB2B245E64E600B8F18A /* Perfil */,
+				0F9FBB2B245F61CD0009C9CC /* Application */,
+				0F9FBB2A245F61C10009C9CC /* Resources */,
+				0F9FBB29245F5FE80009C9CC /* View */,
+				0F9FBB28245F5FA80009C9CC /* Models */,
+				0F9FBB26245F5F110009C9CC /* ViewModels */,
+				0F9FBB27245F5F650009C9CC /* Interfaces */,
+				0F9A8D23245C7299005B2E2B /* Helpers */,
 				0FEBF489245CF633009E3F19 /* Network */,
-				0F3BB697245BADC400CFF81D /* Resources */,
-				0F9A8D23245C7299005B2E2B /* Extensions */,
-				0F9A8D28245C8C25005B2E2B /* Login */,
-				0F9A8D2E245CAF25005B2E2B /* ResetPassword */,
-				0F9A8D29245C9522005B2E2B /* Register */,
-				0F9A8D33245CBE94005B2E2B /* Schedules */,
-				0F3BB662245B32C400CFF81D /* Main.storyboard */,
-				0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */,
-				0F3BB66A245B32C500CFF81D /* LaunchScreen.storyboard */,
-				0F3BB69A245BB10100CFF81D /* Login.storyboard */,
-				0F3BB66D245B32C500CFF81D /* Info.plist */,
-				0F3BB665245B32C400CFF81D /* MinhasPautas.xcdatamodeld */,
-				0F9A8D26245C8A3A005B2E2B /* GoogleService-Info.plist */,
 			);
 			path = MinhasPautas;
 			sourceTree = "<group>";
@@ -203,80 +198,83 @@
 			path = MinhasPautasUITests;
 			sourceTree = "<group>";
 		};
-		0F3BB697245BADC400CFF81D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0F3BB698245BADD700CFF81D /* Constants.swift */,
-				0F3BB65E245B32C400CFF81D /* AppDelegate.swift */,
-				0F3BB668245B32C500CFF81D /* Assets.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		0F9A8D23245C7299005B2E2B /* Extensions */ = {
+		0F9A8D23245C7299005B2E2B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				0F9A8D24245C72AE005B2E2B /* StringExt.swift */,
 				0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */,
 			);
-			path = Extensions;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		0F9A8D28245C8C25005B2E2B /* Login */ = {
+		0F9FBB26245F5F110009C9CC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				0F3BB68F245B702E00CFF81D /* LoginModel.swift */,
-				0F3BB693245B9FEA00CFF81D /* LoginViewController.swift */,
-				0F3BB691245B72D200CFF81D /* LoginViewModel.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		0F9A8D29245C9522005B2E2B /* Register */ = {
-			isa = PBXGroup;
-			children = (
-				0F3BB69C245BC07A00CFF81D /* RegisterViewController.swift */,
-				0F9A8D2A245C986A005B2E2B /* RegisterViewModel.swift */,
-				0F9A8D2C245C9E48005B2E2B /* RegisterModel.swift */,
-			);
-			path = Register;
-			sourceTree = "<group>";
-		};
-		0F9A8D2E245CAF25005B2E2B /* ResetPassword */ = {
-			isa = PBXGroup;
-			children = (
-				0F3BB69E245BC09F00CFF81D /* ResetPasswordViewController.swift */,
 				0F9A8D2F245CB26D005B2E2B /* ResetPasswordViewModel.swift */,
-			);
-			path = ResetPassword;
-			sourceTree = "<group>";
-		};
-		0F9A8D33245CBE94005B2E2B /* Schedules */ = {
-			isa = PBXGroup;
-			children = (
-				0FB2EB28245E195500B8F18A /* List */,
-				0FB4947D245E09560079201D /* RegisterSchedule */,
-			);
-			path = Schedules;
-			sourceTree = "<group>";
-		};
-		0FB2EB28245E195500B8F18A /* List */ = {
-			isa = PBXGroup;
-			children = (
-				0FEBF48E245CFED7009E3F19 /* SchedulesModel.swift */,
+				0F9A8D2A245C986A005B2E2B /* RegisterViewModel.swift */,
+				0F3BB691245B72D200CFF81D /* LoginViewModel.swift */,
 				0FEBF48C245CFAE4009E3F19 /* SchedulesViewModel.swift */,
-				0FEBF487245CF3C4009E3F19 /* SchedulesViewController.swift */,
+				0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0F9FBB27245F5F650009C9CC /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				0F3BB662245B32C400CFF81D /* Main.storyboard */,
+				0F3BB69A245BB10100CFF81D /* Login.storyboard */,
+				0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */,
+				0F9FBB2C245F63B20009C9CC /* Perfil.storyboard */,
 				0FB49478245DAFD80079201D /* Cells */,
 			);
-			path = List;
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
-		0FB2EB2B245E64E600B8F18A /* Perfil */ = {
+		0F9FBB28245F5FA80009C9CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0FB2EB2C245E66DE00B8F18A /* PerfilViewController.swift */,
+				0FB2EB29245E207300B8F18A /* ResultModel.swift */,
+				0F9A8D2C245C9E48005B2E2B /* RegisterModel.swift */,
+				0FEBF48E245CFED7009E3F19 /* SchedulesModel.swift */,
+				0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */,
+				0F3BB68F245B702E00CFF81D /* LoginModel.swift */,
 			);
-			path = Perfil;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0F9FBB29245F5FE80009C9CC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F3BB693245B9FEA00CFF81D /* LoginViewController.swift */,
+				0FB2EB2C245E66DE00B8F18A /* PerfilViewController.swift */,
+				0F3BB69E245BC09F00CFF81D /* ResetPasswordViewController.swift */,
+				0FEBF487245CF3C4009E3F19 /* SchedulesViewController.swift */,
+				0F3BB69C245BC07A00CFF81D /* RegisterViewController.swift */,
+				0FB4947E245E0A430079201D /* CreateScheduleViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F9FBB2A245F61C10009C9CC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0F3BB698245BADD700CFF81D /* Constants.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0F9FBB2B245F61CD0009C9CC /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				0F3BB66A245B32C500CFF81D /* LaunchScreen.storyboard */,
+				0F3BB66D245B32C500CFF81D /* Info.plist */,
+				0F3BB665245B32C400CFF81D /* MinhasPautas.xcdatamodeld */,
+				0F3BB668245B32C500CFF81D /* Assets.xcassets */,
+				0F3BB65E245B32C400CFF81D /* AppDelegate.swift */,
+				0F9A8D26245C8A3A005B2E2B /* GoogleService-Info.plist */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		0FB49478245DAFD80079201D /* Cells */ = {
@@ -288,22 +286,11 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		0FB4947D245E09560079201D /* RegisterSchedule */ = {
-			isa = PBXGroup;
-			children = (
-				0FB4947E245E0A430079201D /* CreateScheduleViewController.swift */,
-				0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */,
-				0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */,
-			);
-			path = RegisterSchedule;
-			sourceTree = "<group>";
-		};
 		0FEBF489245CF633009E3F19 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				0F3BB695245BA6C400CFF81D /* LoginAPI.swift */,
 				0FEBF48A245CF64E009E3F19 /* SchedulesAPI.swift */,
-				0FB2EB29245E207300B8F18A /* ResultModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -441,6 +428,7 @@
 			files = (
 				0F3BB69B245BB10100CFF81D /* Login.storyboard in Resources */,
 				0F9A8D37245CC02B005B2E2B /* Schedules.storyboard in Resources */,
+				0F9FBB2D245F63B20009C9CC /* Perfil.storyboard in Resources */,
 				0FB4947C245DB0320079201D /* SchedulesTableViewCell.xib in Resources */,
 				0F3BB66C245B32C500CFF81D /* LaunchScreen.storyboard in Resources */,
 				0F9A8D27245C8A3A005B2E2B /* GoogleService-Info.plist in Resources */,
@@ -757,7 +745,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JBUKTSVL99;
-				INFOPLIST_FILE = MinhasPautas/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MinhasPautas/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -776,7 +764,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JBUKTSVL99;
-				INFOPLIST_FILE = MinhasPautas/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MinhasPautas/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

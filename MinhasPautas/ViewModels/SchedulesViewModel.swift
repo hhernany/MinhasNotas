@@ -39,7 +39,7 @@ class SchedulesViewModel {
             
             switch result {
             case .success(let response):
-                print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any])
+                // print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any]) // Testing
                 do {
                     self?.schedulesList += try response.map(SchedulesResults<SchedulesModel>.self).items
                     self?.schedulesListOpen = self?.schedulesList.filter { $0.status == "Aberto" } ?? []

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GzR-Id-86r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Perfil-->
+        <scene sceneID="lAC-mY-cXk">
+            <objects>
+                <viewController id="GzR-Id-86r" customClass="PerfilViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uDe-Pa-BcW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-rV-Hrg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aLl-rv-Cyg">
+                                        <rect key="frame" x="20" y="12" width="335" height="46"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hugo Hernany" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPZ-ez-CDR">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hugohernany@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1C-VX-GRs">
+                                                <rect key="frame" x="0.0" y="25.5" width="335" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="customLightGray"/>
+                                <constraints>
+                                    <constraint firstItem="aLl-rv-Cyg" firstAttribute="centerY" secondItem="DeZ-rV-Hrg" secondAttribute="centerY" id="26I-Cm-Pty"/>
+                                    <constraint firstAttribute="height" constant="70" id="MML-Cm-gKB"/>
+                                    <constraint firstItem="aLl-rv-Cyg" firstAttribute="leading" secondItem="DeZ-rV-Hrg" secondAttribute="leading" constant="20" id="TBZ-Eq-Pun"/>
+                                    <constraint firstAttribute="trailing" secondItem="aLl-rv-Cyg" secondAttribute="trailing" constant="20" id="bV4-to-e1S"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxB-XD-3S6">
+                                <rect key="frame" x="0.0" y="70" width="375" height="533"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="perfilCell" id="4Qh-zJ-tDz">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Qh-zJ-tDz" id="YB0-jI-WQA">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GzR-Id-86r" id="ElH-5E-ya2"/>
+                                    <outlet property="delegate" destination="GzR-Id-86r" id="yXG-cY-jF9"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MfE-PS-cAe" firstAttribute="trailing" secondItem="mxB-XD-3S6" secondAttribute="trailing" id="Cjd-Dr-p94"/>
+                            <constraint firstItem="mxB-XD-3S6" firstAttribute="leading" secondItem="MfE-PS-cAe" secondAttribute="leading" id="EaX-FX-HhS"/>
+                            <constraint firstItem="DeZ-rV-Hrg" firstAttribute="leading" secondItem="uDe-Pa-BcW" secondAttribute="leading" id="TZ4-Pk-VW2"/>
+                            <constraint firstItem="DeZ-rV-Hrg" firstAttribute="top" secondItem="MfE-PS-cAe" secondAttribute="top" id="YfS-vz-eDg"/>
+                            <constraint firstItem="MfE-PS-cAe" firstAttribute="trailing" secondItem="DeZ-rV-Hrg" secondAttribute="trailing" id="cV4-YS-8pg"/>
+                            <constraint firstItem="mxB-XD-3S6" firstAttribute="top" secondItem="DeZ-rV-Hrg" secondAttribute="bottom" id="vyU-4E-5m2"/>
+                            <constraint firstItem="MfE-PS-cAe" firstAttribute="bottom" secondItem="mxB-XD-3S6" secondAttribute="bottom" id="y0d-nw-TZb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MfE-PS-cAe"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Perfil" id="TRH-Vf-aqg"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="l1C-VX-GRs" id="xoj-lo-hf6"/>
+                        <outlet property="nameTextField" destination="MPZ-ez-CDR" id="WNX-ci-UMk"/>
+                        <outlet property="tableView" destination="mxB-XD-3S6" id="VrJ-N9-Xyg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lQf-dd-Go5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="1638"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="customLightGray">
+            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
