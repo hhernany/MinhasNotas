@@ -37,9 +37,6 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TOKEN NA LISTAGEM: \(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "") ")
-        print("TOKEN NA LISTAGEM: \(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "") ")
-        print("NOME NA LISTAGEM: \(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "") ")
         schedulesViewModel = SchedulesViewModel(delegate: self)
         setupLayout()
         getSchedules()
@@ -60,6 +57,7 @@ class SchedulesViewController: UIViewController {
     
     // Handle Refresh
     @objc private func updateSchedules() {
+        //tableView.reloadData()
         schedulesViewModel?.getInitialData()
     }
     
@@ -98,6 +96,10 @@ extension SchedulesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if schedulesViewModel?.schedulesList.count == 0 {
+            return UITableViewCell()
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! SchedulesTableViewCell
         cell.schedulesViewModel = schedulesViewModel // Pass viewModel to the cell
         cell.indexPath = indexPath
@@ -149,6 +151,9 @@ extension SchedulesViewController: UITableViewDelegate {
 extension SchedulesViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height) {
+            if refreshControl.isRefreshing {
+                return
+            }
             schedulesViewModel?.getMoreData()
         }
     }

@@ -78,7 +78,7 @@ class SchedulesViewModel {
 
 extension SchedulesViewModel: SchedulesViewModelDelegate {
     func getInitialData() {
-        schedulesList.removeAll() // SE COMÇEAR A CRASHAR, OU VAI TER QUE DAR RELOAD, OU VAI TER QUE LIMPAR DENTRO DO .SUCCESS
+        schedulesList.removeAll()
         schedulesListClose.removeAll()
         schedulesListOpen.removeAll()
         page = 0

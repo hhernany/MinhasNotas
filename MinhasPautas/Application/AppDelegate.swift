@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
         }
         
-        application.statusBarStyle = .lightContent
         // Override point for customization after application launch.
         return true
     }

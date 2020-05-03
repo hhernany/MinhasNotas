@@ -49,7 +49,6 @@ struct LoginViewModel {
     
     // Remove local data from UserDefaults
     private func removeLocalData() {
-        print("removendo dados locais")
         let chaves = [
             "nome_usuario",
             "token_jwt",

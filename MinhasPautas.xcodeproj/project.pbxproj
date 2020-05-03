@@ -30,6 +30,7 @@
 		0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */; };
 		0F9A8D37245CC02B005B2E2B /* Schedules.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */; };
 		0F9FBB2D245F63B20009C9CC /* Perfil.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9FBB2C245F63B20009C9CC /* Perfil.storyboard */; };
+		0F9FBB2F245F67070009C9CC /* ApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9FBB2E245F67070009C9CC /* ApplicationExt.swift */; };
 		0FB2EB25245E13D800B8F18A /* CreateScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */; };
 		0FB2EB27245E13EC00B8F18A /* CreateScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */; };
 		0FB2EB2A245E207300B8F18A /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EB29245E207300B8F18A /* ResultModel.swift */; };
@@ -93,6 +94,7 @@
 		0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		0F9A8D36245CC02B005B2E2B /* Schedules.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Schedules.storyboard; sourceTree = "<group>"; };
 		0F9FBB2C245F63B20009C9CC /* Perfil.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Perfil.storyboard; sourceTree = "<group>"; };
+		0F9FBB2E245F67070009C9CC /* ApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationExt.swift; sourceTree = "<group>"; };
 		0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModel.swift; sourceTree = "<group>"; };
 		0FB2EB26245E13EC00B8F18A /* CreateScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleViewModel.swift; sourceTree = "<group>"; };
 		0FB2EB29245E207300B8F18A /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
@@ -170,8 +172,8 @@
 			children = (
 				0F9FBB2B245F61CD0009C9CC /* Application */,
 				0F9FBB2A245F61C10009C9CC /* Resources */,
-				0F9FBB29245F5FE80009C9CC /* View */,
 				0F9FBB28245F5FA80009C9CC /* Models */,
+				0F9FBB29245F5FE80009C9CC /* View */,
 				0F9FBB26245F5F110009C9CC /* ViewModels */,
 				0F9FBB27245F5F650009C9CC /* Interfaces */,
 				0F9A8D23245C7299005B2E2B /* Helpers */,
@@ -203,6 +205,7 @@
 			children = (
 				0F9A8D24245C72AE005B2E2B /* StringExt.swift */,
 				0F9A8D31245CBBA1005B2E2B /* UIViewExt.swift */,
+				0F9FBB2E245F67070009C9CC /* ApplicationExt.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FB4947B245DB0320079201D /* SchedulesTableViewCell.swift in Sources */,
+				0F9FBB2F245F67070009C9CC /* ApplicationExt.swift in Sources */,
 				0FB2EB27245E13EC00B8F18A /* CreateScheduleViewModel.swift in Sources */,
 				0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */,
 				0F3BB69D245BC07A00CFF81D /* RegisterViewController.swift in Sources */,

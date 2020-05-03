@@ -74,7 +74,9 @@ class LoginViewController: UIViewController {
 extension LoginViewController: LoginViewControlerDelegate {
     func loginSuccess() {
         spinner?.removeSpinner()
-        performSegue(withIdentifier: Segue.loginToMain, sender: self)
+        let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabbarVC")
+        UIApplication.setRootView(rootVC, options: UIApplication.loginAnimation)
+        //performSegue(withIdentifier: Segue.loginToMain, sender: self)
     }
     
     func loginError(message: String) {

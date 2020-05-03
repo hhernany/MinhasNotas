@@ -32,8 +32,6 @@ class PerfilViewController: UIViewController {
     }
     
     func fillLabels() {
-        print("perfil")
-        print(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "")
         emailTextField.text = UserDefaults.standard.object(forKey: "email_usuario") as? String ?? ""
         nameTextField.text = UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? ""
     }
@@ -63,8 +61,7 @@ extension PerfilViewController: UITableViewDelegate {
         switch optionsList[indexPath.row] {
         case .logout:
             let rootVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = rootVC
+            UIApplication.setRootView(rootVC, options: UIApplication.logoutAnimation)
         }
     }
 }

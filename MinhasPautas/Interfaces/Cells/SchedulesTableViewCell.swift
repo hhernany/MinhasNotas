@@ -44,6 +44,7 @@ class SchedulesTableViewCell: UITableViewCell {
         detailContainerView.isHidden = scheduleModel.expanded ? false : true
         accessoryType = scheduleModel.expanded ? .none : .disclosureIndicator
         backgroundColor = scheduleModel.expanded ? UIColor.init(named: "customLightGray") : UIColor.white
+        titleLabel.numberOfLines = scheduleModel.expanded ? 0 : 1
         descriptionLabel.numberOfLines = scheduleModel.expanded ? 0 : 1
         detailTextField.numberOfLines = scheduleModel.expanded ? 0 : 1
 

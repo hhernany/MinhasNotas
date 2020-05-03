@@ -43,8 +43,8 @@ class CreateScheduleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayoutAndDelegates()
         registerNotifications()
+        setupLayoutAndDelegates()
         toolBarTextFields()
         createScheduleViewModel = CreateScheduleViewModel(delegate: self)
     }
@@ -52,7 +52,8 @@ class CreateScheduleViewController: UIViewController {
     private func setupLayoutAndDelegates() {
         createButton.isEnabled = false
         authorLabel.text = "Autor: \(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "")"
-        
+        titleTextField.becomeFirstResponder()
+
         titleTextField.delegate = self
         descriptionTextField.delegate = self
         contentTextView.delegate = self
@@ -84,6 +85,7 @@ class CreateScheduleViewController: UIViewController {
         if let userInfo = notification.userInfo {
             keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue // Save keyboard size
             keyboardIsShowing = notification.name == UIResponder.keyboardWillShowNotification // keyboard status
+            footerViewBottom.constant = keyboardIsShowing ? -keyboardSize.height : 0
         }
     }
     
@@ -114,46 +116,61 @@ extension CreateScheduleViewController: UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false } // try read range
         let newText = currentText.replacingCharacters(in: stringRange, with: string) // new text
         let numberOfChars = newText.count
-        
-        // Update total chars and check
+
+        // Update total chars while typing, and check if all fields contain characters
         if textField == titleTextField {
             titleChars = numberOfChars
+            self.totalCharactersTextField.text = "\(titleChars) de 50"
+            return numberOfChars < 50
         }
         if textField == descriptionTextField {
             descriptionChars = numberOfChars
+            self.totalCharactersTextField.text = "\(descriptionChars) de 100"
+            return numberOfChars < 100
         }
         checkTextFieldIsNotEmpty()
         return true
     }
     
-    func updateTextViewLayoutPosition() {
-        stackViewTopConstraint.constant = keyboardIsShowing ? -130 : 20
-        footerViewBottom.constant = keyboardIsShowing ? -keyboardSize.height : 0
-        
-        // Effect while change constraints (self.view.layoutIfNeeded)
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-        }) { (completed) in
-            // Animção concluída
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == titleTextField {
+            self.totalCharactersTextField.text = "\(titleChars) de 50"
         }
+        if textField == descriptionTextField {
+            self.totalCharactersTextField.text = "\(descriptionChars) de 100"
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
     }
 }
 
 extension CreateScheduleViewController: UITextViewDelegate {
+    // Update total chars while typing, and check if all fields contain characters
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         let numberOfChars = newText.count
         contentChars = numberOfChars
-        self.totalCharactersTextField.text = "\(numberOfChars) de 1000"
+        self.totalCharactersTextField.text = "\(contentChars) de 1000"
         checkTextFieldIsNotEmpty()
         return numberOfChars < 1000
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        self.totalCharactersTextField.text = "\(contentChars) de 1000"
         updateTextViewLayoutPosition()
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-         updateTextViewLayoutPosition()
+        updateTextViewLayoutPosition()
+    }
+    
+    func updateTextViewLayoutPosition() {
+        stackViewTopConstraint.constant = keyboardIsShowing ? -130 : 20
+        // Effect while change constraints (self.view.layoutIfNeeded)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }) { (completed) in }
     }
 }
 
