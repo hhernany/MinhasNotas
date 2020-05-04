@@ -11,6 +11,7 @@ import UIKit
 protocol SchedulesViewControlerDelegate {
     func reloadTableView()
     func resultLabelIsHidden(state: Bool, message: String)
+    func updateError(message: String)
 }
 
 class SchedulesViewController: UIViewController {
@@ -18,11 +19,14 @@ class SchedulesViewController: UIViewController {
     // Oulets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noResultLabel: UILabel!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     // Variables and Constants
     var schedulesViewModel: SchedulesViewModel?
     private var spinner: UIView? = nil
-    private var lastCellOpen: IndexPath?
+    private var lastCellOpenInOpenTab: IndexPath?
+    private var lastCellOpenInCloseTab: IndexPath?
+    private var tabStatus = "Aberto"
     
     // Refresh Control
     private lazy var refreshControl: UIRefreshControl = {
@@ -33,14 +37,9 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-//        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
+        print("TOKEN NA LISTAGEM: \(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "") ")
+        print("TOKEN NA LISTAGEM: \(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "") ")
+        print("NOME NA LISTAGEM: \(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "") ")
         schedulesViewModel = SchedulesViewModel(delegate: self)
         setupLayout()
         getSchedules()
@@ -63,6 +62,22 @@ class SchedulesViewController: UIViewController {
     @objc private func updateSchedules() {
         schedulesViewModel?.getInitialData()
     }
+    
+    @IBAction func changeTab(_ sender: UISegmentedControl) {
+        resultLabelIsHidden(state: true)
+        if sender.selectedSegmentIndex == 0 {
+            tabStatus = "Aberto"
+            if schedulesViewModel?.schedulesListOpen.count == 0 {
+                resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta em aberto")
+            }
+        } else {
+            tabStatus = "Fechado"
+            if schedulesViewModel?.schedulesListClose.count == 0 {
+                resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta encerrada")
+            }
+        }
+        tableView.reloadData()
+    }
 }
 
 extension SchedulesViewController: UITableViewDataSource {
@@ -75,12 +90,23 @@ extension SchedulesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return schedulesViewModel?.schedulesList.count ?? 0
+        if tabStatus == "Aberto" {
+            return schedulesViewModel?.schedulesListOpen.count ?? 0
+        } else {
+            return schedulesViewModel?.schedulesListClose.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! SchedulesTableViewCell
-        cell.scheduleModel = schedulesViewModel?.schedulesList[indexPath.row]
+        cell.schedulesViewModel = schedulesViewModel // Pass viewModel to the cell
+        cell.indexPath = indexPath
+        
+        if tabStatus == "Aberto" {
+            cell.scheduleModel = schedulesViewModel?.schedulesListOpen[indexPath.row]
+        } else {
+            cell.scheduleModel = schedulesViewModel?.schedulesListClose[indexPath.row]
+        }
         return cell
     }
 }
@@ -88,16 +114,34 @@ extension SchedulesViewController: UITableViewDataSource {
 extension SchedulesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Colapse last cell open
+        let lastCellOpen = tabStatus == "Aberto" ? lastCellOpenInOpenTab : lastCellOpenInCloseTab
         if lastCellOpen != nil && lastCellOpen?.row != indexPath.row {
-            schedulesViewModel?.expandedCell(status: false, index: lastCellOpen!.row)
+            schedulesViewModel?.expandedCell(index: lastCellOpen!.row, type: tabStatus, status: false)
             tableView.reloadRows(at: [lastCellOpen!], with: .fade)
         }
         
         // Expand/Colapse cell
-        schedulesViewModel?.expandedCell(status: !schedulesViewModel!.schedulesList[indexPath.row].expanded, index: indexPath.row)
+        var newStatus: Bool
+        if tabStatus == "Aberto" {
+            newStatus = !schedulesViewModel!.schedulesListOpen[indexPath.row].expanded
+        } else {
+            newStatus = !schedulesViewModel!.schedulesListClose[indexPath.row].expanded
+
+        }
+        schedulesViewModel?.expandedCell(index: indexPath.row, type: tabStatus, status: newStatus)
         tableView.reloadRows(at: [indexPath], with: .fade)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true) // Testando se o resultado fica legal
-        lastCellOpen = indexPath // Update last cell open
+
+        // Animate when scroll to top
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        }) { (completed) in }
+        
+        // Update last cell open
+        if tabStatus == "Aberto" {
+            lastCellOpenInOpenTab = indexPath
+        } else {
+            lastCellOpenInCloseTab = indexPath
+        }
     }
 }
 
@@ -120,5 +164,11 @@ extension SchedulesViewController: SchedulesViewControlerDelegate {
     func resultLabelIsHidden(state: Bool, message: String = "") {
         noResultLabel.isHidden = state
         noResultLabel.text = message
+    }
+    
+    func updateError(message: String) {
+        message.alert(self, title: "Aviso") { UIAlertAction in
+            self.getSchedules()
+        }
     }
 }

@@ -19,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Load Firebase
         FirebaseApp.configure()
         
+        // Open loginVC if user is not logged in
+        if Auth.auth().currentUser == nil || UserDefaults.standard.object(forKey: "token_jwt") == nil {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("The user is not logged in or was unable to log out")
+            }
+            window?.rootViewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
+        }
+        
         // Override point for customization after application launch.
         return true
     }
