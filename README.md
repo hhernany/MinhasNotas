@@ -2,7 +2,7 @@
 
 Aplicativo desenvolvido para a vaga de Desenvolvedor iOS (Home Office).
 
-O Aplicativo Minhas Pautas permite que o usuário se cadastre e gerencie suas notas (abertas e fechadas).
+O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas e fechadas). O mesmo possui um sistema de login/logout para que o usuário possa ter acesso ao aplicativo e suas funcionalidades.
 
 ## Arquitetura
 - MVVM
