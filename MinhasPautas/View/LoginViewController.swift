@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        // setupKeyboard() // Corrigir
+        setupKeyboard()
         loginViewModel = LoginViewModel(delegate: self)
     }
     
@@ -39,29 +39,11 @@ class LoginViewController: UIViewController {
     }
     
     private func setupKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide)))
     }
     
     @objc private func keyboardWillHide(notification:NSNotification){
         self.view.endEditing(true)
-    }
-    
-    @objc private func keyboardNotification(notification: NSNotification){
-        if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let endFrameY = endFrame?.origin.y ?? 0
-            var height = self.view.frame.height - endFrameY
-            if self.view.frame.height - endFrameY == 0 {
-                bottomStackView.constant = 10 // Constraint inicial
-                self.view.layoutIfNeeded()
-                return
-            } else {
-                height -= 20 // Era 10
-            }
-            bottomStackView.constant = height
-            self.view.layoutIfNeeded()
-        }
     }
     
     @IBAction func didTapConnectButton(_ sender: UIButton) {

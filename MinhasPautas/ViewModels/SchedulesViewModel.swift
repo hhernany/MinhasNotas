@@ -57,7 +57,6 @@ class SchedulesViewModel {
     }
     
     private func updateStatus(data: [String:Any]) {
-        print(data)
         provider.request(.update(data: data)) { [weak self] result in
             switch result {
             case .success(let response):
@@ -81,6 +80,7 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
         schedulesList.removeAll()
         schedulesListClose.removeAll()
         schedulesListOpen.removeAll()
+        viewModelDelegate?.resultLabelIsHidden(state: true, message: "")
         page = 0
         isLoading = true
         getData()

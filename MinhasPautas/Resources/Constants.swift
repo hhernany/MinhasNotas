@@ -24,8 +24,3 @@ struct Network {
 struct Segue {
     static let loginToMain = "mainSegue"
 }
-
-// Login error code
-struct LoginError {
-
-}

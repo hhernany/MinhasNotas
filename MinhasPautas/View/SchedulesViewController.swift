@@ -12,11 +12,13 @@ protocol SchedulesViewControlerDelegate {
     func reloadTableView()
     func resultLabelIsHidden(state: Bool, message: String)
     func updateError(message: String)
+    func resetLastCellStatus(tab: String)
+    func controlMessageStatus() // Control when a message whe be visible in the screen (Message when dont have any result to show)
 }
 
 class SchedulesViewController: UIViewController {
 
-    // Oulets
+    // Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noResultLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -42,14 +44,14 @@ class SchedulesViewController: UIViewController {
         getSchedules()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         noResultLabel.isHidden = true
         tableView.register(UINib(nibName: "SchedulesTableViewCell", bundle: nil), forCellReuseIdentifier: "scheduleCell")
         tableView.refreshControl = refreshControl
         tableView.tableFooterView = UIView() // Remove blank lines in tableView footer
     }
     
-    func getSchedules() {
+    private func getSchedules() {
         guard let _ = schedulesViewModel else { fatalError("ViewModel not implemented")}
         spinner = self.view.showSpinnerGray()
         schedulesViewModel?.getInitialData()
@@ -57,24 +59,29 @@ class SchedulesViewController: UIViewController {
     
     // Handle Refresh
     @objc private func updateSchedules() {
-        //tableView.reloadData()
         schedulesViewModel?.getInitialData()
     }
     
-    @IBAction func changeTab(_ sender: UISegmentedControl) {
+    @IBAction private func changeTab(_ sender: UISegmentedControl) {
         resultLabelIsHidden(state: true)
         if sender.selectedSegmentIndex == 0 {
             tabStatus = "Aberto"
-            if schedulesViewModel?.schedulesListOpen.count == 0 {
-                resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta em aberto")
-            }
         } else {
             tabStatus = "Fechado"
-            if schedulesViewModel?.schedulesListClose.count == 0 {
-                resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta encerrada")
-            }
         }
+        controlMessageStatus()
         tableView.reloadData()
+    }
+    
+    // Uwind segue (After create a new schedule)
+    @IBAction func backToSchedulesList(_ sender: UIStoryboardSegue) {
+        DispatchQueue.main.async {
+            self.segmentedControl.selectedSegmentIndex = 0 // Back to first tab after create a new schedule
+            self.segmentedControl.sendActions(for: UIControl.Event.valueChanged) // Send update action
+
+            self.spinner = self.view.showSpinnerGray()
+            self.schedulesViewModel?.getInitialData()
+        }
     }
 }
 
@@ -102,6 +109,7 @@ extension SchedulesViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! SchedulesTableViewCell
         cell.schedulesViewModel = schedulesViewModel // Pass viewModel to the cell
+        cell.viewController = self
         cell.indexPath = indexPath
         
         if tabStatus == "Aberto" {
@@ -164,6 +172,7 @@ extension SchedulesViewController: SchedulesViewControlerDelegate {
         spinner?.removeSpinner() // Só vai ser chamado se tiver um spinner ativo. Então não tem problema ser chamado aqui sempre.
         refreshControl.endRefreshing()
         tableView.reloadData()
+        controlMessageStatus()
     }
     
     func resultLabelIsHidden(state: Bool, message: String = "") {
@@ -174,6 +183,23 @@ extension SchedulesViewController: SchedulesViewControlerDelegate {
     func updateError(message: String) {
         message.alert(self, title: "Aviso") { UIAlertAction in
             self.getSchedules()
+        }
+    }
+    
+    func resetLastCellStatus(tab: String) {
+        if tab == "Aberto" {
+            lastCellOpenInOpenTab = nil
+        } else {
+            lastCellOpenInCloseTab = nil
+        }
+    }
+    
+    func controlMessageStatus() {
+        if segmentedControl.selectedSegmentIndex == 0 && schedulesViewModel?.schedulesListOpen.count == 0 {
+            resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta em aberto")
+        }
+        if segmentedControl.selectedSegmentIndex == 1 && schedulesViewModel?.schedulesListClose.count == 0 {
+            resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta encerrada")
         }
     }
 }

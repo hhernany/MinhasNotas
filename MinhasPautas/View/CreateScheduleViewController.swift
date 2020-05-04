@@ -140,10 +140,6 @@ extension CreateScheduleViewController: UITextFieldDelegate {
             self.totalCharactersTextField.text = "\(descriptionChars) de 100"
         }
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-
-    }
 }
 
 extension CreateScheduleViewController: UITextViewDelegate {
@@ -177,7 +173,7 @@ extension CreateScheduleViewController: UITextViewDelegate {
 extension CreateScheduleViewController: CreateScheduleViewControllerDelegate {
     func createSuccess() {
         spinner?.removeSpinner()
-        self.navigationController?.popViewController(animated: true)
+        self.performSegue(withIdentifier: "backToSchedulesListSegue", sender: self) // Uwind Segue
     }
     
     func createError(message: String) {
