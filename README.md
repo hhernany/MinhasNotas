@@ -1,8 +1,8 @@
-# Minhas Notas
+# Minhas Pautas
 
 Aplicativo desenvolvido para a vaga de Desenvolvedor iOS (Home Office).
 
-O Aplicativo Minhas Notas permite que o usuário se cadastre e gerencie suas notas (abertas e fechadas).
+O Aplicativo Minhas Pautas permite que o usuário se cadastre e gerencie suas notas (abertas e fechadas).
 
 ## Arquitetura
 - MVVM
