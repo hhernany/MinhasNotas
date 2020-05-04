@@ -10,6 +10,7 @@ O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas 
 ## Ambiente de desenvolvimento
 - Xcode 10.1
 - Swift 4.2
+- iOS 12.1
 
 ## Pods utilizados (Dependências)
 - pod 'Moya' - Biblioteca de network
