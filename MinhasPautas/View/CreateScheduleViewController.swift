@@ -173,7 +173,7 @@ extension CreateScheduleViewController: UITextViewDelegate {
 extension CreateScheduleViewController: CreateScheduleViewControllerDelegate {
     func createSuccess() {
         spinner?.removeSpinner()
-        self.performSegue(withIdentifier: "backToSchedulesListSegue", sender: self) // Uwind Segue
+        self.performSegue(withIdentifier: Segue.backToSchedules, sender: self) // Uwind Segue
     }
     
     func createError(message: String) {

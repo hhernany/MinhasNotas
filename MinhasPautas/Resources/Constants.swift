@@ -23,4 +23,5 @@ struct Network {
 // Segues identifiers
 struct Segue {
     static let loginToMain = "mainSegue"
+    static let backToSchedules = "backToSchedulesListSegue" // Uwind segue
 }
