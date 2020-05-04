@@ -9,7 +9,6 @@ target 'MinhasPautas' do
   pod 'Moya', '~> 12.0.1'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
-  # pod 'Firebase/Crashlytics'
 
   target 'MinhasPautasTests' do
     inherit! :search_paths

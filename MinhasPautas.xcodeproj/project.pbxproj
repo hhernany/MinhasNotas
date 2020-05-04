@@ -250,11 +250,11 @@
 			isa = PBXGroup;
 			children = (
 				0F3BB693245B9FEA00CFF81D /* LoginViewController.swift */,
-				0FB2EB2C245E66DE00B8F18A /* PerfilViewController.swift */,
+				0F3BB69C245BC07A00CFF81D /* RegisterViewController.swift */,
 				0F3BB69E245BC09F00CFF81D /* ResetPasswordViewController.swift */,
 				0FEBF487245CF3C4009E3F19 /* SchedulesViewController.swift */,
-				0F3BB69C245BC07A00CFF81D /* RegisterViewController.swift */,
 				0FB4947E245E0A430079201D /* CreateScheduleViewController.swift */,
+				0FB2EB2C245E66DE00B8F18A /* PerfilViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

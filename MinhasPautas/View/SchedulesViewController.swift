@@ -141,10 +141,10 @@ extension SchedulesViewController: UITableViewDelegate {
         schedulesViewModel?.expandedCell(index: indexPath.row, type: tabStatus, status: newStatus)
         tableView.reloadRows(at: [indexPath], with: .fade)
 
-        // Animate when scroll to top
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-        }) { (completed) in }
+        // Animate when scroll to top (Nedd some more test)
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+//            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+//        }) { (completed) in }
         
         // Update last cell open
         if tabStatus == "Aberto" {
@@ -199,7 +199,7 @@ extension SchedulesViewController: SchedulesViewControlerDelegate {
             resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta em aberto")
         }
         if segmentedControl.selectedSegmentIndex == 1 && schedulesViewModel?.schedulesListClose.count == 0 {
-            resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta encerrada")
+            resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta fechada")
         }
     }
 }
