@@ -16,7 +16,7 @@ O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas 
 - pod 'Firebase/Analytics' - Biblioteca para insights do Firebase (Obrigatório para o uso do Auth)
 - pod 'Firebase/Auth' - Biblioteca de autenticação do Firebase
 
-### Backend
+## Backend
 - Google Cloud
 - MySQL 5.7
 - NodeJS (APIs)
