@@ -16,17 +16,11 @@ struct Network {
         }
     }
     struct Headers {
-        static var contentTypeWithAuthJSON = ["Content-Type": "application/json",
-                                              "x-auth-token": UserDefaults.standard.object(forKey: "token_jwt") as? String ?? ""]
+        static var contentTypeWithAuthJSON = ["Content-Type": "application/json"]
     }
 }
 
 // Segues identifiers
 struct Segue {
     static let loginToMain = "mainSegue"
-}
-
-// Login error code
-struct LoginError {
-
 }
