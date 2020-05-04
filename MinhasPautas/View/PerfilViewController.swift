@@ -29,6 +29,11 @@ class PerfilViewController: UIViewController {
         super.viewDidLoad()
         fillLabels()
         tableView.tableFooterView = UIView() // Remove blank cells
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func fillLabels() {

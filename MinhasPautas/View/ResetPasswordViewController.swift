@@ -25,6 +25,11 @@ class ResetPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resetPasswordViewModel = ResetPasswordViewModel(delegate: self)
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     @IBAction func didTapBackButton(_ sender: UIBarButtonItem) {

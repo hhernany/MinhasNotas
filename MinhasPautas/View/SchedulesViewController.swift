@@ -42,6 +42,11 @@ class SchedulesViewController: UIViewController {
         schedulesViewModel = SchedulesViewModel(delegate: self)
         setupLayout()
         getSchedules()
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     private func setupLayout() {

@@ -49,6 +49,10 @@ class CreateScheduleViewController: UIViewController {
         createScheduleViewModel = CreateScheduleViewModel(delegate: self)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private func setupLayoutAndDelegates() {
         createButton.isEnabled = false
         authorLabel.text = "Autor: \(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "")"
@@ -57,6 +61,7 @@ class CreateScheduleViewController: UIViewController {
         titleTextField.delegate = self
         descriptionTextField.delegate = self
         contentTextView.delegate = self
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     private func registerNotifications() {

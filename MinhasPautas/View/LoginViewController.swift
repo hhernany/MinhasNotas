@@ -30,6 +30,11 @@ class LoginViewController: UIViewController {
         setupLayout()
         setupKeyboard()
         loginViewModel = LoginViewModel(delegate: self)
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     private func setupLayout() {

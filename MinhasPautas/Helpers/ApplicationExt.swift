@@ -29,6 +29,7 @@ extension UIApplication {
         UIView.transition(with: UIApplication.shared.keyWindow!, duration: duration, options: options, animations: {
             let oldState = UIView.areAnimationsEnabled
             UIView.setAnimationsEnabled(false)
+            viewController.modalPresentationCapturesStatusBarAppearance = true
             UIApplication.shared.keyWindow?.rootViewController = viewController
             UIView.setAnimationsEnabled(oldState)
         }) { _ in

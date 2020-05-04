@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgN-Fl-MnB">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgN-Fl-MnB">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,13 +12,13 @@
         <!--Login View Controller-->
         <scene sceneID="rTL-d8-REc">
             <objects>
-                <viewController storyboardIdentifier="loginVC" id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginVC" modalPresentationStyle="fullScreen" id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UBQ-sa-Sku">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDI-DE-pNa">
-                                <rect key="frame" x="10" y="187.5" width="355" height="312.5"/>
+                                <rect key="frame" x="10" y="177.5" width="355" height="312.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vbW-mk-tUW">
                                         <rect key="frame" x="20" y="20" width="315" height="124.5"/>
@@ -166,11 +164,12 @@
         <!--Navigation Controller-->
         <scene sceneID="Syq-dm-Xx1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m1q-3L-Onw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="m1q-3L-Onw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="2jf-3i-mQv">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="customBlue"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" name="customBlue"/>
                         <textAttributes key="titleTextAttributes">
@@ -192,11 +191,12 @@
         <!--Navigation Controller-->
         <scene sceneID="raH-7y-p1w">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ebh-Zx-JcK" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="ebh-Zx-JcK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="uXp-2F-AMj">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="customBlue"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" name="customBlue"/>
                         <textAttributes key="titleTextAttributes">
@@ -208,7 +208,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="FgM-0F-OWH" kind="relationship" relationship="rootViewController" id="pfk-WA-Ip5"/>
+                        <segue destination="FgM-0F-OWH" kind="relationship" relationship="rootViewController" id="aUB-cB-o5h"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K8Q-ss-EVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -218,16 +218,16 @@
         <!--Novo cadastro-->
         <scene sceneID="xAy-FB-TeJ">
             <objects>
-                <viewController title="Novo cadastro" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Novo cadastro" modalPresentationStyle="fullScreen" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rRb-lC-ynj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vy7-x7-ukZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="539"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogU-eF-PNN">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="451"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="439"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5S-6u-ULy">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
@@ -426,7 +426,7 @@
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9O-74-9FC">
-                                        <rect key="frame" x="0.0" y="451" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="439" width="375" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCn-hz-AmS">
                                                 <rect key="frame" x="20" y="25" width="335" height="55"/>
@@ -502,9 +502,9 @@
         <!--Esqueci a senha-->
         <scene sceneID="NYj-tO-8hx">
             <objects>
-                <viewController title="Esqueci a senha" id="FgM-0F-OWH" customClass="ResetPasswordViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Esqueci a senha" modalPresentationStyle="fullScreen" id="FgM-0F-OWH" customClass="ResetPasswordViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9JU-FL-xSI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V29-wr-Qx7">
