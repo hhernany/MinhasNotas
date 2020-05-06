@@ -22,6 +22,9 @@ O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas 
 - MySQL 5.7
 - NodeJS (APIs)
 
+## Melhorias Adicionais
+- Teste unitários e de interface - Para maior qualidade, com tempo adicional pode-se implementar teste unitário e de interface.
+
 ## Informações Adicionais
 O sistema de login foi desenvolvido utilizando Firebase para o aproveitamento de diversas funcionalidades úteis para o usuário, como: Criação segura de novos logins; Recuperação de senha; Conferência de e-mail já existente; etc.
 
