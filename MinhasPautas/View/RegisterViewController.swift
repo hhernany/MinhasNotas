@@ -30,6 +30,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
+        setupObservers()
         registerViewModel = RegisterViewModel(delegate: self)
     }
 
