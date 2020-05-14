@@ -13,28 +13,38 @@ class LoginViewControllerUITests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        continueAfterFailure = false // In UI tests it is usually best to stop immediately when a failure occurs.
-        UserDefaults.standard.removeObject(forKey: "token_jwt")
-        app = XCUIApplication() // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        app.launch()
+        let configuration = Configuration()
+        configuration.dictionary[ConfigurationKeys.isFirstTimeUser] = "true"
+        app = start(using: configuration)
     }
 
     func testEmptyEmailAndPassword() {
+        // Check fields and buttons
+        XCTAssert(app.textFields["emailTextField"].exists, "emailTextField dont exist.")
+        XCTAssert(app.secureTextFields["passwordTextField"].exists, "passwordTextField dont exist.")
+        XCTAssert(app.buttons["connectButton"].exists, "connectButton dont exist.")
+
         // Empty email
-        tapButton(identifier: "connectButton")
-        XCTAssert(app.alerts.element.staticTexts["Informe o e-mail de acesso."].exists)
+        tapButton(app: app, identifier: "connectButton")
+        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe o e-mail de acesso."]), "Alert did not appear.")
         intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
         
         // Valid email and empty password
         let textField = app.textFields["emailTextField"]
         textField.tap()
         textField.typeText("hugo@gmail.com")
-        tapButton(identifier: "connectButton")
-    
-        XCTAssert(app.alerts.element.staticTexts["Informe a senha de acesso."].exists)
+        tapButton(app: app, identifier: "connectButton")
+        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe a senha de acesso."]), "Alert did not appear.")
+        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
     }
     
+    // This test need internet connection to check password in Firebase
     func testInvalidEmailAndPassword() {
+        // Check fields and buttons
+        XCTAssert(app.textFields["emailTextField"].exists, "emailTextField dont exist.")
+        XCTAssert(app.secureTextFields["passwordTextField"].exists, "passwordTextField dont exist.")
+        XCTAssert(app.buttons["connectButton"].exists, "connectButton dont exist.")
+        
         // Text fields
         let emailTextField = app.textFields["emailTextField"]
         let passwordTextField = app.secureTextFields["passwordTextField"]
@@ -42,8 +52,8 @@ class LoginViewControllerUITests: XCTestCase {
         // Invalid E-mail
         emailTextField.tap()
         emailTextField.typeText("invalidemail")
-        tapButton(identifier: "connectButton")
-        XCTAssert(app.alerts.element.staticTexts["E-mail inválido."].exists)
+        tapButton(app: app, identifier: "connectButton")
+        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["E-mail inválido."]), "Alert did not appear.")
         intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
 
         // Valid e-mail and invalid password
@@ -56,24 +66,9 @@ class LoginViewControllerUITests: XCTestCase {
 
         passwordTextField.tap()
         passwordTextField.typeText("123123123")
-        tapButton(identifier: "connectButton")
-        print(app.alerts.element.staticTexts)
-        sleep(1)
-        XCTAssert(app.alerts.element.staticTexts["A senha informada está incorreta."].exists)
-    }
-
-    func tapButton(identifier buttonIdentifier: String) {
-        app.buttons[buttonIdentifier].tap()
-    }
-    
-    // Create a helper of this
-    func intercepetAndCloseAlerts(name withTitle: String, button buttonName: String) {
-        addUIInterruptionMonitor(withDescription: withTitle) { (alerts) -> Bool in
-            if alerts.buttons[buttonName].exists {
-                alerts.buttons[buttonName].tap()
-            }
-            return true
-        }
+        tapButton(app: app, identifier: "connectButton")
+        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["A senha informada está incorreta."]), "Alert did not appear.")
+        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
     }
     
     override func tearDown() {

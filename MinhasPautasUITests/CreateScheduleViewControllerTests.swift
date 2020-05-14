@@ -10,34 +10,100 @@ import XCTest
 
 class CreateScheduleViewControllerTests: XCTestCase {
 
+    var app: XCUIApplication!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = start(using: Configuration())
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+        app = nil
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testScreenCreateSchedules() {
+        XCTAssert(app.navigationBars["Minhas Pautas"].buttons["addButton"].exists, "addButton not found: SchedulesViewController")
+        app.navigationBars["Minhas Pautas"].buttons["addButton"].tap()
+        
+        // Fields and Labels
+        let title = app.textFields["titleTextField"]
+        let description = app.textFields["descriptionTextField"]
+        let content = app.textViews["contentTextView"]
+        let author = app.staticTexts["authorLabel"]
+        let qtdCharacters = app.staticTexts["qtdCharactersLabel"]
+        let createButton = app.navigationBars["Nova Pauta"].buttons["createButton"]
+        let keyboardOkButton = app.toolbars["Toolbar"].buttons["OK"]
 
-    // Ao entrar o botão Criar tem que estar desativado
-    // Nome do autor na barra inferior tem que ser o usuário atualmente logado
-    // Quando clicar em cada um dos campos tem que mostrar "0 de xxxx"
-    // Digitar algo no campo titulo e a quantidade de digitos tem que estar correta
-    // Digitar algo no campo de descrição e a quantidade de digitos tem que estar correta
-    // Digitar algo no campo de conteúdo e a quantidade de digitos tem que estar correta
-    // Após todos os campos digitos o botão Criar tem que estar ativado para clique.
+        // Button must be disabled at start
+        XCTAssert(!createButton.isEnabled, "Button must be disabled at start")
+        
+        // Author name
+        let authorText = "Autor: \(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "")"
+        XCTAssert(author.label == authorText, "authorLabel format is incorrect")
+        
+        // Title Field and Characters count
+        title.tap()
+        XCTAssert(qtdCharacters.label == "0 de 50", "titleTextField characters count is incorrect")
+        title.typeText("Titulo")
+        XCTAssert(qtdCharacters.label == "6 de 50", "titleTextField characters count is incorrect")
+        keyboardOkButton.tap()
+        
+        // Description Field and Characters count
+        description.tap()
+        XCTAssert(qtdCharacters.label == "0 de 100", "descriptionTextField characters count is incorrect")
+        description.typeText("Descrição")
+        XCTAssert(qtdCharacters.label == "9 de 100", "descriptionTextField characters count is incorrect")
+        keyboardOkButton.tap()
+        
+        // Content Field and Characters count
+        content.tap()
+        XCTAssert(qtdCharacters.label == "0 de 1000", "contentTextField characters count is incorrect")
+        content.typeText("Conteudo")
+        XCTAssert(qtdCharacters.label == "8 de 1000", "contentTextField characters count is incorrect")
+        keyboardOkButton.tap()
+
+        // Check if create button is enabled
+        XCTAssertTrue(createButton.isEnabled)
+    }
+}
+
+// Helpers of all this
+extension XCTestCase {
+    func start(using configuration: Configuration) -> XCUIApplication {
+        continueAfterFailure = false // Stop execution after a failure occurs
+        let app = XCUIApplication() // Create instance
+        app.launchEnvironment.merge((configuration.dictionary), uniquingKeysWith: { (_, new) in new }) // Add launch parameters
+        app.launchArguments += ["UI-Testing"]
+        app.launch() // Launch app
+        return app // Return instance
+    }
     
-    // Não precisa testar avisos pq não tem nem como clicar em Criar sem estar tudo preenchido.
+    func intercepetAndCloseAlerts(name withTitle: String, button buttonName: String) {
+        addUIInterruptionMonitor(withDescription: withTitle) { (alerts) -> Bool in
+            if alerts.buttons[buttonName].exists {
+                alerts.buttons[buttonName].tap()
+            }
+            return true
+        }
+    }
+    
+    // Melhorar com o link = https://masilotti.com/xctest-helpers/
+    func waitForElementToAppear(_ element: XCUIElement) -> Bool {
+        let existsPredicate = NSPredicate(format: "exists == true")
+        let expectation = XCTNSPredicateExpectation(predicate: existsPredicate,
+                                                    object: element)
+        
+        let result = XCTWaiter().wait(for: [expectation], timeout: 5)
+        
+        if result == .completed {
+            return true
+        } else {
+            return false
+        }
+        //return result == .completed
+    }
+    
+    func tapButton(app: XCUIApplication, identifier buttonIdentifier: String) {
+        app.buttons[buttonIdentifier].tap()
+    }
 }

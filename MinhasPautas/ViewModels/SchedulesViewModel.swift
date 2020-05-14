@@ -22,7 +22,7 @@ protocol SchedulesViewModelDelegate: class {
 class SchedulesViewModel {
     
     var viewModelDelegate: SchedulesViewControlerDelegate? // AQUI TEORICAMENTE TEM QUE SER WEAK - VER O VIDEO DO CAREQUINHA QUE LÁ TEM ISSO E UM COMENTARIO DO CARA.
-    fileprivate let provider = MoyaProvider<SchedulesAPI>()
+    fileprivate var provider: MoyaProvider<SchedulesAPI>!
     fileprivate(set) var schedulesList: [SchedulesModel] = [] // ISSO AQUI VAI TER QUE MUDAR. PQ NÃO VAI SER SÓ SET, VAI PODE ALTERAR TBM. (FALEI BOBAGEM?? )
     fileprivate(set) var schedulesListOpen: [SchedulesModel] = []
     fileprivate(set) var schedulesListClose: [SchedulesModel] = []
@@ -32,6 +32,16 @@ class SchedulesViewModel {
     // Dependency Injection
     init(delegate: SchedulesViewControlerDelegate?) {
         viewModelDelegate = delegate
+        setMoyaProvider()
+    }
+    
+    private func setMoyaProvider() {
+        let isTesting = AppDelegate.isUITestingEnabled
+        if isTesting {
+            provider = MoyaProvider<SchedulesAPI>(stubClosure: MoyaProvider.immediatelyStub)
+        } else {
+            provider = MoyaProvider<SchedulesAPI>()
+        }
     }
     
     private func getData() {
@@ -39,7 +49,8 @@ class SchedulesViewModel {
             
             switch result {
             case .success(let response):
-                // print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any]) // Testing
+//                print(try! String(data: response.data, encoding: .utf8))
+//                print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any]) // Testing
                 do {
                     self?.schedulesList += try response.map(SchedulesResults<SchedulesModel>.self).items
                     self?.schedulesListOpen = self?.schedulesList.filter { $0.status == "Aberto" } ?? []

@@ -12,58 +12,43 @@ class SchedulesViewControllerUITests: XCTestCase {
 
     var app: XCUIApplication!
 
-    // O que falta arrumar
-    // 1 - Como lidar quando demora pra sumir o spinner por causa da internet lenta?
-    // 2 - É correto testar pegando da API? Esses testes deveriam ser sempre locais?
-    // 3 - Como lidar com o caso de que nem sempre vai ter a lista vazia pra testar as mensagens? Usar contas diferentes ou dados locais?
     override func setUp() {
         super.setUp()
-        UserDefaults.standard.set("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywibm9tZSI6IlRFU1RBTkRPIFBFTE8gQVBQIiwiaWF0IjoxNTg5MjI0MDIzfQ.GcrGUO_idI1W8bmq3GNMrlIuIaXZOX8bFwppvw95YtA", forKey: "token_jwt")
-        app = XCUIApplication()
-        continueAfterFailure = false
-        app.launch()
-    }
-
-    func testSegmentedControlLabelAndAction() {
-        let tablesQuery = app.tables["scheduleTableView"]
-
-        app/*@START_MENU_TOKEN@*/.buttons["Fechadas"]/*[[".segmentedControls.buttons[\"Fechadas\"]",".buttons[\"Fechadas\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        if tablesQuery.cells.count == 0 {
-            XCTAssertTrue(app.staticTexts["Você não possui nenhuma pauta fechada"].exists)
-        }
-
-        app/*@START_MENU_TOKEN@*/.buttons["Abertas"]/*[[".segmentedControls.buttons[\"Abertas\"]",".buttons[\"Abertas\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        if tablesQuery.cells.count == 0 {
-            XCTAssertTrue(app.staticTexts["Você não possui nenhuma pauta em aberto"].exists)
-        }
+        let configuration = Configuration()
+        app = start(using: configuration)
     }
     
-    func testExpandableCellAndChangeStatus() {
-        // TableView
+    func testSchedulesListLabelsAndCells() {
+        // Check if tableView exist and if have cells
+        XCTAssert(app.tables["scheduleTableView"].exists, "SchedulesViewController: scheduleTableView dont exists")
         let tablesQuery = app.tables["scheduleTableView"]
-        XCTAssertTrue(tablesQuery.cells.count > 0)
-        
+        XCTAssert(tablesQuery.cells.count > 0, "SchedulesViewController: scheduleTableView dont have any open schedule")
+
+        // Check if found first cell in table
+        XCTAssert(tablesQuery.cells.element(boundBy: 0).exists, "SchedulesViewController: scheduleTableView cant detect first cell")
         let firstCell = tablesQuery.cells.element(boundBy: 0)
-        XCTAssertTrue(firstCell.exists)
-        firstCell.tap()
         
         // Expand Cell and click "Encerrar" button
-        let encerrarButton = tablesQuery.buttons["Encerrar"]
-        encerrarButton.tap()
-        if tablesQuery.cells.count == 0 {
-            XCTAssertTrue(app.staticTexts["Você não possui nenhuma pauta em aberto"].exists)
-        }
-        
-        // Change tab and click in firstCell
-        app.buttons["Fechadas"].tap()
-        XCTAssertTrue(tablesQuery.cells.count > 0)
         firstCell.tap()
+        XCTAssert(tablesQuery.buttons["changeStateButton"].exists, "SchedulesCell: changeStateButton dont exists")
+        let changeStateButton = tablesQuery.buttons["changeStateButton"]
+        changeStateButton.tap()
         
-        let reabrirButton = tablesQuery.buttons["Reabrir"]
-        reabrirButton.tap()
-        if tablesQuery.cells.count == 0 {
-            XCTAssertTrue(app.staticTexts["Você não possui nenhuma pauta fechada"].exists)
-        }
+        // Verify total of open schedules and message label
+        XCTAssert(tablesQuery.cells.count == 0, "Total of open schedules is incorret")
+        XCTAssertTrue(app.staticTexts["Você não possui nenhuma pauta em aberto"].exists)
+        
+        // Change tab and check if have at less one schedule
+        app.buttons["Fechadas"].tap()
+        XCTAssert(tablesQuery.cells.count > 0, "SchedulesViewController: scheduleTableView dont have any closed schedule")
+        
+        // Expand Cell and click "Reabrir" button
+        firstCell.tap()
+        changeStateButton.tap()
+        
+        // Verify total of closed schedules and message label
+        XCTAssert(tablesQuery.cells.count == 0, "Total of closed schedules is incorret")
+        XCTAssertTrue(app.staticTexts["Você não possui nenhuma pauta fechada"].exists)
     }
     
     func testTableViewHandleRefresh() {
@@ -76,7 +61,6 @@ class SchedulesViewControllerUITests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
-        UserDefaults.standard.removeObject(forKey: "token_jwt")
         app = nil
     }
 }

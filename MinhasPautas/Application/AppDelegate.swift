@@ -138,7 +138,7 @@ final class LaunchEnvironment {
         userDefaults.set(firstTimeUser, forKey: "is_first_time_user") // Save if is first login
         clearUserDefault() // Clear all user data
         setUpEnvironment(using: launchDictionary) // Save data in UserDefaults
-        return !firstTimeUser ? viewController : nil
+        return firstTimeUser ? viewController : nil
     }
     
     private func clearUserDefault() {

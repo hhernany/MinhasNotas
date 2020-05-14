@@ -14,41 +14,31 @@ class ResetPasswordViewControllerUITests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        continueAfterFailure = false // In UI tests it is usually best to stop immediately when a failure occurs.
-        UserDefaults.standard.removeObject(forKey: "token_jwt")
-        app = XCUIApplication() // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        app.launch()
+        let configuration = Configuration()
+        configuration.dictionary[ConfigurationKeys.isFirstTimeUser] = "true"
+        app = start(using: configuration)
     }
     
     func testResetPasswordEmailField() {
-        // E-mail not informed
-        tapButton(identifier: "resetPasswordButton")
-        tapButton(identifier: "confirmButton")
-        sleep(2)
-        XCTAssert(app.alerts.element.staticTexts["Informe o email."].exists)
+        XCTAssert(app.buttons["resetPasswordButton"].exists, "LoginViewController: resetPasswordButton dont exists") // Check if button exists
+        tapButton(app: app, identifier: "resetPasswordButton")
+
+        XCTAssert(app.buttons["confirmButton"].exists, "ResetPasswordViewController: confirmButton dont exists") // Check if button exists
+        XCTAssert(app.textFields["emailTextField"].exists, "ResetPasswordViewController: emailTextField dont exists") // Check if field exists
+        tapButton(app: app, identifier: "confirmButton")
+
+        // Check if the alert has appeared (Empty email field)
+        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe o email."]), "Alert did not appear")
         intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
         
         // Invalid e-mail
         let textField = app.textFields["emailTextField"]
         textField.tap()
         textField.typeText("invalidemail")
-        tapButton(identifier: "confirmButton")
-        sleep(2)
-        XCTAssert(app.alerts.element.staticTexts["E-mail inválido."].exists)
-    }
+        tapButton(app: app, identifier: "confirmButton")
 
-    func tapButton(identifier buttonIdentifier: String) {
-        app.buttons[buttonIdentifier].tap()
-    }
-    
-    // Create a helper of this
-    func intercepetAndCloseAlerts(name withTitle: String, button buttonName: String) {
-        addUIInterruptionMonitor(withDescription: withTitle) { (alerts) -> Bool in
-            if alerts.buttons[buttonName].exists {
-                alerts.buttons[buttonName].tap()
-            }
-            return true
-        }
+        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["E-mail inválido."]), "Alert did not appear")
+        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
     }
     
     override func tearDown() {

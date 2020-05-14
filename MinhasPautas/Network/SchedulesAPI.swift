@@ -44,7 +44,14 @@ extension SchedulesAPI: TargetType {
     }
     
     public var sampleData: Data {
-        return Data()
+        switch self {
+        case .getData(let page):
+            return stubbedResponse("Schedules")
+        case .update(let data):
+            return stubbedResponse("UpdateScheduleReturn")
+        default:
+            return Data()
+        }
     }
     
     public var task: Task {
@@ -63,4 +70,13 @@ extension SchedulesAPI: TargetType {
         header["x-auth-token"] = UserDefaults.standard.object(forKey: "token_jwt") as? String ?? ""
         return header
     }
+}
+
+// MARK: - Provider Support
+func stubbedResponse(_ filename: String) -> Data! {
+    @objc class TestClass: NSObject { }
+    
+    let bundle = Bundle(for: TestClass.self)
+    let path = bundle.path(forResource: filename, ofType: "json")
+    return (try? Data(contentsOf: URL(fileURLWithPath: path!)))
 }
