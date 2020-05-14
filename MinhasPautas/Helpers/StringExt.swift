@@ -17,4 +17,16 @@ extension String {
             vc.present(alerta, animated: true, completion: nil)
         }
     }
+    
+    func boolValue() -> Bool {
+        return (self as NSString).boolValue
+    }
+    
+    func truncateKey() -> String {
+        if let range = self.range(of: "FakeData_") {
+            let key = self[range.upperBound...]
+            return String(key)
+        }
+        return self
+    }
 }

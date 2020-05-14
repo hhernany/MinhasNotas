@@ -29,12 +29,17 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupObservers()
         self.setNeedsStatusBarAppearanceUpdate()
         registerViewModel = RegisterViewModel(delegate: self)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    @IBAction func keyboardDoneButton(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
     
     private func setupObservers() {

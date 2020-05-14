@@ -39,6 +39,7 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
         schedulesViewModel = SchedulesViewModel(delegate: self)
         setupLayout()
         getSchedules()
@@ -51,6 +52,7 @@ class SchedulesViewController: UIViewController {
     
     private func setupLayout() {
         noResultLabel.isHidden = true
+        tableView.accessibilityLabel = "scheduleTableView"
         tableView.register(UINib(nibName: "SchedulesTableViewCell", bundle: nil), forCellReuseIdentifier: "scheduleCell")
         tableView.refreshControl = refreshControl
         tableView.tableFooterView = UIView() // Remove blank lines in tableView footer

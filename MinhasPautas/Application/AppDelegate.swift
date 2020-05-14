@@ -14,25 +14,44 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    static var isUITestingEnabled: Bool {
+        get {
+            return ProcessInfo.processInfo.arguments.contains("UI-Testing")
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Load Firebase
         FirebaseApp.configure()
         
-        // Open loginVC if user is not logged in
-        if Auth.auth().currentUser == nil || UserDefaults.standard.object(forKey: "token_jwt") == nil {
-            do {
-                try Auth.auth().signOut()
-            } catch {
-                print("The user is not logged in or was unable to log out")
+        // Check if is testing
+        if AppDelegate.isUITestingEnabled {
+            guard let viewController = LaunchEnvironment().setUp(using:ProcessInfo.processInfo.environment, userDefaults: UserDefaults.standard) else {
+                return true
             }
-            window?.rootViewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
+            window?.rootViewController = viewController
+        } else {
+            // Open loginVC if user is not logged in
+            if Auth.auth().currentUser == nil || UserDefaults.standard.object(forKey: "token_jwt") == nil {
+                do {
+                    try Auth.auth().signOut()
+                } catch {
+                    print("The user is not logged in or was unable to log out")
+                }
+                window?.rootViewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
+            }
         }
         
         // Override point for customization after application launch.
         return true
     }
-
+    
+//    private func setStateForUITesting() {
+//        if AppDelegate.isUITestingEnabled {
+//            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+//        }
+//    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -104,3 +123,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+final class LaunchEnvironment {
+    typealias LaunchDictionary = [String: String]
+    
+    func setUp(using launchDictionary: LaunchDictionary, userDefaults: UserDefaults = .standard) -> UIViewController? {
+        guard launchDictionary[ConfigurationKeys.isUITest]?.boolValue() == true else {
+            return nil
+        }
+        guard let firstTimeUser = launchDictionary[ConfigurationKeys.isFirstTimeUser]?.boolValue() else {
+            return nil
+        }
+        
+        let viewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC") // ViewController
+        userDefaults.set(firstTimeUser, forKey: "is_first_time_user") // Save if is first login
+        clearUserDefault() // Clear all user data
+        setUpEnvironment(using: launchDictionary) // Save data in UserDefaults
+        return !firstTimeUser ? viewController : nil
+    }
+    
+    private func clearUserDefault() {
+        let defaults = UserDefaults.standard
+        guard let domain = Bundle.main.bundleIdentifier else { fatalError("Invalid Bundle Identifier")}
+        defaults.removePersistentDomain(forName: domain)
+    }
+    
+    private func setUpEnvironment(using launchDictionary: LaunchDictionary) {
+        for (key, value) in launchDictionary
+            where key.hasPrefix("FakeData_") {
+                // Truncate "UI-TestingKey_" part
+                let userDefaultsKey = key.truncateKey()
+                switch value {
+                case "true":
+                    UserDefaults.standard.set(true, forKey: userDefaultsKey)
+                case "false":
+                    UserDefaults.standard.set(false, forKey: userDefaultsKey)
+                default:
+                    UserDefaults.standard.set(value, forKey: userDefaultsKey)
+                }
+        }
+    }
+}
