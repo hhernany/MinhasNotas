@@ -37,26 +37,6 @@
                BlueprintName = "MinhasPautasTests"
                ReferencedContainer = "container:MinhasPautas.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "MinhasPautasTests">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0F3BB67C245B32C500CFF81D"
-               BuildableName = "MinhasPautasUITests.xctest"
-               BlueprintName = "MinhasPautasUITests"
-               ReferencedContainer = "container:MinhasPautas.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "SchedulesViewControllerUITests/testSegmentedControlLabelAndAction()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
