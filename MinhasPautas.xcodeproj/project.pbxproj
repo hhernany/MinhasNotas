@@ -26,6 +26,7 @@
 		0F3BB69D245BC07A00CFF81D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3BB69C245BC07A00CFF81D /* RegisterViewController.swift */; };
 		0F3BB69F245BC09F00CFF81D /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3BB69E245BC09F00CFF81D /* ResetPasswordViewController.swift */; };
 		0F4889C02465AD7F006F63B3 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4889BF2465AD7F006F63B3 /* LoginViewControllerUITests.swift */; };
+		0F5571342474227B00EABBB6 /* RegisterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5571332474227B00EABBB6 /* RegisterViewControllerTests.swift */; };
 		0F76B7192465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F76B7182465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift */; };
 		0F76B71B246630D700C3EB62 /* RegisterViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F76B71A246630D700C3EB62 /* RegisterViewControllerUITests.swift */; };
 		0F9A8D25245C72AE005B2E2B /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A8D24245C72AE005B2E2B /* StringExt.swift */; };
@@ -100,6 +101,7 @@
 		0F3BB69C245BC07A00CFF81D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0F3BB69E245BC09F00CFF81D /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		0F4889BF2465AD7F006F63B3 /* LoginViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerUITests.swift; sourceTree = "<group>"; };
+		0F5571332474227B00EABBB6 /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
 		0F76B7182465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewControllerUITests.swift; sourceTree = "<group>"; };
 		0F76B71A246630D700C3EB62 /* RegisterViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerUITests.swift; sourceTree = "<group>"; };
 		0F9A8D24245C72AE005B2E2B /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		0F3BB675245B32C500CFF81D /* MinhasPautasTests */ = {
 			isa = PBXGroup;
 			children = (
+				0F5571332474227B00EABBB6 /* RegisterViewControllerTests.swift */,
 				0F3BB676245B32C500CFF81D /* MinhasPautasTests.swift */,
 				0F3BB678245B32C500CFF81D /* Info.plist */,
 			);
@@ -631,6 +634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F3BB677245B32C500CFF81D /* MinhasPautasTests.swift in Sources */,
+				0F5571342474227B00EABBB6 /* RegisterViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

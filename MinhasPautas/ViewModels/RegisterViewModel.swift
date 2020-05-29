@@ -98,6 +98,7 @@ struct RegisterViewModel {
 
 extension RegisterViewModel: RegisterViewModelDelegate {
     func sendCredentials(data: RegisterModel) {
+        // Maybe separete this logic in another function ou class?
         if data.name.isEmpty == true {
             registerError(message: "Informe o seu nome.")
             return

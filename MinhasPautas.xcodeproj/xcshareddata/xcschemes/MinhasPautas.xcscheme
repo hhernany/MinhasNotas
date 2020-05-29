@@ -37,6 +37,11 @@
                BlueprintName = "MinhasPautasTests"
                ReferencedContainer = "container:MinhasPautas.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RegisterViewControllerTests/testOutlets()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

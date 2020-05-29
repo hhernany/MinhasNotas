@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RegisterViewControlerDelegate {
+@objc protocol RegisterViewControlerDelegate {
     func registerSuccess()
     func registerError(message: String)
 }
@@ -22,6 +22,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var passwordConfirmation: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     // Variables and Constants
     var registerViewModel: RegisterViewModel?

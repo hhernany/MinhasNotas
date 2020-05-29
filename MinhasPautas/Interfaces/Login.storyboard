@@ -225,7 +225,7 @@
         <!--Novo cadastro-->
         <scene sceneID="xAy-FB-TeJ">
             <objects>
-                <viewController title="Novo cadastro" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="registerVC" title="Novo cadastro" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rRb-lC-ynj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -517,11 +517,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="cHa-b6-T9k" id="LSZ-qU-4KP"/>
                         <outlet property="email" destination="W1X-ee-f94" id="9W7-Mn-tpn"/>
                         <outlet property="emailConfirmation" destination="l8D-Ha-vAY" id="xYd-Kk-3Cu"/>
                         <outlet property="name" destination="OaL-Lx-Gpp" id="Nae-dV-YMc"/>
                         <outlet property="password" destination="aGR-N7-DT7" id="L8D-fw-3if"/>
                         <outlet property="passwordConfirmation" destination="P4a-B3-j0f" id="L5a-PT-4ca"/>
+                        <outlet property="registerButton" destination="dCn-hz-AmS" id="Yyl-Js-53H"/>
                         <outlet property="scrollView" destination="ogU-eF-PNN" id="fXe-yO-A0V"/>
                     </connections>
                 </viewController>
@@ -532,7 +534,7 @@
         <!--Esqueci a senha-->
         <scene sceneID="NYj-tO-8hx">
             <objects>
-                <viewController title="Esqueci a senha" id="FgM-0F-OWH" customClass="ResetPasswordViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="resetPasswordVC" title="Esqueci a senha" id="FgM-0F-OWH" customClass="ResetPasswordViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9JU-FL-xSI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -626,6 +628,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="O0F-U6-nNy" id="02c-X0-d3s"/>
+                        <outlet property="confirmButton" destination="pLc-mG-rh4" id="Sa8-Nz-8W9"/>
                         <outlet property="emailTextField" destination="aEq-m5-pCp" id="Tpe-Pw-pHT"/>
                     </connections>
                 </viewController>
