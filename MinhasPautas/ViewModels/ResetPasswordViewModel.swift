@@ -12,68 +12,40 @@ import Firebase
 // Add ": class"  if change struct by class
 protocol ResetPasswordViewModelDelegate {
     func sendCredentials(email: String)
-    func resetSucess()
-    func resetError(message: String)
 }
 
 struct ResetPasswordViewModel {
     
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
-    var viewModelDelegate: ResetPasswordViewControlerDelegate?
+    var viewDelegate: ResetPasswordViewControlerDelegate?
+    var validator = ResetPasswordValidator()
+    var firebaserService: ResetPasswordFirebaseProtocol!
     
     // Dependency Injection
-    init(delegate: ResetPasswordViewControlerDelegate?) {
-        viewModelDelegate = delegate
-    }
-    
-    // Firebase reset password
-    private func resetPassword(email: String) {
-        Auth.auth().languageCode = "pt-BR" // Setar o idioma do e-mail
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
-            guard error == nil else {
-                if let err = error as NSError? {
-                    self.resetError(message: self.firebaseRegisterErrorCode(err))
-                }
-                return
-            }
-            self.resetSucess()
-        }
-    }
-    
-    // Firebase error code
-    private func firebaseRegisterErrorCode(_ error: NSError) -> String {
-        switch error.code {
-        case AuthErrorCode.invalidEmail.rawValue:
-            return "E-mail informado não cadastrado. Confira os dados informados e tente novamente."
-        case AuthErrorCode.userNotFound.rawValue:
-            return "Usuário não encontrado. Confira os dados informados e tente novamente."
-        case AuthErrorCode.networkError.rawValue:
-            return "Houve um erro com a conexão da internet. Por favor, tente novamente."
-        default:
-            return "Não foi possível processar a sua solicitação, por favor, tente novamente mais tarde."
-        }
+    init(delegate: ResetPasswordViewControlerDelegate?,
+         firebaseService: ResetPasswordFirebaseProtocol = ResetPasswordFirebaseService()) {
+        viewDelegate = delegate
+        self.firebaserService = firebaseService
     }
 }
 
 extension ResetPasswordViewModel: ResetPasswordViewModelDelegate {
     func sendCredentials(email: String) {
-        if email.isEmpty == true {
-            resetError(message: "Informe o email.")
+        let resultValidation = validator.isEmailValid(email: email)
+        if resultValidation.0 == false {
+            self.viewDelegate?.resetError(message: resultValidation.1)
             return
         }
-        if !email.contains(".") || !email.contains("@") {
-            resetError(message: "E-mail inválido.")
-        }
-        resetPassword(email: email)
-    }
-    
-    func resetSucess() {
-        viewModelDelegate?.resetSuccess()
-    }
-    
-    func resetError(message: String) {
-        viewModelDelegate?.resetError(message: message)
+        
+        print(firebaserService)
+        firebaserService?.resetPassword(email: email, completionHandler: { (success, error) in
+            if success && error == nil{
+                self.viewDelegate?.resetSuccess()
+            } else {
+                self.viewDelegate?.resetError(message: self.validator.firebaseRegisterErrorCode(error!))
+            }
+        })
     }
 }
 

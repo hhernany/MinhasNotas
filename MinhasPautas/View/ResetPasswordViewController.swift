@@ -21,7 +21,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     
     // Variables and Constants
-    var resetPasswordViewModel: ResetPasswordViewModel?
+    var resetPasswordViewModel: ResetPasswordViewModelDelegate?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {

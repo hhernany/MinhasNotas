@@ -45,10 +45,12 @@ extension SchedulesAPI: TargetType {
     
     public var sampleData: Data {
         switch self {
-        case .getData(let page):
+        case .getData( _):
             return stubbedResponse("Schedules")
-        case .update(let data):
+        case .update( _):
             return stubbedResponse("UpdateScheduleReturn")
+        case .create( _):
+            return stubbedResponse("CreateScheduleReturn")
         default:
             return Data()
         }
