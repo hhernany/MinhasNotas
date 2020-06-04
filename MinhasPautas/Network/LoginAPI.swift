@@ -37,7 +37,12 @@ extension LoginAPI: TargetType {
     }
     
     public var sampleData: Data {
-        return Data()
+        switch self {
+        case .register:
+            return stubbedResponse("LoginSuccessReturn")
+        default:
+            return Data()
+        }
     }
     
     public var task: Task {

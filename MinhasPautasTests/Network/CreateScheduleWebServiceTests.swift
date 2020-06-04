@@ -62,7 +62,7 @@ class CreateScheduleWebServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testWebService_WhithInvalidResultStruct() {
+    func testWebService_WithInvalidResultStruct() {
         // Arrange
         let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customSuccessWithInvalidStruct, stubClosure: MoyaProvider.immediatelyStub)
         sut = CreateScheduleWebService(moyaProvider: provider)
@@ -79,7 +79,7 @@ class CreateScheduleWebServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testWebService_WhithFailedRequest() {
+    func testWebService_WithFailedRequest() {
         // Arrange
         let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customErrorEndpoint, stubClosure: MoyaProvider.immediatelyStub)
         sut = CreateScheduleWebService(moyaProvider: provider)
@@ -113,7 +113,7 @@ class CreateScheduleWebServiceTests: XCTestCase {
     }
     
     func customWebServiceValidatingError(_ target: SchedulesAPI) -> Endpoint {
-        let data = "{\"success\": false, \"message\": \"Status atualizado com sucesso.\"}"
+        let data = "{\"success\": false, \"message\": \"Result with success equal false.\"}"
         let sampleData = Data(data.utf8)
 
         return Endpoint(url: URL(target: target).absoluteString,

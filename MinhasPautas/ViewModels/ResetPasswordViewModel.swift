@@ -15,11 +15,11 @@ protocol ResetPasswordViewModelDelegate {
 }
 
 struct ResetPasswordViewModel {
-    
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
     var viewDelegate: ResetPasswordViewControlerDelegate?
     var validator = ResetPasswordValidator()
+    var firebaseValidator = FirebaseErrorCodeValidator()
     var firebaserService: ResetPasswordFirebaseProtocol!
     
     // Dependency Injection
@@ -38,12 +38,11 @@ extension ResetPasswordViewModel: ResetPasswordViewModelDelegate {
             return
         }
         
-        print(firebaserService)
         firebaserService?.resetPassword(email: email, completionHandler: { (success, error) in
             if success && error == nil{
                 self.viewDelegate?.resetSuccess()
             } else {
-                self.viewDelegate?.resetError(message: self.validator.firebaseRegisterErrorCode(error!))
+                self.viewDelegate?.resetError(message: self.firebaseValidator.firebaseRegisterErrorCode(error!))
             }
         })
     }

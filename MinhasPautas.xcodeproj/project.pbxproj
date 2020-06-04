@@ -35,6 +35,13 @@
 		0F52BA302488144B00C51E65 /* ResetPasswordFirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA2F2488144B00C51E65 /* ResetPasswordFirebaseService.swift */; };
 		0F52BA33248817F300C51E65 /* MockResetPasswordFirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA32248817F300C51E65 /* MockResetPasswordFirebaseService.swift */; };
 		0F52BA35248820D400C51E65 /* ResetPasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA34248820D400C51E65 /* ResetPasswordViewControllerTests.swift */; };
+		0F52BA3724882F3200C51E65 /* RegisterViewModelValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA3624882F3200C51E65 /* RegisterViewModelValidator.swift */; };
+		0F52BA392488357200C51E65 /* RegisterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA382488357200C51E65 /* RegisterError.swift */; };
+		0F52BA3B248839BA00C51E65 /* RegisterWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA3A248839BA00C51E65 /* RegisterWebService.swift */; };
+		0F52BA3D24885B5D00C51E65 /* FirebaseErrorCodeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA3C24885B5D00C51E65 /* FirebaseErrorCodeValidator.swift */; };
+		0F52BA412488744300C51E65 /* RegisterViewModelValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA402488744300C51E65 /* RegisterViewModelValidatorTests.swift */; };
+		0F52BA4324887A5400C51E65 /* RegisterWebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52BA4224887A5400C51E65 /* RegisterWebServiceTests.swift */; };
+		0F52BA452488807E00C51E65 /* LoginSuccessReturn.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F52BA442488807E00C51E65 /* LoginSuccessReturn.json */; };
 		0F5571342474227B00EABBB6 /* RegisterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5571332474227B00EABBB6 /* RegisterViewControllerTests.swift */; };
 		0F76B7192465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F76B7182465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift */; };
 		0F76B71B246630D700C3EB62 /* RegisterViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F76B71A246630D700C3EB62 /* RegisterViewControllerUITests.swift */; };
@@ -128,6 +135,13 @@
 		0F52BA2F2488144B00C51E65 /* ResetPasswordFirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordFirebaseService.swift; sourceTree = "<group>"; };
 		0F52BA32248817F300C51E65 /* MockResetPasswordFirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResetPasswordFirebaseService.swift; sourceTree = "<group>"; };
 		0F52BA34248820D400C51E65 /* ResetPasswordViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewControllerTests.swift; sourceTree = "<group>"; };
+		0F52BA3624882F3200C51E65 /* RegisterViewModelValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModelValidator.swift; sourceTree = "<group>"; };
+		0F52BA382488357200C51E65 /* RegisterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterError.swift; sourceTree = "<group>"; };
+		0F52BA3A248839BA00C51E65 /* RegisterWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWebService.swift; sourceTree = "<group>"; };
+		0F52BA3C24885B5D00C51E65 /* FirebaseErrorCodeValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseErrorCodeValidator.swift; sourceTree = "<group>"; };
+		0F52BA402488744300C51E65 /* RegisterViewModelValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModelValidatorTests.swift; sourceTree = "<group>"; };
+		0F52BA4224887A5400C51E65 /* RegisterWebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWebServiceTests.swift; sourceTree = "<group>"; };
+		0F52BA442488807E00C51E65 /* LoginSuccessReturn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginSuccessReturn.json; sourceTree = "<group>"; };
 		0F5571332474227B00EABBB6 /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
 		0F76B7182465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewControllerUITests.swift; sourceTree = "<group>"; };
 		0F76B71A246630D700C3EB62 /* RegisterViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerUITests.swift; sourceTree = "<group>"; };
@@ -288,6 +302,7 @@
 			children = (
 				0F7A692C2481B5FD002DCB4E /* CreateScheduleModelValidatorTests.swift */,
 				0F52BA252487F55A00C51E65 /* ResetPasswordValidatorTests.swift */,
+				0F52BA402488744300C51E65 /* RegisterViewModelValidatorTests.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -296,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				0F8285352486C4BE007D9E3C /* CreateScheduleWebServiceTests.swift */,
+				0F52BA4224887A5400C51E65 /* RegisterWebServiceTests.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -349,8 +365,11 @@
 			isa = PBXGroup;
 			children = (
 				0F7A69282481B243002DCB4E /* CreateScheduleError.swift */,
-				0F7A69262481A4C2002DCB4E /* CreateScheduleModelValidator.swift */,
+				0F52BA382488357200C51E65 /* RegisterError.swift */,
 				0F52BA232487EF7A00C51E65 /* ResetPasswordValidator.swift */,
+				0F7A69262481A4C2002DCB4E /* CreateScheduleModelValidator.swift */,
+				0F52BA3624882F3200C51E65 /* RegisterViewModelValidator.swift */,
+				0F52BA3C24885B5D00C51E65 /* FirebaseErrorCodeValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -394,10 +413,10 @@
 			isa = PBXGroup;
 			children = (
 				0FB2EB29245E207300B8F18A /* ResultModel.swift */,
-				0F9A8D2C245C9E48005B2E2B /* RegisterModel.swift */,
-				0FEBF48E245CFED7009E3F19 /* SchedulesModel.swift */,
-				0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */,
 				0F3BB68F245B702E00CFF81D /* LoginModel.swift */,
+				0F9A8D2C245C9E48005B2E2B /* RegisterModel.swift */,
+				0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */,
+				0FEBF48E245CFED7009E3F19 /* SchedulesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -458,8 +477,9 @@
 			children = (
 				0F3BB695245BA6C400CFF81D /* LoginAPI.swift */,
 				0FEBF48A245CF64E009E3F19 /* SchedulesAPI.swift */,
-				0F7A691D24815FB3002DCB4E /* CreateScheduleWebService.swift */,
 				0F52BA2F2488144B00C51E65 /* ResetPasswordFirebaseService.swift */,
+				0F7A691D24815FB3002DCB4E /* CreateScheduleWebService.swift */,
+				0F52BA3A248839BA00C51E65 /* RegisterWebService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -469,6 +489,7 @@
 			children = (
 				0FF86383246DF50E00E657BD /* Schedules.json */,
 				0F8285392486D48E007D9E3C /* CreateScheduleReturn.json */,
+				0F52BA442488807E00C51E65 /* LoginSuccessReturn.json */,
 				0FF86387246DFF0900E657BD /* UpdateScheduleReturn.json */,
 			);
 			path = "Stubbed Responses";
@@ -611,6 +632,7 @@
 				0FB4947C245DB0320079201D /* SchedulesTableViewCell.xib in Resources */,
 				0FF86384246DF50E00E657BD /* Schedules.json in Resources */,
 				0F82853A2486D48E007D9E3C /* CreateScheduleReturn.json in Resources */,
+				0F52BA452488807E00C51E65 /* LoginSuccessReturn.json in Resources */,
 				0F3BB66C245B32C500CFF81D /* LaunchScreen.storyboard in Resources */,
 				0F9A8D27245C8A3A005B2E2B /* GoogleService-Info.plist in Resources */,
 				0F3BB669245B32C500CFF81D /* Assets.xcassets in Resources */,
@@ -728,16 +750,20 @@
 			files = (
 				0FB4947B245DB0320079201D /* SchedulesTableViewCell.swift in Sources */,
 				0F52BA242487EF7A00C51E65 /* ResetPasswordValidator.swift in Sources */,
+				0F52BA3D24885B5D00C51E65 /* FirebaseErrorCodeValidator.swift in Sources */,
 				0F9FBB2F245F67070009C9CC /* ApplicationExt.swift in Sources */,
+				0F52BA392488357200C51E65 /* RegisterError.swift in Sources */,
 				0FF8637F246DD15E00E657BD /* XCTestCaseExt.swift in Sources */,
 				0FB2EB27245E13EC00B8F18A /* CreateScheduleViewModel.swift in Sources */,
 				0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */,
 				0F3BB69D245BC07A00CFF81D /* RegisterViewController.swift in Sources */,
 				0F9A8D25245C72AE005B2E2B /* StringExt.swift in Sources */,
+				0F52BA3724882F3200C51E65 /* RegisterViewModelValidator.swift in Sources */,
 				0F3BB694245B9FEA00CFF81D /* LoginViewController.swift in Sources */,
 				0FB2EB2D245E66DE00B8F18A /* PerfilViewController.swift in Sources */,
 				0F7A691E24815FB3002DCB4E /* CreateScheduleWebService.swift in Sources */,
 				0FB4947F245E0A430079201D /* CreateScheduleViewController.swift in Sources */,
+				0F52BA3B248839BA00C51E65 /* RegisterWebService.swift in Sources */,
 				0FB2EB2A245E207300B8F18A /* ResultModel.swift in Sources */,
 				0F3BB696245BA6C400CFF81D /* LoginAPI.swift in Sources */,
 				0F9A8D2B245C986A005B2E2B /* RegisterViewModel.swift in Sources */,
@@ -771,6 +797,7 @@
 				0F7A69242481A129002DCB4E /* CreteScheduleViewModelTests.swift in Sources */,
 				0F52BA2C2487FD4800C51E65 /* ResetPasswordViewModelTests.swift in Sources */,
 				0F52BA35248820D400C51E65 /* ResetPasswordViewControllerTests.swift in Sources */,
+				0F52BA412488744300C51E65 /* RegisterViewModelValidatorTests.swift in Sources */,
 				0F8285362486C4BE007D9E3C /* CreateScheduleWebServiceTests.swift in Sources */,
 				0F52BA262487F55A00C51E65 /* ResetPasswordValidatorTests.swift in Sources */,
 				0F82853C248710EB007D9E3C /* MockCreateScheduleViewDelegate.swift in Sources */,
@@ -779,6 +806,7 @@
 				0F0280AB24872A4D00811BA9 /* CreateScheduleViewControllerTests.swift in Sources */,
 				0F3BB677245B32C500CFF81D /* MinhasPautasTests.swift in Sources */,
 				0F5571342474227B00EABBB6 /* RegisterViewControllerTests.swift in Sources */,
+				0F52BA4324887A5400C51E65 /* RegisterWebServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,7 +33,7 @@ extension CreateScheduleViewModel: CreateScheduleViewModelDelegate {
     func sendFormData(formData: CreateScheduleModel) {
         let validationError = validator.validateScheduleModel(formData: formData)
         if validationError != nil {
-            viewModelDelegate?.createError(message: validationError?.localizedDescription ?? "Unknow error")
+            viewModelDelegate?.createError(message: validationError?.localizedDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
             return
         }
 
@@ -48,7 +48,7 @@ extension CreateScheduleViewModel: CreateScheduleViewModelDelegate {
             if error == nil && result?.success == true {
                 self.viewModelDelegate?.createSuccess()
             } else {
-                self.viewModelDelegate?.createError(message: error?.errorDescription ?? "Unknow Error")
+                self.viewModelDelegate?.createError(message: error?.errorDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
             }
         }
     }

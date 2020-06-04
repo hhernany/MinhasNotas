@@ -26,10 +26,6 @@ class CreateScheduleWebService: CreateScheduleWebServiceProtocol {
             case .success(let response):
                 do {
                     let resultModel = try response.map(ResultModel.self)
-                    if resultModel.success == false {
-                        completionHandler(resultModel, nil)
-                        return
-                    }
                     completionHandler(resultModel, nil)
                 } catch {
                     completionHandler(nil, MoyaError.jsonMapping(response))
