@@ -1,7 +1,7 @@
 {
     "success":true,
     "message":"Login efetuado com sucesso.",
-    "token_jwt":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwibm9tZSI6IlBvc3RtYW4iLCJpYXQiOjE1OTEyMzI3MDN9.M_SBHPAfMYkQRDylzbKb64bSsYrkwrE_1sjXUziC5_Y",
+    "token_jwt":"XXXXXXXXXXXXXXXXXXX",
     "usuario": {
         "id_usuario":2,
         "nome":"Postman",

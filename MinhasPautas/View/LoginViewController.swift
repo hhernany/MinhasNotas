@@ -19,10 +19,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
+    @IBOutlet weak var forgetPasswordButton: UIButton!
+    @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var bottomStackView: NSLayoutConstraint!
     
     // Variables and Constants
-    var loginViewModel: LoginViewModel?
+    var loginViewModel: LoginViewModelDelegate?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {
@@ -51,6 +53,14 @@ class LoginViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    @IBAction func didTapForgetPasswordButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "forgetPasswordSegue", sender: self)
+    }
+    
+    @IBAction func didTapRegistrationButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "registrationSegue", sender: self)
+    }
+    
     @IBAction func didTapConnectButton(_ sender: UIButton) {
         guard let _ = loginViewModel else { fatalError("ViewModel not implemented")}
         spinner = self.view.showSpinnerGray()
@@ -63,7 +73,6 @@ extension LoginViewController: LoginViewControlerDelegate {
         spinner?.removeSpinner()
         let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabbarVC")
         UIApplication.setRootView(rootVC, options: UIApplication.loginAnimation)
-        //performSegue(withIdentifier: Segue.loginToMain, sender: self)
     }
     
     func loginError(message: String) {

@@ -38,10 +38,10 @@ extension LoginAPI: TargetType {
     
     public var sampleData: Data {
         switch self {
+        case .login:
+            return stubbedResponse("LoginSuccessReturn")
         case .register:
             return stubbedResponse("LoginSuccessReturn")
-        default:
-            return Data()
         }
     }
     

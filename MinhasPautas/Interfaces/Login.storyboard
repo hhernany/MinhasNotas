@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="rTL-d8-REc">
             <objects>
-                <viewController storyboardIdentifier="loginVC" id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UBQ-sa-Sku">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="ebh-Zx-JcK" kind="show" id="9zd-IP-VED"/>
+                                            <action selector="didTapForgetPasswordButton:" destination="mgN-Fl-MnB" eventType="touchUpInside" id="7sC-lG-xjU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bam-Oq-4ZR">
@@ -117,7 +117,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="m1q-3L-Onw" kind="show" id="Szf-Zv-glX"/>
+                                            <action selector="didTapRegistrationButton:" destination="mgN-Fl-MnB" eventType="touchUpInside" id="wU5-CB-g4s"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -150,8 +150,12 @@
                         <outlet property="bottomStackView" destination="eE0-FU-7Ng" id="r94-dK-bmM"/>
                         <outlet property="connectButton" destination="bam-Oq-4ZR" id="cTt-iu-dTt"/>
                         <outlet property="emailTextField" destination="IPI-oP-SF1" id="lMZ-Jt-ayt"/>
+                        <outlet property="forgetPasswordButton" destination="W4Q-YV-W0p" id="6sG-TD-2Lw"/>
                         <outlet property="passwordTextField" destination="1AS-ts-0SA" id="qb8-Tl-em1"/>
+                        <outlet property="registrationButton" destination="HmH-JX-qip" id="tqb-08-hyZ"/>
                         <segue destination="qUf-T2-jZG" kind="show" identifier="mainSegue" id="X2c-If-hSJ"/>
+                        <segue destination="ebh-Zx-JcK" kind="show" identifier="forgetPasswordSegue" id="rk1-kg-533"/>
+                        <segue destination="m1q-3L-Onw" kind="show" identifier="registrationSegue" id="cTg-AE-LKh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ae0-wf-voY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -171,6 +175,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m1q-3L-Onw" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="gRh-yE-6Hq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="2jf-3i-mQv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -198,6 +203,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ebh-Zx-JcK" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Q1l-wl-2oH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="uXp-2F-AMj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -223,7 +229,7 @@
         <!--Novo cadastro-->
         <scene sceneID="xAy-FB-TeJ">
             <objects>
-                <viewController storyboardIdentifier="registerVC" title="Novo cadastro" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterVC" title="Novo cadastro" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rRb-lC-ynj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

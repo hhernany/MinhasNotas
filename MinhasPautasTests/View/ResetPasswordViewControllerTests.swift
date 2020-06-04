@@ -25,11 +25,15 @@ class ResetPasswordViewControllerTests: XCTestCase {
         sut = nil
     }
 
-    func testResetPasswordViewControllerTests_WhenCreated_HasRequiredOutlets() throws {
+    func testResetPasswordViewController_WhenCreated_HasRequiredOutlets() throws {
         let emailTextField = try XCTUnwrap(sut.emailTextField, "The emailTextField is not connect to an IBOutlet")
 
         // TextFields must be empty in the start
         XCTAssertEqual(emailTextField.text, "", "emailTextField is not empty when the view controller initially loaded")
+    }
+    
+    func testResetPasswordViewController_HasCorrectKeyboardType() throws {
+        XCTAssertTrue(sut.emailTextField.keyboardType == .emailAddress, "emailTextField has incorrect keyboard type")
     }
     
     func testCreateScheduleViewController_WhenCreated_HasCreateButtonAction() throws {
@@ -40,14 +44,14 @@ class ResetPasswordViewControllerTests: XCTestCase {
         XCTAssertTrue(confirmActions.contains("didtapCofirmButton:"), "There is no action with a name signupButtonTapped assigned to signup button")
     }
 
-    func testCreateScheduleViewController_WhenCreateTapped_InvokesCreateProcess() throws {
-        let confirmButton: UIButton = try XCTUnwrap(sut.confirmButton, "confirmButton it not connect to an IBOutlet")
+    func testCreateScheduleViewController_WhenCreateTapped_InvokesResetProcess() throws {
+        let confirmButton: UIButton = try XCTUnwrap(sut.confirmButton, "confirmButton is not connect to an IBOutlet")
         let viewModel = MockResetPasswordViewModel()
         sut.resetPasswordViewModel = viewModel
 
         confirmButton.sendActions(for: .touchUpInside)
 
         // Assert
-        XCTAssertTrue(viewModel.sendCredentialsCalled, "The sendCredentialsCalled() method was not called when tapped in confirmButton")
+        XCTAssertTrue(viewModel.sendCredentialsCalled, "The sendCredentials() method was not called when tapped in confirmButton")
     }
 }

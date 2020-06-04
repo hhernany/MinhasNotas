@@ -1,8 +1,8 @@
 //
-//  RegisterWebService.swift
+//  LoginWebService.swift
 //  MinhasPautas
 //
-//  Created by Hugo Hernany on 03/06/20.
+//  Created by Hugo Hernany on 04/06/20.
 //  Copyright © 2020 Hugo Hernany. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Foundation
 import Firebase
 import Moya
 
-protocol RegisterWebServiceProtocol {
-    func registerDatabase(_ userData: [String:String], completionHandler: @escaping (LoginModel?, ResultModel?, MoyaError?) -> Void)
-    func registerFirebase(registerData: RegisterModel, completionHandler: @escaping ([String:String]?, NSError?) -> Void)
+protocol LoginWebserviceProtocol {
+    func loginFirebase(email: String, password: String, completionHandler: @escaping ([String:String]?, NSError?) -> Void)
+    func performLogin(_ userData: [String:String], completionHandler: @escaping (LoginModel?, ResultModel?, MoyaError?) -> Void)
 }
 
-class RegisterWebService: RegisterWebServiceProtocol {
+class LoginWebService: LoginWebserviceProtocol {
     var provider: MoyaProvider<LoginAPI>
     var firebaseValidator = FirebaseErrorCodeValidator()
     
@@ -23,29 +23,27 @@ class RegisterWebService: RegisterWebServiceProtocol {
         provider = moyaProvider
     }
     
-    // Firebase Register
-    func registerFirebase(registerData: RegisterModel, completionHandler: @escaping ([String:String]?, NSError?) -> Void) {
-        Auth.auth().createUser(withEmail: registerData.email , password: registerData.password) { (authResult, error) in
-            guard let user = authResult?.user else {
+    // Firebase login
+    func loginFirebase(email: String, password: String, completionHandler: @escaping ([String:String]?, NSError?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            guard let userData = user?.user else {
                 let err = error! as NSError
                 let errorMessage = self.firebaseValidator.firebaseRegisterErrorCode(err)
                 completionHandler(nil, NSError(domain: errorMessage, code: err.code))
                 return
             }
-
-            // Save user in database
-            let userData: [String:String] = [
-                "nome": registerData.name,
-                "email": registerData.email,
-                "token_autenticacao": user.uid
-            ]
             
-            completionHandler(userData, nil)
+            // Data to be sent to the database
+            let data: [String:String] = [
+                "email": email,
+                "token_autenticacao": userData.uid
+            ]
+            completionHandler(data, nil)
         }
     }
     
-    func registerDatabase(_ userData: [String:String], completionHandler: @escaping (LoginModel?, ResultModel?, MoyaError?) -> Void) {
-        provider.request(.register(data: userData)) { result in
+    func performLogin(_ userData: [String:String], completionHandler: @escaping (LoginModel?, ResultModel?, MoyaError?) -> Void) {
+        provider.request(.login(data: userData)) { result in
             switch result {
             case .success(let response):
                 do {
@@ -53,16 +51,16 @@ class RegisterWebService: RegisterWebServiceProtocol {
                     completionHandler(login, nil, nil)
                 } catch {
                     // If don't decode with LoginModel, try with ResulModel.
-                    let resultRegister = try? JSONDecoder().decode(ResultModel.self, from: response.data)
-                    if resultRegister == nil {
+                    let resultLogin = try? JSONDecoder().decode(ResultModel.self, from: response.data)
+                    if resultLogin == nil {
                         completionHandler(nil, nil, MoyaError.jsonMapping(response)) // "Não foi possível finalizar o cadastro. Por favor, tente novamente mais tarde."
                         return
                     }
-
+                    
                     // TODO: Se chegou aqui é um erro desconhecido. Como está vai retornar uma mensagem nada a ver.
                     // Corrigir e também corrigir o teste.
-                    completionHandler(nil, resultRegister, MoyaError.jsonMapping(response))
-                    //print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
+                    completionHandler(nil, resultLogin, MoyaError.jsonMapping(response))
+                    print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
                 }
             case .failure:
                 // TODO: Criar um erro personalizado, não da pra saber qual erro que vem aqui e vai mostrar tudo estranho pro usuário.

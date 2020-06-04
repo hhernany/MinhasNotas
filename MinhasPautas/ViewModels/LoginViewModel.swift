@@ -13,8 +13,6 @@ import Firebase
 // Add ": class"  if change struct by class
 protocol LoginViewModelDelegate {
     func sendCredentials(email: String, password: String)
-    func loginSuccess()
-    func loginError(message: String)
 }
 
 struct LoginViewModel {
@@ -22,16 +20,21 @@ struct LoginViewModel {
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
     var viewModelDelegate: LoginViewControlerDelegate?
-    fileprivate let provider = MoyaProvider<LoginAPI>()
+    var validator = LoginValidator()
+    var webService: LoginWebserviceProtocol?
+    var firebaseValidator = FirebaseErrorCodeValidator()
 
     // Dependency Injection
-    init(delegate: LoginViewControlerDelegate?) {
+    init(delegate: LoginViewControlerDelegate?,
+         webservice: LoginWebserviceProtocol = LoginWebService()) {
         viewModelDelegate = delegate
+        webService = webservice
+        
         self.logoutUserFirebase()
         self.removeLocalData()
     }
     
-    // Logout user on Firebase when loginVC are presented.
+    // Logout user on Firebase when LoginVC are presented.
     private func logoutUserFirebase() {
         do {
             try Auth.auth().signOut()
@@ -59,94 +62,36 @@ struct LoginViewModel {
             UserDefaults.standard.removeObject(forKey: key)
         }
     }
-    
-    // Firebase login
-    private func loginFirebase(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            guard let userData = user?.user else {
-                let err = error! as NSError
-                let errorMessage = self.firebaseErrorCode(err)
-                self.loginError(message: errorMessage)
-                return
-            }
-            
-            // POST DATA
-            let data: [String:String] = [
-                "email": email,
-                "token_autenticacao": userData.uid
-            ]
-            
-            self.performLogin(data)
-        }
-    }
-    
-    private func performLogin(_ userData: [String:String]) {
-        provider.request(.login(data: userData)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let login = try response.map(LoginModel.self)
-                    if login.success == false {
-                        self.loginError(message: login.message)
-                        return
-                    }
-                    self.saveLocalData(data: login)
-                    self.loginSuccess()
-                } catch {
-                    guard let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any] else {
-                        self.loginError(message: "Não foi possível realizar o login. Por favor, tente novamente mais tarde.")
-                        return
-                    }
-                    if json["success"] as? Bool == false {
-                        self.loginError(message: json["message"] as? String ?? "Não foi possível realizar o login. Por favor, tente novamente mais tarde.")
-                        return
-                    }
-                    print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
-                }
-            case .failure:
-                self.loginError(message: "Não foi possível realizar o login. Por favor, tente novamente mais tarde.")
-                print("Erro ao obter dados: \(result.error.debugDescription)")
-            }
-        }
-    }
-    
-    // Firebase error code
-    private func firebaseErrorCode(_ error: NSError) -> String {
-        switch error.code {
-        case AuthErrorCode.invalidEmail.rawValue:
-            return "O e-mail informado não é uma e-mail válido."
-        case AuthErrorCode.wrongPassword.rawValue:
-            return "A senha informada está incorreta."
-        case AuthErrorCode.userNotFound.rawValue:
-            return "Conta não cadastrada."
-        default:
-            return "Não foi possível realizar o login. Por favor, tente novamente mais tarde."
-        }
-    }
 }
 
 extension LoginViewModel: LoginViewModelDelegate {
-    func loginSuccess() {
-        viewModelDelegate?.loginSuccess()
-    }
-    
-    func loginError(message: String) {
-        viewModelDelegate?.loginError(message: message)
-    }
-    
     func sendCredentials(email: String, password: String) {
-        if email.isEmpty {
-            loginError(message: "Informe o e-mail de acesso.")
+        let returnValidation = validator.validateData(email: email, password: password)
+        if returnValidation.0 == false {
+            viewModelDelegate?.loginError(message: returnValidation.1)
             return
         }
-        if !email.contains(".") || !email.contains("@") {
-            loginError(message: "E-mail inválido.")
-        }
-        if password.isEmpty {
-            loginError(message: "Informe a senha de acesso.")
-            return
-        }
-        loginFirebase(email: email, password: password)
+        
+        webService?.loginFirebase(email: email, password: password, completionHandler: { (resultData, error) in
+            if error != nil {
+                let err = error! as NSError
+                self.viewModelDelegate?.loginError(message: err.domain)
+            } else {
+                self.webService?.performLogin(resultData!, completionHandler: { (loginModel, resultModel, error) in
+                    if loginModel == nil && resultModel == nil {
+                        self.viewModelDelegate?.loginError(message: error?.localizedDescription ?? "Erro desconhecido durante o login. Tente novamente.")
+                        return
+                    }
+                    if resultModel?.success == false && loginModel == nil {
+                        self.viewModelDelegate?.loginError(message: resultModel?.message ?? "Erro desconhecido durante o login. Tente novamente.")
+                        return
+                    }
+                    
+                    self.saveLocalData(data: loginModel!)
+                    self.viewModelDelegate?.loginSuccess()
+                })
+            }
+        })
     }
 }
 

@@ -52,9 +52,6 @@
                   Identifier = "MinhasPautasTests">
                </Test>
                <Test
-                  Identifier = "RegisterViewControllerTests">
-               </Test>
-               <Test
                   Identifier = "RegisterViewControllerTests/testOutlets()">
                </Test>
             </SkippedTests>

@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     // Variables and Constants
-    var registerViewModel: RegisterViewModel?
+    var registerViewModel: RegisterViewModelDelegate?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification:NSNotification){
-        var userInfo = notification.userInfo!
+        let userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         

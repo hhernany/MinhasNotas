@@ -51,8 +51,6 @@ extension SchedulesAPI: TargetType {
             return stubbedResponse("UpdateScheduleReturn")
         case .create( _):
             return stubbedResponse("CreateScheduleReturn")
-        default:
-            return Data()
         }
     }
     

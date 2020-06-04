@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 } catch {
                     print("The user is not logged in or was unable to log out")
                 }
-                window?.rootViewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
+                window?.rootViewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
             }
         }
         
@@ -134,7 +134,7 @@ final class LaunchEnvironment {
             return nil
         }
         
-        let viewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC") // ViewController
+        let viewController = UIStoryboard.init(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") // ViewController
         userDefaults.set(firstTimeUser, forKey: "is_first_time_user") // Save if is first login
         clearUserDefault() // Clear all user data
         setUpEnvironment(using: launchDictionary) // Save data in UserDefaults

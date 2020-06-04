@@ -35,6 +35,7 @@ extension RegisterViewModel: RegisterViewModelDelegate {
         let resultValidation = validator.validateModel(data: data)
         if resultValidation != nil {
             viewModelDelegate?.registerError(message: resultValidation?.localizedDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
+            return
         }
 
         webService.registerFirebase(registerData: data) { (result, error) in

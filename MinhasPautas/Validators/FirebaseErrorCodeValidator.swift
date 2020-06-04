@@ -22,6 +22,8 @@ class FirebaseErrorCodeValidator {
             return "E-mail não informado."
         case AuthErrorCode.userNotFound.rawValue:
             return "Usuário não encontrado. Confira os dados informados e tente novamente."
+        case AuthErrorCode.wrongPassword.rawValue:
+            return "A senha informada está incorreta."
         case AuthErrorCode.networkError.rawValue:
             return "Houve um erro com a conexão da internet. Por favor, tente novamente."
         default:
