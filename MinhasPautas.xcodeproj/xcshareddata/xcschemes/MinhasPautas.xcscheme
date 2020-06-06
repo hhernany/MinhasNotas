@@ -56,16 +56,6 @@
                </Test>
             </SkippedTests>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0F3BB67C245B32C500CFF81D"
-               BuildableName = "MinhasPautasUITests.xctest"
-               BlueprintName = "MinhasPautasUITests"
-               ReferencedContainer = "container:MinhasPautas.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
