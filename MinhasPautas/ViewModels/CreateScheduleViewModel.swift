@@ -10,26 +10,26 @@ import Foundation
 import Moya
 
 // Add ": class"  if change struct by class
-protocol CreateScheduleViewModelDelegate {
-    init(delegate: CreateScheduleViewControllerDelegate?, webservice: CreateScheduleWebServiceProtocol)
+protocol CreateScheduleViewModelProtocol {
+    init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol)
     func sendFormData(formData: CreateScheduleModel)
 }
 
 struct CreateScheduleViewModel {
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
-    var viewModelDelegate: CreateScheduleViewControllerDelegate?
+    var viewModelDelegate: CreateScheduleViewControllerProtocol?
     var webService: CreateScheduleWebServiceProtocol?
-    let validator = CreateScheduleModelValidator()
+    let validator = CreateScheduleValidator()
     
     // Dependency Injection
-    init(delegate: CreateScheduleViewControllerDelegate?, webservice: CreateScheduleWebServiceProtocol) {
+    init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol) {
         viewModelDelegate = delegate
         webService = webservice
     }
 }
 
-extension CreateScheduleViewModel: CreateScheduleViewModelDelegate {
+extension CreateScheduleViewModel: CreateScheduleViewModelProtocol {
     func sendFormData(formData: CreateScheduleModel) {
         let validationError = validator.validateScheduleModel(formData: formData)
         if validationError != nil {

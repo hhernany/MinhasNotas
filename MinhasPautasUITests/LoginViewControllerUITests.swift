@@ -58,10 +58,10 @@ class LoginViewControllerUITests: XCTestCase {
 
         // Valid e-mail and invalid password
         emailTextField.doubleTap()
-        app.menuItems["Select All"].tap()
+        //app.menuItems["Select All"].tap()
         app.menuItems["Cut"].tap()
         
-        emailTextField.tap()
+        //emailTextField.tap()
         emailTextField.typeText("hugo@gmail.com")
 
         passwordTextField.tap()

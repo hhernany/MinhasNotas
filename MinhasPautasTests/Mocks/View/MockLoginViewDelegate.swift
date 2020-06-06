@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import MinhasPautas
 
-class MockLoginViewDelegate: LoginViewControlerDelegate {
+class MockLoginViewDelegate: LoginViewControlerProtocol {
     var expectation: XCTestExpectation?
     var loginSuccessCounter = 0
     var loginErrorCounter = 0

@@ -10,7 +10,7 @@ import Foundation
 @testable import MinhasPautas
 
 // Used to test ResetPasswordViewController
-class MockResetPasswordViewModel: ResetPasswordViewModelDelegate {
+class MockResetPasswordViewModel: ResetPasswordViewModelProtocol {
     var sendCredentialsCalled = false
 
     func sendCredentials(email: String) {

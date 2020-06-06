@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import MinhasPautas
 
-class MockRegisterViewDelegate: RegisterViewControlerDelegate {
+class MockRegisterViewDelegate: RegisterViewControlerProtocol {
     var expectation: XCTestExpectation?
     var registerSuccessCounter = 0
     var registerErrorCounter = 0

@@ -29,7 +29,7 @@ class LoginViewModelTests: XCTestCase {
         loginModel = nil
     }
 
-    func testViewModel_WhenLoginSuccess_ShouldCallLoginSuccess() {
+    func testViewModel_WhenLoginSuccess_ShouldCallLoginSuccess() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the loginSuccess() method to be called")
         viewDelegate.expectation = myExpectation
@@ -42,7 +42,7 @@ class LoginViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.loginSuccessCounter, 1, "The loginSuccess() method was called more than one time")
     }
     
-    func testViewModel_WhenRecieveEmptyData_ShouldCallLoginError() {
+    func testViewModel_WhenRecieveEmptyData_ShouldCallLoginError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the loginError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -55,7 +55,7 @@ class LoginViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.loginErrorCounter, 1, "The loginError() method was called more than one time")
     }
     
-    func testViewModel_WhenRecieveValidData_FailedFirebaseLogin() {
+    func testViewModel_WhenRecieveValidData_FailedFirebaseLogin() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the loginError() method to be called when failed firebase login")
         viewDelegate.expectation = myExpectation
@@ -69,7 +69,7 @@ class LoginViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.loginErrorCounter, 1, "The loginError() method was called more than one time")
     }
     
-    func testViewModel_WhenRecieveValidData_FailedDatabaseLogin() {
+    func testViewModel_WhenRecieveValidData_FailedDatabaseLogin() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the loginError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -83,7 +83,7 @@ class LoginViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.loginErrorCounter, 1, "The loginError() method was called more than one time")
     }
     
-    func testViewModel_WhenRemoteWebServiceReturnError_ShouldCallResetError() {
+    func testViewModel_WhenRemoteWebServiceReturnError_ShouldCallResetError() throws{
         // Arrange
         let myExpectation = expectation(description: "Expected the loginError() method to be called")
         webservice.shouldReturnRemoteErrorMessage = true

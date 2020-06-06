@@ -13,20 +13,16 @@ class RegisterViewControllerTests: XCTestCase {
 
     var sut: RegisterViewController!
     
-    override func setUp() {
+    override func setUpWithError() throws {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         sut = storyboard.instantiateViewController(withIdentifier: "RegisterVC") as? RegisterViewController
         sut.loadViewIfNeeded()
         //let _ = sut.view // Load view hierarchy
     }
     
-    override func tearDown() {
+    override func tearDownWithError() throws {
         super.tearDown()
         sut = nil
-    }
-
-    func testViewModelIsSet() {
-        XCTAssertNotNil(sut.registerViewModel)
     }
     
     func testRegisterViewController_WhenCreated_HasRequiredOutlets() throws {

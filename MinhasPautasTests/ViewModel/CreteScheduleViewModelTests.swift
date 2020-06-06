@@ -17,20 +17,20 @@ class CreteScheduleViewModelTests: XCTestCase {
     var webservice: CreateScheduleWebServiceProtocol!
     var createScheduleModel: CreateScheduleModel!
     
-    override func setUp() {
+    override func setUpWithError() throws {
         viewDelegate = MockCreateScheduleViewDelegate()
         webservice = CreateScheduleWebService(moyaProvider: MoyaProvider<SchedulesAPI>(stubClosure: MoyaProvider.immediatelyStub))
         sut = CreateScheduleViewModel(delegate: viewDelegate, webservice: webservice)
     }
 
-    override func tearDown() {
+    override func tearDownWithError() throws {
         sut = nil
         viewDelegate = nil
         webservice = nil
         createScheduleModel = nil
     }
 
-    func testViewModel_WhenOperationSuccess_ShouldCallCreateSuccess() {
+    func testViewModel_WhenOperationSuccess_ShouldCallCreateSuccess() throws {
         // Arrange
         createScheduleModel = CreateScheduleModel(titulo: "Titulo", descricao: "Descricao", detalhes: "Detalhes")
         let myExpectation = expectation(description: "Expected the createSuccess() method to be called")
@@ -44,7 +44,7 @@ class CreteScheduleViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.createSuccessCounter, 1, "The createSuccess() method was called more than one time")
     }
     
-    func testViewModel_WhenModelValidatorFail_ShouldCallCreateError() {
+    func testViewModel_WhenModelValidatorFail_ShouldCallCreateError() throws {
         // Arrange
         createScheduleModel = CreateScheduleModel(titulo: "", descricao: "", detalhes: "")
         let myExpectation = expectation(description: "Expected the createError() method to be called")
@@ -58,12 +58,7 @@ class CreteScheduleViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.createErrorCounter, 1, "The createError() method was called more than one time")
     }
     
-    // Problemas
-    // 1 - Eu injetei tudo no começo, porém eu precisaria de um endpoint personalizado pra forçar error com o Moya
-    // 2 - Eu arrumou um jeito aqui de injetar, ou o certo seria criar um WebService Mock?
-    // 3 - Se eu criar um Mock, é certo? Eu usar Mock aqui, e nos outros lugares, vou suar o Moack ou o Oficial?
-    // 4 - O Oficial já tá pronto com os testes dele em separado.
-    func testViewModel_WhenOperationFail_ShouldCallCreateError() {
+    func testViewModel_WhenOperationFail_ShouldCallCreateError() throws {
         // Arrange
         let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customErrorEndpoint, stubClosure: MoyaProvider.immediatelyStub)
         webservice = CreateScheduleWebService(moyaProvider: provider)

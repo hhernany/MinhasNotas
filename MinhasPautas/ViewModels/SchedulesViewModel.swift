@@ -10,88 +10,78 @@ import Foundation
 import Moya
 
 // Add ": class"  if change struct by class
-protocol SchedulesViewModelDelegate: class {
+protocol SchedulesViewModelProtocol: class {
+    var schedulesList: [SchedulesModel] { get set }
+    var schedulesListOpen: [SchedulesModel] { get set }
+    var schedulesListClose: [SchedulesModel] { get set }
+    
     func getInitialData()
     func getMoreData()
     func updateTableView()
-    func hideResultLabel(state: Bool)
+    func controlResultLabel()
     func expandedCell(index: Int, type: String, status: Bool)
     func updateScheduleStatus(index: Int, listType: String)
 }
 
 class SchedulesViewModel {
+    var viewModelDelegate: SchedulesViewControlerProtocol?
+    var webService: SchedulesWebServiceProtocol?
     
-    var viewModelDelegate: SchedulesViewControlerDelegate? // AQUI TEORICAMENTE TEM QUE SER WEAK - VER O VIDEO DO CAREQUINHA QUE LÁ TEM ISSO E UM COMENTARIO DO CARA.
     fileprivate var provider: MoyaProvider<SchedulesAPI>!
-    fileprivate(set) var schedulesList: [SchedulesModel] = [] // ISSO AQUI VAI TER QUE MUDAR. PQ NÃO VAI SER SÓ SET, VAI PODE ALTERAR TBM. (FALEI BOBAGEM?? )
-    fileprivate(set) var schedulesListOpen: [SchedulesModel] = []
-    fileprivate(set) var schedulesListClose: [SchedulesModel] = []
+    var schedulesList: [SchedulesModel] = []
+    var schedulesListOpen: [SchedulesModel] = []
+    var schedulesListClose: [SchedulesModel] = []
     fileprivate var page = 0
     fileprivate var isLoading = false
     
     // Dependency Injection
-    init(delegate: SchedulesViewControlerDelegate?) {
+    init(delegate: SchedulesViewControlerProtocol?,
+         webservice: SchedulesWebServiceProtocol = SchedulesWebService()) {
         viewModelDelegate = delegate
-        setMoyaProvider()
+        webService = webservice
     }
     
-    private func setMoyaProvider() {
-        let isTesting = AppDelegate.isUITestingEnabled
-        if isTesting {
-            provider = MoyaProvider<SchedulesAPI>(stubClosure: MoyaProvider.immediatelyStub)
-        } else {
-            provider = MoyaProvider<SchedulesAPI>()
-        }
-    }
+//    private func setMoyaProvider() {
+//        let isTesting = AppDelegate.isUITestingEnabled
+//        if isTesting {
+//            provider = MoyaProvider<SchedulesAPI>(stubClosure: MoyaProvider.immediatelyStub)
+//        } else {
+//            provider = MoyaProvider<SchedulesAPI>()
+//        }
+//    }
     
     private func getData() {
-        provider.request(.getData(page: page)) { [weak self] result in
-            
-            switch result {
-            case .success(let response):
-//                print(try! String(data: response.data, encoding: .utf8))
-//                print(try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any]) // Testing
-                do {
-                    self?.schedulesList += try response.map(SchedulesResults<SchedulesModel>.self).items
-                    self?.schedulesListOpen = self?.schedulesList.filter { $0.status == "Aberto" } ?? []
-                    self?.schedulesListClose = self?.schedulesList.filter { $0.status == "Fechado" } ?? []
-                    self?.updateTableView()
-                } catch {
-                    self?.hideResultLabel(state: true)
-                    print("Erro ao mapear resultados: \(error.localizedDescription)")
-                }
-            case .failure:
-                self?.hideResultLabel(state: true)
-                print("Erro ao obter dados: \(result.error.debugDescription)")
+        webService?.getData(page: page, completionHandler: { [weak self] (schedulesList, resultModel, error) in
+            if schedulesList != nil {
+                self?.schedulesList += schedulesList!
+                self?.schedulesListOpen = self?.schedulesList.filter { $0.status == "Aberto" } ?? []
+                self?.schedulesListClose = self?.schedulesList.filter { $0.status == "Fechado" } ?? []
+                self?.updateTableView()
+                return
             }
-        }
+            if resultModel != nil || error != nil {
+                self?.controlResultLabel()
+            }
+        })
     }
     
     private func updateStatus(data: [String:Any]) {
-        provider.request(.update(data: data)) { [weak self] result in
-            switch result {
-            case .success(let response):
-                guard let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as! [String : Any] else {
-                    return
-                }
-                if json["success"] as? Bool == false {
-                    self?.updateError(message: json["message"] as? String ?? "Não foi possível realizar atualizar o status. Recarrege a tela e tente novamente.")
-                    return
-                }
-            case .failure:
-                self?.updateError(message: "Não foi possível realizar atualizar o status. Recarrege a tela e tente novamente.")
-                print("Erro ao obter dados: \(result.error.debugDescription)")
+        webService?.updateStatus(data: data, completionHandler: { [weak self] (resultModel, error) in
+            if error != nil {
+                self?.viewModelDelegate?.updateError(message: "Não possível atualizar o status. Tente novamente.")
+            } else if resultModel?.success == false {
+                self?.viewModelDelegate?.updateError(message: resultModel?.message ?? "Não foi possível atualizar o status. Tente novamente.")
             }
-        }
+        })
     }
 }
 
-extension SchedulesViewModel: SchedulesViewModelDelegate {
+extension SchedulesViewModel: SchedulesViewModelProtocol {
     func getInitialData() {
         schedulesList.removeAll()
         schedulesListClose.removeAll()
         schedulesListOpen.removeAll()
-        viewModelDelegate?.resultLabelIsHidden(state: true, message: "")
+        //viewModelDelegate?.resultLabelIsHidden(state: true, message: "")
         page = 0
         isLoading = true
         getData()
@@ -113,7 +103,7 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
     }
     
     // Show message only when there are no results (when list is empty).
-    func hideResultLabel(state: Bool) {
+    func controlResultLabel() {
         isLoading = false
         if schedulesList.count == 0 {
             viewModelDelegate?.reloadTableView()
@@ -160,10 +150,6 @@ extension SchedulesViewModel: SchedulesViewModelDelegate {
         ]
         updateStatus(data: data)
         viewModelDelegate?.reloadTableView()
-    }
-    
-    func updateError(message: String) {
-        viewModelDelegate?.updateError(message: message)
     }
 }
 

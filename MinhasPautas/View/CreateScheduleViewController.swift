@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CreateScheduleViewControllerDelegate {
+protocol CreateScheduleViewControllerProtocol {
     func createSuccess()
     func createError(message: String)
 }
@@ -28,7 +28,7 @@ class CreateScheduleViewController: UIViewController {
     @IBOutlet weak var stackViewTopConstraint: NSLayoutConstraint!
     
     // Variables and Constants
-    var createScheduleViewModel: CreateScheduleViewModelDelegate?
+    var createScheduleViewModel: CreateScheduleViewModelProtocol?
     private var spinner: UIView? = nil
     private var textViewIsFocused = false
     
@@ -176,7 +176,7 @@ extension CreateScheduleViewController: UITextViewDelegate {
     }
 }
 
-extension CreateScheduleViewController: CreateScheduleViewControllerDelegate {
+extension CreateScheduleViewController: CreateScheduleViewControllerProtocol {
     func createSuccess() {
         spinner?.removeSpinner()
         self.performSegue(withIdentifier: Segue.backToSchedules, sender: self) // Uwind Segue

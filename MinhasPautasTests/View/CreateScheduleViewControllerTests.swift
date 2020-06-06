@@ -14,13 +14,13 @@ class CreateScheduleViewControllerTests: XCTestCase {
     var storyboard: UIStoryboard!
     var sut: CreateScheduleViewController!
     
-    override func setUp() {
+    override func setUpWithError() throws {
         storyboard = UIStoryboard(name: "Schedules", bundle: nil)
         sut = storyboard.instantiateViewController(withIdentifier: "CreateScheduleVC") as? CreateScheduleViewController
         sut.loadViewIfNeeded()
     }
 
-    override func tearDown() {
+    override func tearDownWithError() throws {
         storyboard = nil
         sut = nil
     }

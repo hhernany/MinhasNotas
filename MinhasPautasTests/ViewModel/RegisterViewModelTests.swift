@@ -34,7 +34,7 @@ class RegisterViewModelTests: XCTestCase {
         registerModel = nil
     }
 
-    func testViewModel_WhenRecieveEmptyData_ShouldCallRegisterError() {
+    func testViewModel_WhenRecieveEmptyData_ShouldCallRegisterError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the registerError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -47,7 +47,7 @@ class RegisterViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.registerErrorCounter, 1, "The registerError() method was called more than one time")
     }
     
-    func testViewModel_WhenRecieveValidData_FailedFirebaseRegistration() {
+    func testViewModel_WhenRecieveValidData_FailedFirebaseRegistration() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the registerError() method to be called when failed firebase registration")
         viewDelegate.expectation = myExpectation
@@ -61,7 +61,7 @@ class RegisterViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.registerErrorCounter, 1, "The registerError() method was called more than one time")
     }
     
-    func testViewModel_WhenRecieveValidData_FailedDatabaseRegistration() {
+    func testViewModel_WhenRecieveValidData_FailedDatabaseRegistration() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the registerError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -75,7 +75,7 @@ class RegisterViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.registerErrorCounter, 1, "The registerError() method was called more than one time")
     }
     
-    func testViewModel_WhenRemoteWebServiceReturnError_ShouldCallResetError() {
+    func testViewModel_WhenRemoteWebServiceReturnError_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         webservice.shouldReturnRemoteErrorMessage = true

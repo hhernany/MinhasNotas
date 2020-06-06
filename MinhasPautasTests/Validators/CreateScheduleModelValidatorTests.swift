@@ -11,19 +11,19 @@ import XCTest
 
 class CreateScheduleModelValidatorTests: XCTestCase {
 
-    var sut: CreateScheduleModelValidator!
+    var sut: CreateScheduleValidator!
     var createScheduleModel: CreateScheduleModel!
     
-    override func setUp() {
-        sut = CreateScheduleModelValidator()
+    override func setUpWithError() throws {
+        sut = CreateScheduleValidator()
     }
 
-    override func tearDown() {
+    override func tearDownWithError() throws {
         sut = nil
         createScheduleModel = nil
     }
 
-    func testCreateScheduleModelValidator_WithEmptyTitle() {
+    func testCreateScheduleModelValidator_WithEmptyTitle() throws {
         // Arrange
         createScheduleModel = CreateScheduleModel(titulo: "", descricao: "description", detalhes: "detail")
         
@@ -41,7 +41,7 @@ class CreateScheduleModelValidatorTests: XCTestCase {
         }
     }
     
-    func testCreateScheduleModelValidator_WithEmptyDescription() {
+    func testCreateScheduleModelValidator_WithEmptyDescription() throws {
         // Arrange
         createScheduleModel = CreateScheduleModel(titulo: "title", descricao: "", detalhes: "detail")
         
@@ -59,7 +59,7 @@ class CreateScheduleModelValidatorTests: XCTestCase {
         }
     }
     
-    func testCreateScheduleModelValidator_WithEmptyDetail() {
+    func testCreateScheduleModelValidator_WithEmptyDetail() throws {
         // Arrange
         createScheduleModel = CreateScheduleModel(titulo: "title", descricao: "description", detalhes: "")
         

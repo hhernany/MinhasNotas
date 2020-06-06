@@ -14,13 +14,13 @@ class ResetPasswordViewControllerTests: XCTestCase {
     var storyboard: UIStoryboard!
     var sut: ResetPasswordViewController!
     
-    override func setUp() {
+    override func setUpWithError() throws {
         storyboard = UIStoryboard(name: "Login", bundle: nil)
         sut = storyboard.instantiateViewController(withIdentifier: "ResetPasswordVC") as? ResetPasswordViewController
         sut.loadViewIfNeeded()
     }
 
-    override func tearDown() {
+    override func tearDownWithError() throws {
         storyboard = nil
         sut = nil
     }

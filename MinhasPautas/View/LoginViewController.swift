@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LoginViewControlerDelegate: class {
+protocol LoginViewControlerProtocol: class {
     func loginSuccess()
     func loginError(message: String)
 }
@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var bottomStackView: NSLayoutConstraint!
     
     // Variables and Constants
-    var loginViewModel: LoginViewModelDelegate?
+    var loginViewModel: LoginViewModelProtocol?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: LoginViewControlerDelegate {
+extension LoginViewController: LoginViewControlerProtocol {
     func loginSuccess() {
         spinner?.removeSpinner()
         let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabbarVC")

@@ -11,7 +11,7 @@ import Moya
 import Firebase
 
 // Add ": class"  if change struct by class
-protocol LoginViewModelDelegate {
+protocol LoginViewModelProtocol {
     func sendCredentials(email: String, password: String)
 }
 
@@ -19,13 +19,13 @@ struct LoginViewModel {
     
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
-    var viewModelDelegate: LoginViewControlerDelegate?
+    var viewModelDelegate: LoginViewControlerProtocol?
     var validator = LoginValidator()
     var webService: LoginWebserviceProtocol?
     var firebaseValidator = FirebaseErrorCodeValidator()
 
     // Dependency Injection
-    init(delegate: LoginViewControlerDelegate?,
+    init(delegate: LoginViewControlerProtocol?,
          webservice: LoginWebserviceProtocol = LoginWebService()) {
         viewModelDelegate = delegate
         webService = webservice
@@ -64,7 +64,7 @@ struct LoginViewModel {
     }
 }
 
-extension LoginViewModel: LoginViewModelDelegate {
+extension LoginViewModel: LoginViewModelProtocol {
     func sendCredentials(email: String, password: String) {
         let returnValidation = validator.validateData(email: email, password: password)
         if returnValidation.0 == false {

@@ -9,10 +9,10 @@
 import Foundation
 @testable import MinhasPautas
 
-class MockCreateScheduleViewModel: CreateScheduleViewModelDelegate {
+class MockCreateScheduleViewModel: CreateScheduleViewModelProtocol {
     var sendFormDataCalled = false
     
-    required init(delegate: CreateScheduleViewControllerDelegate?, webservice: CreateScheduleWebServiceProtocol) {
+    required init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol) {
         // TODO: If necessary ...
     }
     

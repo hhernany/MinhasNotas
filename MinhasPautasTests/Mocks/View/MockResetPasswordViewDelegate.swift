@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import MinhasPautas
 
-class MockResetPasswordViewDelegate: ResetPasswordViewControlerDelegate {
+class MockResetPasswordViewDelegate: ResetPasswordViewControlerProtocol {
     var expectation: XCTestExpectation?
     var resetSuccessCounter = 0
     var resetErrorCounter = 0

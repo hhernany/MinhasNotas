@@ -25,8 +25,8 @@ class SchedulesTableViewCell: UITableViewCell {
             setupLayout()
         }
     }
-    var schedulesViewModel: SchedulesViewModel?
-    var viewController: SchedulesViewControlerDelegate?
+    var schedulesViewModel: SchedulesViewModelProtocol?
+    var viewController: SchedulesViewControlerProtocol?
     var indexPath: IndexPath!
 
     override func awakeFromNib() {

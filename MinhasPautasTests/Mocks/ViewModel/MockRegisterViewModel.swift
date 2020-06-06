@@ -10,7 +10,7 @@ import Foundation
 @testable import MinhasPautas
 
 // Used to test RegisterViewController
-class MockRegisterViewModel: RegisterViewModelDelegate {
+class MockRegisterViewModel: RegisterViewModelProtocol {
     var sendCredentialsCalled = false
 
     func sendCredentials(data: RegisterModel) {

@@ -27,7 +27,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         firebase = nil
     }
 
-    func testViewModel_WhenEmailIsEmpty_ShouldCallResetError() {
+    func testViewModel_WhenEmailIsEmpty_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -40,7 +40,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resetErrorCounter, 1, "The resetError() method was called more than one time")
     }
     
-    func testViewModel_WhenEmailIsInvalid_ShouldCallResetError() {
+    func testViewModel_WhenEmailIsInvalid_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -53,7 +53,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resetErrorCounter, 1, "The resetError() method was called more than one time")
     }
     
-    func testViewModel_WhenEmailIsValid_ShouldCallResetSuccess() {
+    func testViewModel_WhenEmailIsValid_ShouldCallResetSuccess() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetSuccess() method to be called")
         viewDelegate.expectation = myExpectation
@@ -66,7 +66,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resetSuccessCounter, 1, "The resetSuccess() method was called more than one time")
     }
     
-    func testViewModel_WhenRequestFaield_ShouldCallResetError() {
+    func testViewModel_WhenRequestFaield_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         firebase.shoudReturnError = true

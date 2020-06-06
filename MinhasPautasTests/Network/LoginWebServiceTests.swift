@@ -95,6 +95,7 @@ class LoginWebServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
+    // MARK: Custom Moya functions
     func customSuccessWithInvalidStruct(_ target: LoginAPI) -> Endpoint {
         return Endpoint(url: URL(target: target).absoluteString,
                         sampleResponseClosure: {.networkResponse(200, Data("Invalid message to be parsed".utf8))},

@@ -28,10 +28,12 @@ class CreateScheduleWebService: CreateScheduleWebServiceProtocol {
                     let resultModel = try response.map(ResultModel.self)
                     completionHandler(resultModel, nil)
                 } catch {
+                    // TODO: Create custom message to return
                     completionHandler(nil, MoyaError.jsonMapping(response))
                     //print("Erro desconhecido ao tentar mapear resultados (inclusao de pauta): \(error.localizedDescription)")
                 }
             case .failure( _):
+                // TODO: Create custom message to return
                 //print("Erro ao incluir a pauta: \(result.error.debugDescription)")
                 completionHandler(nil, result.error)
             }

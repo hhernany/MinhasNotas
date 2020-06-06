@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CreateScheduleModelValidator {
+class CreateScheduleValidator {
     func validateScheduleModel(formData: CreateScheduleModel) -> CreateScheduleError? {
         if formData.titulo.isEmpty {
             return CreateScheduleError.errorTitle(description: "Informe o titulo da pauta.")

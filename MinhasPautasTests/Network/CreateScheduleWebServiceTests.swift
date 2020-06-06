@@ -15,18 +15,16 @@ class CreateScheduleWebServiceTests: XCTestCase {
     var sut: CreateScheduleWebService!
     var provider: MoyaProvider<SchedulesAPI>!
     
-    override func setUp()  {
-        
-    }
+    override func setUpWithError() throws {  }
 
-    override func tearDown()  {
+    override func tearDownWithError() throws {
         sut = nil
         provider = nil
     }
     
-    func testWebService_WhithSuccessRequest() {
+    func testWebService_WhithSuccessRequest() throws {
         // Arrange
-        let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customSuccessEndpoint, stubClosure: MoyaProvider.immediatelyStub)
+        let provider = MoyaProvider<SchedulesAPI>(stubClosure: MoyaProvider.immediatelyStub)
         sut = CreateScheduleWebService(moyaProvider: provider)
         let expectation = self.expectation(description: "Response with success expectation")
 
@@ -43,7 +41,7 @@ class CreateScheduleWebServiceTests: XCTestCase {
     }
     
     // When webservice return "success: false", indicating that an error has occurred (Ex: {success: false, message: "Title field not informed"})
-    func testWebService_ReturnValidatingError() {
+    func testWebService_ReturnValidatingError() throws {
         // Arrange
         let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customWebServiceValidatingError, stubClosure: MoyaProvider.immediatelyStub)
         sut = CreateScheduleWebService(moyaProvider: provider)
@@ -62,7 +60,7 @@ class CreateScheduleWebServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testWebService_WithInvalidResultStruct() {
+    func testWebService_WithInvalidResultStruct() throws {
         // Arrange
         let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customSuccessWithInvalidStruct, stubClosure: MoyaProvider.immediatelyStub)
         sut = CreateScheduleWebService(moyaProvider: provider)
@@ -79,7 +77,7 @@ class CreateScheduleWebServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testWebService_WithFailedRequest() {
+    func testWebService_WithFailedRequest() throws {
         // Arrange
         let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customErrorEndpoint, stubClosure: MoyaProvider.immediatelyStub)
         sut = CreateScheduleWebService(moyaProvider: provider)
@@ -95,18 +93,11 @@ class CreateScheduleWebServiceTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5)
     }
-        
+    
+    // MARK: Custom Moya functions
     func customSuccessWithInvalidStruct(_ target: SchedulesAPI) -> Endpoint {
         return Endpoint(url: URL(target: target).absoluteString,
                         sampleResponseClosure: {.networkResponse(200, Data("Invalid message to be parsed".utf8))},
-                        method: target.method,
-                        task: target.task,
-                        httpHeaderFields: target.headers)
-    }
-    
-    func customSuccessEndpoint(_ target: SchedulesAPI) -> Endpoint {
-        return Endpoint(url: URL(target: target).absoluteString,
-                        sampleResponseClosure: {.networkResponse(200, target.sampleData)},
                         method: target.method,
                         task: target.task,
                         httpHeaderFields: target.headers)

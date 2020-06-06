@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SchedulesViewControlerDelegate {
+protocol SchedulesViewControlerProtocol {
     func reloadTableView()
     func resultLabelIsHidden(state: Bool, message: String)
     func updateError(message: String)
@@ -25,7 +25,7 @@ class SchedulesViewController: UIViewController {
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     // Variables and Constants
-    var schedulesViewModel: SchedulesViewModel?
+    var schedulesViewModel: SchedulesViewModelProtocol?
     private var spinner: UIView? = nil
     private var lastCellOpenInOpenTab: IndexPath?
     private var lastCellOpenInCloseTab: IndexPath?
@@ -41,7 +41,11 @@ class SchedulesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-        schedulesViewModel = SchedulesViewModel(delegate: self)
+        
+        if schedulesViewModel == nil {
+            schedulesViewModel = SchedulesViewModel(delegate: self)
+        }
+        
         setupLayout()
         getSchedules()
         self.setNeedsStatusBarAppearanceUpdate()
@@ -63,11 +67,12 @@ class SchedulesViewController: UIViewController {
     private func getSchedules() {
         guard let _ = schedulesViewModel else { fatalError("ViewModel not implemented")}
         spinner = self.view.showSpinnerGray()
+        noResultLabel.isHidden = true // Hide while getting data
         schedulesViewModel?.getInitialData()
     }
     
     // Handle Refresh
-    @objc private func updateSchedules() {
+    @objc func updateSchedules() {
         schedulesViewModel?.getInitialData()
     }
     
@@ -176,7 +181,7 @@ extension SchedulesViewController: UIScrollViewDelegate {
     }
 }
 
-extension SchedulesViewController: SchedulesViewControlerDelegate {
+extension SchedulesViewController: SchedulesViewControlerProtocol {
     func reloadTableView() {
         spinner?.removeSpinner() // Só vai ser chamado se tiver um spinner ativo. Então não tem problema ser chamado aqui sempre.
         refreshControl.endRefreshing()

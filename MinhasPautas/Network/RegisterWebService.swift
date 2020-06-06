@@ -58,15 +58,12 @@ class RegisterWebService: RegisterWebServiceProtocol {
                         completionHandler(nil, nil, MoyaError.jsonMapping(response)) // "Não foi possível finalizar o cadastro. Por favor, tente novamente mais tarde."
                         return
                     }
-
-                    // TODO: Se chegou aqui é um erro desconhecido. Como está vai retornar uma mensagem nada a ver.
-                    // Corrigir e também corrigir o teste.
+                    // TODO: Create custom message to return
                     completionHandler(nil, resultRegister, MoyaError.jsonMapping(response))
                     //print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
                 }
             case .failure:
-                // TODO: Criar um erro personalizado, não da pra saber qual erro que vem aqui e vai mostrar tudo estranho pro usuário.
-                // Colocar para retonar uma mensagem padrão talvez? Como já era antes.
+                // TODO: Create custom message to return
                 completionHandler(nil, nil, result.error)
                 //print("Erro ao obter dados: \(result.error.debugDescription)")
             }

@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import MinhasPautas
 
-class MockCreateScheduleViewDelegate: CreateScheduleViewControllerDelegate {
+class MockCreateScheduleViewDelegate: CreateScheduleViewControllerProtocol {
     var expectation: XCTestExpectation?
     var createSuccessCounter = 0
     var createErrorCounter = 0

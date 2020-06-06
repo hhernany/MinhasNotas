@@ -10,27 +10,27 @@ import Foundation
 import Firebase
 
 // Add ": class"  if change struct by class
-protocol ResetPasswordViewModelDelegate {
+protocol ResetPasswordViewModelProtocol {
     func sendCredentials(email: String)
 }
 
 struct ResetPasswordViewModel {
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
-    var viewDelegate: ResetPasswordViewControlerDelegate?
+    var viewDelegate: ResetPasswordViewControlerProtocol?
     var validator = ResetPasswordValidator()
     var firebaseValidator = FirebaseErrorCodeValidator()
     var firebaserService: ResetPasswordFirebaseProtocol!
     
     // Dependency Injection
-    init(delegate: ResetPasswordViewControlerDelegate?,
+    init(delegate: ResetPasswordViewControlerProtocol?,
          firebaseService: ResetPasswordFirebaseProtocol = ResetPasswordFirebaseService()) {
         viewDelegate = delegate
         self.firebaserService = firebaseService
     }
 }
 
-extension ResetPasswordViewModel: ResetPasswordViewModelDelegate {
+extension ResetPasswordViewModel: ResetPasswordViewModelProtocol {
     func sendCredentials(email: String) {
         let resultValidation = validator.isEmailValid(email: email)
         if resultValidation.0 == false {

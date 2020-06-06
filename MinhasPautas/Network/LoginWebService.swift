@@ -53,18 +53,16 @@ class LoginWebService: LoginWebserviceProtocol {
                     // If don't decode with LoginModel, try with ResulModel.
                     let resultLogin = try? JSONDecoder().decode(ResultModel.self, from: response.data)
                     if resultLogin == nil {
-                        completionHandler(nil, nil, MoyaError.jsonMapping(response)) // "Não foi possível finalizar o cadastro. Por favor, tente novamente mais tarde."
+                        // TODO: Create custom message to return
+                        completionHandler(nil, nil, MoyaError.jsonMapping(response)) // "Não foi possível realizar o login"
                         return
                     }
                     
-                    // TODO: Se chegou aqui é um erro desconhecido. Como está vai retornar uma mensagem nada a ver.
-                    // Corrigir e também corrigir o teste.
+                    // TODO: Se chegou aqui é porque consegui processar o ResultModel
                     completionHandler(nil, resultLogin, MoyaError.jsonMapping(response))
-                    print("Erro desconhecido ao tentar mapear resultados: \(error.localizedDescription)")
                 }
             case .failure:
-                // TODO: Criar um erro personalizado, não da pra saber qual erro que vem aqui e vai mostrar tudo estranho pro usuário.
-                // Colocar para retonar uma mensagem padrão talvez? Como já era antes.
+                // TODO: Create custom message to return
                 completionHandler(nil, nil, result.error)
                 //print("Erro ao obter dados: \(result.error.debugDescription)")
             }

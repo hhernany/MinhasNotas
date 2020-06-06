@@ -44,7 +44,7 @@ class RegisterViewControllerUITests: XCTestCase {
         nameTextField.tap()
         nameTextField.typeText("UI Test")
         if app.keyboards.keys.count > 0 {
-            app.keyboards.buttons["Continuar"].tap()
+            app.keyboards.buttons["continuar"].tap()
         }
         tapButton(app: app, identifier: "confirmButton")
         XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe o email."]), "Alert did not appear.")

@@ -22,6 +22,7 @@ class ResetPasswordFirebaseService: ResetPasswordFirebaseProtocol {
                     completionHandler(false, err)
                     return
                 }
+                // TODO: Create custom message to return
                 completionHandler(false, NSError(domain: "Unknow error", code: 500))
                 return
             }
