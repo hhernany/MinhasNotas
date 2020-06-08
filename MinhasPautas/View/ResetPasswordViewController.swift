@@ -28,6 +28,8 @@ class ResetPasswordViewController: UIViewController {
         super.viewDidLoad()
         resetPasswordViewModel = ResetPasswordViewModel(delegate: self)
         self.setNeedsStatusBarAppearanceUpdate()
+        self.view.window?.backgroundColor = UIColor.red
+        self.view.window?.tintColor = UIColor.red
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

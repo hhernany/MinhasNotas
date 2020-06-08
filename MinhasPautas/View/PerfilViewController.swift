@@ -31,6 +31,11 @@ class PerfilViewController: UIViewController {
         tableView.accessibilityIdentifier = "perfilTableViewOptions"
         tableView.tableFooterView = UIView() // Remove blank cells
         self.setNeedsStatusBarAppearanceUpdate()
+        self.configureNavigationBar(largeTitleColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                    backgoundColor: UIColor.init(named: "customBlue")!,
+                                    tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                    title: "Perfil",
+                                    preferredLargeTitle: true)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
