@@ -8,22 +8,22 @@ O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas 
 - MVVM
 
 ## Ambiente de desenvolvimento
-- Xcode 10.1
-- Swift 4.2
-- iOS 12.1
+- Xcode 11.5
+- Swift 5
+- iOS 13.5
 
 ## Pods utilizados (Dependências)
 - pod 'Moya' - Biblioteca de network
 - pod 'Firebase/Analytics' - Biblioteca para insights do Firebase (Obrigatório para o uso do Auth)
 - pod 'Firebase/Auth' - Biblioteca de autenticação do Firebase
 
+## Testes unitários e interface
+Testes unitários e de interface completos, utilizando XCTests e Moya.
+
 ## Backend
 - Google Cloud
 - MySQL 5.7
 - NodeJS (APIs)
-
-## Melhorias Adicionais
-- Teste unitários e de interface - Para maior qualidade, com tempo adicional pode-se implementar testes unitários e de interface.
 
 ## Informações Adicionais
 O sistema de login foi desenvolvido utilizando Firebase para o aproveitamento de diversas funcionalidades úteis para o usuário, como: Criação segura de novos logins; Recuperação de senha; Conferência de e-mail já existente; etc.
