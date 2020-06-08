@@ -40,15 +40,11 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
-        
         if schedulesViewModel == nil {
             schedulesViewModel = SchedulesViewModel(delegate: self)
         }
-        
         setupLayout()
         getSchedules()
-        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -56,6 +52,13 @@ class SchedulesViewController: UIViewController {
     }
     
     private func setupLayout() {
+        self.setNeedsStatusBarAppearanceUpdate()
+        self.configureNavigationBar(largeTitleColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                    backgoundColor: UIColor.init(named: "customBlue")!,
+                                    tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                    title: "Minhas Patuas",
+                                    preferredLargeTitle: true)
+        
         addButton.accessibilityIdentifier = "addButton"
         noResultLabel.isHidden = true
         tableView.accessibilityIdentifier = "scheduleTableView"
