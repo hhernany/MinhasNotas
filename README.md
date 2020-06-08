@@ -18,7 +18,7 @@ O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas 
 - pod 'Firebase/Auth' - Biblioteca de autenticação do Firebase
 
 ## Testes unitários e interface
-Testes unitários e de interface completos, utilizando XCTests e Moya.
+Testes unitários e de interface completos, utilizando XCTests e Moya (Stubbed responses).
 
 ## Backend
 - Google Cloud
