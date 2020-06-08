@@ -67,6 +67,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUr-yS-tYa">
                                         <rect key="frame" x="152" y="60" width="100" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="changeStateButton"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="BQ0-VE-Rlg"/>
                                             <constraint firstAttribute="height" constant="40" id="qm3-oc-CKi"/>

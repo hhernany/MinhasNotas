@@ -28,6 +28,7 @@ class PerfilViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fillLabels()
+        tableView.accessibilityIdentifier = "perfilTableViewOptions"
         tableView.tableFooterView = UIView() // Remove blank cells
         self.setNeedsStatusBarAppearanceUpdate()
     }

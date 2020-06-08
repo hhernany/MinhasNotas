@@ -1,0 +1,12 @@
+{
+    "items": [
+        {
+            "id_pauta": 1,
+            "titulo": "Pauta Teste 1",
+            "descricao": "Descrição do teste 1",
+            "detalhes": "Detalhes completos do teste 1",
+            "status": "Aberto",
+            "nome_usuario": "Usuário teste"
+        }
+    ]
+}

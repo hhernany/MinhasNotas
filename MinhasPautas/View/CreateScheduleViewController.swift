@@ -54,6 +54,7 @@ class CreateScheduleViewController: UIViewController {
     }
     
     private func setupLayoutAndDelegates() {
+        createButton.accessibilityIdentifier = "createButton"
         createButton.isEnabled = false
         authorLabel.text = "Autor: \(UserDefaults.standard.object(forKey: "nome_usuario") as? String ?? "")"
         titleTextField.becomeFirstResponder()

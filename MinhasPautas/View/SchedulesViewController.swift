@@ -22,6 +22,7 @@ class SchedulesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noResultLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     // Variables and Constants
     var schedulesViewModel: SchedulesViewModel?
@@ -39,6 +40,7 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserDefaults.standard.object(forKey: "token_jwt") as? String ?? "")
         schedulesViewModel = SchedulesViewModel(delegate: self)
         setupLayout()
         getSchedules()
@@ -50,7 +52,9 @@ class SchedulesViewController: UIViewController {
     }
     
     private func setupLayout() {
+        addButton.accessibilityIdentifier = "addButton"
         noResultLabel.isHidden = true
+        tableView.accessibilityIdentifier = "scheduleTableView"
         tableView.register(UINib(nibName: "SchedulesTableViewCell", bundle: nil), forCellReuseIdentifier: "scheduleCell")
         tableView.refreshControl = refreshControl
         tableView.tableFooterView = UIView() // Remove blank lines in tableView footer

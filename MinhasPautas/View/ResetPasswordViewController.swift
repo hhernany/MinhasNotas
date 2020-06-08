@@ -17,6 +17,8 @@ class ResetPasswordViewController: UIViewController {
 
     // Outlets
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var confirmButton: UIButton!
     
     // Variables and Constants
     var resetPasswordViewModel: ResetPasswordViewModel?

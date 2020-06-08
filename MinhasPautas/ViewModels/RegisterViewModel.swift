@@ -98,6 +98,7 @@ struct RegisterViewModel {
 
 extension RegisterViewModel: RegisterViewModelDelegate {
     func sendCredentials(data: RegisterModel) {
+        // Maybe separete this logic in another function ou class?
         if data.name.isEmpty == true {
             registerError(message: "Informe o seu nome.")
             return
@@ -113,16 +114,16 @@ extension RegisterViewModel: RegisterViewModelDelegate {
             registerError(message: "Informe a confirmação do e-mail.")
             return
         }
+        if data.email != data.emailConfirmation {
+            registerError(message: "Os emails informados não coincidem.")
+            return
+        }
         if data.password.isEmpty == true {
             registerError(message: "Informe uma senha.")
             return
         }
         if data.passwordConfirmation.isEmpty == true {
             registerError(message: "Informe a confirmação da senha.")
-            return
-        }
-        if data.email != data.emailConfirmation {
-            registerError(message: "Os emails informados não coincidem.")
             return
         }
         if data.password != data.passwordConfirmation {

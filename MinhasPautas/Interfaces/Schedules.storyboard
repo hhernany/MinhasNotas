@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuB-zb-vIM">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuB-zb-vIM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,11 +16,11 @@
             <objects>
                 <viewController id="xuB-zb-vIM" customClass="SchedulesViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bor-4C-b8D">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gXa-hf-Mfu">
-                                <rect key="frame" x="109" y="10" width="157" height="32"/>
+                                <rect key="frame" x="114" y="10" width="147" height="29"/>
                                 <segments>
                                     <segment title="Abertas"/>
                                     <segment title="Fechadas"/>
@@ -29,7 +31,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rdt-7u-RhT">
-                                <rect key="frame" x="0.0" y="51" width="375" height="572"/>
+                                <rect key="frame" x="0.0" y="48" width="375" height="555"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="xuB-zb-vIM" id="GvH-7K-MC1"/>
@@ -37,7 +39,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você ainda não possui nenhuma pauta cadastrada." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aT7-v5-KON">
-                                <rect key="frame" x="20" y="316.5" width="335" height="41"/>
+                                <rect key="frame" x="20" y="305" width="335" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -69,6 +71,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="addButton" destination="sEN-VK-ogb" id="Ce4-j4-ZWj"/>
                         <outlet property="noResultLabel" destination="aT7-v5-KON" id="9gT-cv-Hv0"/>
                         <outlet property="segmentedControl" destination="gXa-hf-Mfu" id="6mE-dd-BkE"/>
                         <outlet property="tableView" destination="rdt-7u-RhT" id="JOc-Rs-J2a"/>
@@ -83,7 +86,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="uPD-Xy-wgA" customClass="CreateScheduleViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vuc-d3-4En">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kho-i8-z5s">
@@ -97,6 +100,7 @@
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ElQ-2N-E1U">
                                         <rect key="frame" x="0.0" y="24.5" width="355" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="titleTextField"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="eJ4-JH-6iA"/>
                                         </constraints>
@@ -118,6 +122,7 @@
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lok-2N-iRG">
                                         <rect key="frame" x="0.0" y="88.5" width="355" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="descriptionTextField"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="U24-Hi-21v"/>
                                         </constraints>
@@ -140,13 +145,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="o58-26-LQL">
-                                <rect key="frame" x="10" y="182.5" width="355" height="390.5"/>
+                                <rect key="frame" x="10" y="182.5" width="355" height="370.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="contentTextView"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05Y-Dv-zwK" userLabel="Footer View">
-                                <rect key="frame" x="0.0" y="583" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="563" width="375" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiF-T6-muo">
                                         <rect key="frame" x="10" y="0.0" width="355" height="1"/>
@@ -157,12 +163,14 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 de 1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bG-eo-Tgy">
                                         <rect key="frame" x="294.5" y="11" width="70.5" height="18"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="qtdCharactersLabel"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oj9-uZ-jlA">
                                         <rect key="frame" x="10" y="11" width="39" height="18"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="authorLabel"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
