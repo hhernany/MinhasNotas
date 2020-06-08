@@ -60,7 +60,7 @@
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50F-ay-YSG" userLabel="ViewLine">
                                                 <rect key="frame" x="0.0" y="123.5" width="315" height="1"/>
@@ -554,13 +554,13 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aEq-m5-pCp">
                                                         <rect key="frame" x="20" y="10" width="315" height="40"/>
-                                                        <accessibility key="accessibilityConfiguration" identifier="emailTextField"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="emailResetTextField"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="fkW-qg-zUQ"/>
                                                         </constraints>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3B-wH-PTA">
                                                         <rect key="frame" x="10" y="60" width="335" height="2"/>

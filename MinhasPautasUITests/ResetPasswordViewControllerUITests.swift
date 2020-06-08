@@ -12,36 +12,35 @@ class ResetPasswordViewControllerUITests: XCTestCase {
 
     var app: XCUIApplication!
     
-    override func setUp() {
+    override func setUpWithError() throws {
         super.setUp()
-        let configuration = Configuration()
+        let configuration = ConfigurationUITests()
         configuration.dictionary[ConfigurationKeys.isFirstTimeUser] = "true"
         app = start(using: configuration)
     }
     
-    func testResetPasswordEmailField() {
-        XCTAssert(app.buttons["resetPasswordButton"].exists, "LoginViewController: resetPasswordButton dont exists") // Check if button exists
-        tapButton(app: app, identifier: "resetPasswordButton")
-
-        XCTAssert(app.buttons["confirmButton"].exists, "ResetPasswordViewController: confirmButton dont exists") // Check if button exists
-        XCTAssert(app.textFields["emailTextField"].exists, "ResetPasswordViewController: emailTextField dont exists") // Check if field exists
-        tapButton(app: app, identifier: "confirmButton")
-
-        // Check if the alert has appeared (Empty email field)
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe o email."]), "Alert did not appear")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
-        
-        // Invalid e-mail
-        let textField = app.textFields["emailTextField"]
-        textField.tap()
-        textField.typeText("invalidemail")
-        tapButton(app: app, identifier: "confirmButton")
-
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["E-mail inválido."]), "Alert did not appear")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+    override func tearDownWithError() throws {
+        super.tearDown()
+        app = nil
     }
     
-    override func tearDown() {
-        super.tearDown()
+    func testResetPasswordEmailField() throws {
+        // LoginViewcontroller
+        let resetPasswordButton = try XCTUnwrap(app.buttons["resetPasswordButton"], "LoginViewController: resetPasswordButton dont exists")
+        resetPasswordButton.tap()
+        
+        // RegisterViewController (sut)
+        let confirmButton = try XCTUnwrap(app.buttons["confirmButton"], "ResetPasswordViewController: confirmButton dont exists")
+        let emailTextField = try XCTUnwrap(app.textFields["emailResetTextField"], "ResetPasswordViewController: emailTextField dont exists")
+
+        // Empty Email
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
+        
+        // Invalid e-mail
+        emailTextField.tap()
+        emailTextField.typeText("invalidemail")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
     }
 }

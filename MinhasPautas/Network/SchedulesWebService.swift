@@ -18,7 +18,12 @@ class SchedulesWebService: SchedulesWebServiceProtocol {
     var provider: MoyaProvider<SchedulesAPI>
     
     init(moyaProvider: MoyaProvider<SchedulesAPI> = MoyaProvider<SchedulesAPI>()) {
-        provider = moyaProvider
+         let isTesting = AppDelegate.isUITestingEnabled
+         if isTesting {
+             provider = MoyaProvider<SchedulesAPI>(stubClosure: MoyaProvider.immediatelyStub)
+         } else {
+             provider = moyaProvider
+         }
     }
     
 //    func setMoyaProvider() {

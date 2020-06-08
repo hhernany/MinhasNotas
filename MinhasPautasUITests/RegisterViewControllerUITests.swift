@@ -11,34 +11,34 @@ import XCTest
 class RegisterViewControllerUITests: XCTestCase {
     var app: XCUIApplication!
     
-    override func setUp() {
+    override func setUpWithError() throws {
         super.setUp()
-        let configuration = Configuration()
+        let configuration = ConfigurationUITests()
         configuration.dictionary[ConfigurationKeys.isFirstTimeUser] = "true"
         app = start(using: configuration)
     }
 
-    func testRegisterFieldsAndAlerts() {
+    override func tearDownWithError() throws {
+        super.tearDown()
+        app = nil
+    }
+    
+    func testRegisterFieldsAndAlerts() throws {
         tapButton(app: app, identifier: "registerButton")
 
         // Check if fields exists
-        XCTAssert(app.textFields["nameTextField"].exists, "RegisterViewController: nameTextField dont exists")
-        XCTAssert(app.textFields["emailTextField"].exists, "RegisterViewController: emailTextField dont exists")
-        XCTAssert(app.textFields["emailConfirmationTextField"].exists, "RegisterViewController: emailConfirmationTextField dont exists")
-        XCTAssert(app.secureTextFields["passwordTextField"].exists, "RegisterViewController: passwordTextField dont exists")
-        XCTAssert(app.secureTextFields["passwordConfirmationTextField"].exists, "RegisterViewController: passwordConfirmationTextField dont exists")
-
-        // Declare fields
-        let nameTextField = app.textFields["nameTextField"]
-        let emailTextField = app.textFields["emailTextField"]
-        let emailConfirmationTextField = app.textFields["emailConfirmationTextField"]
-        let passwordTextField = app.secureTextFields["passwordTextField"]
-        let passwordConfirmationTextField = app.secureTextFields["passwordConfirmationTextField"]
+        let nameTextField = try XCTUnwrap(app.scrollViews.textFields["nameTextField"], "RegisterViewController: nameTextField dont exists")
+        let emailTextField = try XCTUnwrap(app.scrollViews.textFields["emailTextField"], "RegisterViewController: emailTextField dont exists")
+        let emailConfirmationTextField = try XCTUnwrap(app.scrollViews.textFields["emailConfirmationTextField"], "RegisterViewController: emailConfirmationTextField dont exists")
+        let passwordTextField = try XCTUnwrap(app.scrollViews.secureTextFields["passwordTextField"], "RegisterViewController: passwordTextField dont exists")
+        let passwordConfirmationTextField = try XCTUnwrap(app.scrollViews.secureTextFields["passwordConfirmationTextField"], "RegisterViewController: passwordConfirmationTextField dont exists")
+        let confirmButton = try XCTUnwrap(app.buttons["confirmButton"], "confirmButton dont exists")
         
         // Name empty
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe o seu nome."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 5), "Error Alert dialog does not presented")
+        //XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe o seu nome."]), "Alert did not appear.")
+        //intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
 
         // Email empty
         nameTextField.tap()
@@ -46,79 +46,61 @@ class RegisterViewControllerUITests: XCTestCase {
         if app.keyboards.keys.count > 0 {
             app.keyboards.buttons["continuar"].tap()
         }
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe o email."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
 
         // Invalid email
         emailTextField.tap()
         emailTextField.typeText("invalidemail")
         if app.keyboards.keys.count > 0 {
-            app.keyboards.buttons["Continuar"].tap()
+            app.keyboards.buttons["continuar"].tap()
         }
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["E-mail inválido."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
 
         // Valid e-mail and E-mail confirmation empty
         emailTextField.doubleTap()
-        app.menuItems["Select All"].tap()
-        app.menuItems["Cut"].tap()
-        emailTextField.tap()
         emailTextField.typeText("teste@gmail.com")
         if app.keyboards.keys.count > 0 {
-            app.keyboards.buttons["Continuar"].tap()
+            app.keyboards.buttons["continuar"].tap()
         }
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe a confirmação do e-mail."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
 
         // E-mail confirmation not match
         emailConfirmationTextField.tap()
         emailConfirmationTextField.typeText("teste2@gmail.com")
         if app.keyboards.keys.count > 0 {
-            app.keyboards.buttons["Continuar"].tap()
+            app.keyboards.buttons["continuar"].tap()
         }
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Os emails informados não coincidem."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
 
         // Valid e-mail and confirmation match, with empty password
         emailConfirmationTextField.doubleTap()
-        app.menuItems["Select All"].tap()
-        app.menuItems["Cut"].tap()
-        emailConfirmationTextField.tap()
         emailConfirmationTextField.typeText("teste@gmail.com")
         if app.keyboards.keys.count > 0 {
-            app.keyboards.buttons["Continuar"].tap()
+            app.keyboards.buttons["continuar"].tap()
         }
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe uma senha."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
 
         // Password and Confirmation password empty
         passwordTextField.tap()
         passwordTextField.typeText("12345")
         if app.keyboards.keys.count > 0 {
-            app.keyboards.buttons["Continue"].tap()
+            app.keyboards.buttons["continue"].tap()
         }
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["Informe a confirmação da senha."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
 
         // Password and Confirmation password dont match
         passwordConfirmationTextField.tap()
         passwordConfirmationTextField.typeText("123456")
         if app.keyboards.keys.count > 0 {
-            app.keyboards.buttons["Continue"].tap()
+            app.keyboards.buttons["continue"].tap()
         }
-        tapButton(app: app, identifier: "confirmButton")
-        XCTAssert(waitForElementToAppear(app.alerts.element.staticTexts["As senhas informadas não coincidem."]), "Alert did not appear.")
-        intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
-    }
-
-    override func tearDown() {
-        super.tearDown()
-        app = nil
+        confirmButton.tap()
+        XCTAssertTrue(app.alerts["informationAlertDialog"].waitForExistence(timeout: 3), "Error Alert dialog does not presented")
     }
 }

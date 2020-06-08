@@ -12,9 +12,10 @@ import UIKit
 extension String {
     func alert(_ vc: UIViewController, title: String = "Aviso", handler: ((UIAlertAction) -> Void)? = nil) {
         DispatchQueue.main.async {
-            let alerta = UIAlertController.init(title: title, message: self, preferredStyle: .alert)
-            alerta.addAction(UIAlertAction(title: "Fechar", style: .default, handler: handler))
-            vc.present(alerta, animated: true, completion: nil)
+            let alert = UIAlertController.init(title: title, message: self, preferredStyle: .alert)
+            alert.view.accessibilityIdentifier = "informationAlertDialog"
+            alert.addAction(UIAlertAction(title: "Fechar", style: .default, handler: handler))
+            vc.present(alert, animated: true, completion: nil)
         }
     }
     

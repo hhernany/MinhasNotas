@@ -12,26 +12,28 @@ class SchedulesViewControllerUITests: XCTestCase {
 
     var app: XCUIApplication!
 
-    override func setUp() {
+    override func setUpWithError() throws {
         super.setUp()
-        let configuration = Configuration()
+        let configuration = ConfigurationUITests()
         app = start(using: configuration)
     }
     
-    func testSchedulesListLabelsAndCells() {
+    override func tearDownWithError() throws {
+        super.tearDown()
+        app = nil
+    }
+    
+    func testSchedulesListLabelsAndCells() throws {
         // Check if tableView exist and if have cells
-        XCTAssert(app.tables["scheduleTableView"].exists, "SchedulesViewController: scheduleTableView dont exists")
-        let tablesQuery = app.tables["scheduleTableView"]
+        let tablesQuery = try XCTUnwrap(app.tables["scheduleTableView"], "SchedulesViewController: scheduleTableView dont exists")
         XCTAssert(tablesQuery.cells.count > 0, "SchedulesViewController: scheduleTableView dont have any open schedule")
 
         // Check if found first cell in table
-        XCTAssert(tablesQuery.cells.element(boundBy: 0).exists, "SchedulesViewController: scheduleTableView cant detect first cell")
-        let firstCell = tablesQuery.cells.element(boundBy: 0)
+        let firstCell = try XCTUnwrap(tablesQuery.cells.element(boundBy: 0), "SchedulesViewController: scheduleTableView cant detect first cell")
         
         // Expand Cell and click "Encerrar" button
         firstCell.tap()
-        XCTAssert(tablesQuery.buttons["changeStateButton"].exists, "SchedulesCell: changeStateButton dont exists")
-        let changeStateButton = tablesQuery.buttons["changeStateButton"]
+        let changeStateButton = try XCTUnwrap(tablesQuery.buttons["changeStateButton"], "SchedulesTableViewCell: changeStateButton dont exists")
         changeStateButton.tap()
         
         // Verify total of open schedules and message label
@@ -51,16 +53,11 @@ class SchedulesViewControllerUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Você não possui nenhuma pauta fechada"].exists)
     }
     
-    func testTableViewHandleRefresh() {
+    func testTableViewHandleRefresh() throws {
         // XCUICoordinate - Simulate pull to refresh using fisrt cell position.
-        let firstCell = app.tables["scheduleTableView"].cells.element(boundBy: 0)
+        let firstCell = try XCTUnwrap(app.tables["scheduleTableView"].cells.element(boundBy: 0), "SchedulesViewController: scheduleTableView cant detect first cell")
         let start = firstCell.coordinate(withNormalizedOffset: (CGVector(dx: 0, dy: 0)))
         let finish = firstCell.coordinate(withNormalizedOffset: (CGVector(dx: 0, dy: 5)))
         start.press(forDuration: 0, thenDragTo: finish)
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-        app = nil
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08FA0F2C18AE93DD12B77ECA /* Pods_MinhasPautas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7C4355E458644BD392ABA6 /* Pods_MinhasPautas.framework */; };
+		0F01012C248EB35A008A80C5 /* ConfigurationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F01012B248EB35A008A80C5 /* ConfigurationUITests.swift */; };
 		0F0280AB24872A4D00811BA9 /* CreateScheduleViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0280AA24872A4D00811BA9 /* CreateScheduleViewControllerTests.swift */; };
 		0F0714892469C5E6008978A4 /* SchedulesViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0714882469C5E6008978A4 /* SchedulesViewControllerUITests.swift */; };
 		0F07148B2469FB19008978A4 /* PerfilViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07148A2469FB19008978A4 /* PerfilViewControllerUITests.swift */; };
@@ -122,6 +123,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F01012B248EB35A008A80C5 /* ConfigurationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationUITests.swift; sourceTree = "<group>"; };
 		0F0280AA24872A4D00811BA9 /* CreateScheduleViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleViewControllerTests.swift; sourceTree = "<group>"; };
 		0F0714882469C5E6008978A4 /* SchedulesViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesViewControllerUITests.swift; sourceTree = "<group>"; };
 		0F07148A2469FB19008978A4 /* PerfilViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilViewControllerUITests.swift; sourceTree = "<group>"; };
@@ -258,6 +260,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F01012A248EB341008A80C5 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				0F01012B248EB35A008A80C5 /* ConfigurationUITests.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		0F3BB652245B32C400CFF81D = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +325,7 @@
 		0F3BB680245B32C500CFF81D /* MinhasPautasUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0F01012A248EB341008A80C5 /* Configuration */,
 				0FA663A2246CC57D00D5A972 /* CreateScheduleViewControllerTests.swift */,
 				0F07148A2469FB19008978A4 /* PerfilViewControllerUITests.swift */,
 				0F0714882469C5E6008978A4 /* SchedulesViewControllerUITests.swift */,
@@ -913,6 +924,7 @@
 				0FA663A1246C7C4100D5A972 /* Configuration.swift in Sources */,
 				0F3BB682245B32C500CFF81D /* MinhasPautasUITests.swift in Sources */,
 				0F76B7192465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift in Sources */,
+				0F01012C248EB35A008A80C5 /* ConfigurationUITests.swift in Sources */,
 				0F4889C02465AD7F006F63B3 /* LoginViewControllerUITests.swift in Sources */,
 				0F76B71B246630D700C3EB62 /* RegisterViewControllerUITests.swift in Sources */,
 				0FA663A3246CC57D00D5A972 /* CreateScheduleViewControllerTests.swift in Sources */,
