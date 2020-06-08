@@ -61,7 +61,7 @@ class LoginViewControllerUITests: XCTestCase {
         let emailTextField = try XCTUnwrap(app.textFields["emailTextField"], "emailTextField dont exist.")
         let passwordTextField = try XCTUnwrap(app.secureTextFields["passwordTextField"], "passwordTextField dont exist.")
         let connectButton = try XCTUnwrap(app.buttons["connectButton"], "connectButton dont exist.")
-
+        
         // Valid e-mail and invalid password
         emailTextField.tap()
         emailTextField.typeText("hugo@gmail.com")
