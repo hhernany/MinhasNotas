@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgN-Fl-MnB">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgN-Fl-MnB">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,13 +12,13 @@
         <!--Login View Controller-->
         <scene sceneID="rTL-d8-REc">
             <objects>
-                <viewController storyboardIdentifier="loginVC" id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="mgN-Fl-MnB" customClass="LoginViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UBQ-sa-Sku">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDI-DE-pNa">
-                                <rect key="frame" x="10" y="187.5" width="355" height="312.5"/>
+                                <rect key="frame" x="10" y="177.5" width="355" height="312.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vbW-mk-tUW">
                                         <rect key="frame" x="20" y="20" width="315" height="124.5"/>
@@ -62,7 +60,7 @@
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50F-ay-YSG" userLabel="ViewLine">
                                                 <rect key="frame" x="0.0" y="123.5" width="315" height="1"/>
@@ -84,7 +82,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="ebh-Zx-JcK" kind="show" id="9zd-IP-VED"/>
+                                            <action selector="didTapForgetPasswordButton:" destination="mgN-Fl-MnB" eventType="touchUpInside" id="7sC-lG-xjU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bam-Oq-4ZR">
@@ -119,7 +117,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="m1q-3L-Onw" kind="show" id="Szf-Zv-glX"/>
+                                            <action selector="didTapRegistrationButton:" destination="mgN-Fl-MnB" eventType="touchUpInside" id="wU5-CB-g4s"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -152,8 +150,12 @@
                         <outlet property="bottomStackView" destination="eE0-FU-7Ng" id="r94-dK-bmM"/>
                         <outlet property="connectButton" destination="bam-Oq-4ZR" id="cTt-iu-dTt"/>
                         <outlet property="emailTextField" destination="IPI-oP-SF1" id="lMZ-Jt-ayt"/>
+                        <outlet property="forgetPasswordButton" destination="W4Q-YV-W0p" id="6sG-TD-2Lw"/>
                         <outlet property="passwordTextField" destination="1AS-ts-0SA" id="qb8-Tl-em1"/>
+                        <outlet property="registrationButton" destination="HmH-JX-qip" id="tqb-08-hyZ"/>
                         <segue destination="qUf-T2-jZG" kind="show" identifier="mainSegue" id="X2c-If-hSJ"/>
+                        <segue destination="ebh-Zx-JcK" kind="show" identifier="forgetPasswordSegue" id="rk1-kg-533"/>
+                        <segue destination="m1q-3L-Onw" kind="show" identifier="registrationSegue" id="cTg-AE-LKh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ae0-wf-voY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -173,8 +175,9 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m1q-3L-Onw" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="gRh-yE-6Hq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="2jf-3i-mQv">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="customBlue"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -200,8 +203,9 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ebh-Zx-JcK" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Q1l-wl-2oH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="uXp-2F-AMj">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="customBlue"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -225,16 +229,16 @@
         <!--Novo cadastro-->
         <scene sceneID="xAy-FB-TeJ">
             <objects>
-                <viewController storyboardIdentifier="registerVC" title="Novo cadastro" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterVC" title="Novo cadastro" id="qAY-VW-iGp" customClass="RegisterViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rRb-lC-ynj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vy7-x7-ukZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="539"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogU-eF-PNN">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="451"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="439"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5S-6u-ULy">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
@@ -455,7 +459,7 @@
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9O-74-9FC">
-                                        <rect key="frame" x="0.0" y="451" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="439" width="375" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCn-hz-AmS">
                                                 <rect key="frame" x="20" y="25" width="335" height="55"/>
@@ -534,9 +538,9 @@
         <!--Esqueci a senha-->
         <scene sceneID="NYj-tO-8hx">
             <objects>
-                <viewController storyboardIdentifier="resetPasswordVC" title="Esqueci a senha" id="FgM-0F-OWH" customClass="ResetPasswordViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetPasswordVC" title="Esqueci a senha" id="FgM-0F-OWH" customClass="ResetPasswordViewController" customModule="MinhasPautas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9JU-FL-xSI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V29-wr-Qx7">
@@ -550,13 +554,13 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aEq-m5-pCp">
                                                         <rect key="frame" x="20" y="10" width="315" height="40"/>
-                                                        <accessibility key="accessibilityConfiguration" identifier="emailTextField"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="emailResetTextField"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="fkW-qg-zUQ"/>
                                                         </constraints>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3B-wH-PTA">
                                                         <rect key="frame" x="10" y="60" width="335" height="2"/>

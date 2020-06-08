@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CreateScheduleModel {
+struct CreateScheduleModel: Codable {
     let titulo: String
     let descricao: String
     let detalhes: String

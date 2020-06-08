@@ -1,0 +1,11 @@
+{
+    "success":true,
+    "message":"Login efetuado com sucesso.",
+    "token_jwt":"XXXXXXXXXXXXXXXXXXX",
+    "usuario": {
+        "id_usuario":2,
+        "nome":"Postman",
+        "email":"postman@gmail.com",
+        "receber_notificacao":"S"
+    }
+}

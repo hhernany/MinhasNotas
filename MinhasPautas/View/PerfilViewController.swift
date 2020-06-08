@@ -66,7 +66,7 @@ extension PerfilViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch optionsList[indexPath.row] {
         case .logout:
-            let rootVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+            let rootVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
             UIApplication.setRootView(rootVC, options: UIApplication.logoutAnimation)
         }
     }

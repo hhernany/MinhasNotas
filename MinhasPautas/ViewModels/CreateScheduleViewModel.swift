@@ -10,77 +10,47 @@ import Foundation
 import Moya
 
 // Add ": class"  if change struct by class
-protocol CreateScheduleViewModelDelegate {
+protocol CreateScheduleViewModelProtocol {
+    init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol)
     func sendFormData(formData: CreateScheduleModel)
-    func createSuccess()
-    func createError(message: String)
 }
 
 struct CreateScheduleViewModel {
-    
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
-    var viewModelDelegate: CreateScheduleViewControllerDelegate?
-    fileprivate let provider = MoyaProvider<SchedulesAPI>()
+    var viewModelDelegate: CreateScheduleViewControllerProtocol?
+    var webService: CreateScheduleWebServiceProtocol?
+    let validator = CreateScheduleValidator()
     
     // Dependency Injection
-    init(delegate: CreateScheduleViewControllerDelegate?) {
+    init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol) {
         viewModelDelegate = delegate
-    }
-    
-    private func insertSchedule(_ scheduleData: [String:String]) {
-        provider.request(.create(data: scheduleData)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let result = try response.map(ResultModel.self)
-                    if result.success == false {
-                        self.createError(message: result.message)
-                        return
-                    }
-                    self.createSuccess()
-                } catch {
-                    self.createError(message: "Não foi possível incluir a pauta. Por favor, tente novamente mais tarde.")
-                    print("Erro desconhecido ao tentar mapear resultados (inclusao de pauta): \(error.localizedDescription)")
-                }
-            case .failure:
-                self.createError(message: "Não foi possível incluir a pauta. Por favor, tente novamente mais tarde.")
-                print("Erro ao incluir a pauta: \(result.error.debugDescription)")
-            }
-        }
+        webService = webservice
     }
 }
 
-extension CreateScheduleViewModel: CreateScheduleViewModelDelegate {
-    func createSuccess() {
-        viewModelDelegate?.createSuccess()
-    }
-    
-    func createError(message: String) {
-        viewModelDelegate?.createError(message: message)
-    }
-    
+extension CreateScheduleViewModel: CreateScheduleViewModelProtocol {
     func sendFormData(formData: CreateScheduleModel) {
-        if formData.titulo.isEmpty {
-            createError(message: "Informe o titulo da pauta.")
+        let validationError = validator.validateScheduleModel(formData: formData)
+        if validationError != nil {
+            viewModelDelegate?.createError(message: validationError?.localizedDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
             return
         }
-        if formData.descricao.isEmpty {
-            createError(message: "Informe a descrição da pauta.")
-            return
-        }
-        if formData.detalhes.isEmpty {
-            createError(message: "Informe os datalhes da pauta.")
-            return
-        }
-        
-        // POST DATA
+
+        // Form data to sending via POST
         let postData: [String:String] = [
             "titulo": formData.titulo,
             "descricao": formData.descricao,
             "detalhes": formData.detalhes
         ]
-        insertSchedule(postData)
+        
+        webService?.insertSchedule(postData) { (result, error) in
+            if error == nil && result?.success == true {
+                self.viewModelDelegate?.createSuccess()
+            } else {
+                self.viewModelDelegate?.createError(message: error?.errorDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
+            }
+        }
     }
 }
 

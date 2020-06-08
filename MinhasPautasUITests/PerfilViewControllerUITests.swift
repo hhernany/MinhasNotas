@@ -12,12 +12,17 @@ class PerfilViewControllerUITests: XCTestCase {
 
     var app: XCUIApplication!
     
-    override func setUp() {
+    override func setUpWithError() throws {
         super.setUp()
-        app = start(using: Configuration())
+        app = start(using: ConfigurationUITests())
     }
 
-    func testPerfilTabContentAndLogout() {
+    override func tearDownWithError() throws {
+        super.tearDown()
+        app = nil
+    }
+    
+    func testPerfilTabContentAndLogout() throws{
         app.tabBars.buttons["Perfil"].tap() // Change tab
         
         XCTAssert(app.tables["perfilTableViewOptions"].exists, "perfilTableViewOptions dont exists")
@@ -26,22 +31,8 @@ class PerfilViewControllerUITests: XCTestCase {
 
         app.tables.staticTexts["Sair"].tap() // Logout
     }
-    
-    override func tearDown() {
-        super.tearDown()
-        app = nil
-    }
 }
 
-// Default values. Add or change during tests when necessary
-final class Configuration {
-    var dictionary: [String: String] = [
-        ConfigurationKeys.isFirstTimeUser: String(false),
-        ConfigurationKeys.isUITest: String(true),
-        "FakeData_email_usuario": "test@gmail.com",
-        "FakeData_nome_usuario": "User Test"
-    ]
-}
 
 // Posso criar extensões para permitir encadeamento. (Configuration().isFirsTimeUser().isUITest()
 // Não é obrigatório, é mais questão de estética ou facilidades.

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol RegisterViewControlerDelegate {
+@objc protocol RegisterViewControlerProtocol {
     func registerSuccess()
     func registerError(message: String)
 }
@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     // Variables and Constants
-    var registerViewModel: RegisterViewModel?
+    var registerViewModel: RegisterViewModelProtocol?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification:NSNotification){
-        var userInfo = notification.userInfo!
+        let userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
@@ -84,7 +84,7 @@ class RegisterViewController: UIViewController {
     }
 }
 
-extension RegisterViewController: RegisterViewControlerDelegate {
+extension RegisterViewController: RegisterViewControlerProtocol {
     func registerSuccess() {
         spinner?.removeSpinner()
         "Seu cadastro foi finalizado com sucesso. Você já pode realizar o login com sua nova conta.".alert(self, title: "Cadastro realizado com sucesso") { UIAlertAction in

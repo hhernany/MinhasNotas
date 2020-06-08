@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ResetPasswordViewControlerDelegate {
+protocol ResetPasswordViewControlerProtocol {
     func resetSuccess()
     func resetError(message: String)
 }
@@ -21,7 +21,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     
     // Variables and Constants
-    var resetPasswordViewModel: ResetPasswordViewModel?
+    var resetPasswordViewModel: ResetPasswordViewModelProtocol?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class ResetPasswordViewController: UIViewController {
     }
 }
 
-extension ResetPasswordViewController: ResetPasswordViewControlerDelegate {
+extension ResetPasswordViewController: ResetPasswordViewControlerProtocol {
     func resetSuccess() {
         spinner?.removeSpinner()
         "As instruções para resetar a sua senha foram enviadas para o e-mail informado. Verifique seus e-mails recebidos.".alert(self, title: "E-mail enviado") { (AlertAction) in
