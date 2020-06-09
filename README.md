@@ -19,6 +19,7 @@ O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas 
 
 ## Testes unitários e interface
 Testes unitários e de interface completos, utilizando XCTests e Moya (Stubbed responses).
+
 Atenção: Para a execução dos Teste de interface, é obritório desativar a seguinte função no simulador: I/O --> Keyboard --> Connect Hardware Keyboard
 
 ## Backend
