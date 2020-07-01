@@ -25,6 +25,7 @@ class CreateScheduleViewControllerTests: XCTestCase {
 
     func testScreenCreateSchedules() throws {
         let addButton = try XCTUnwrap(app.navigationBars["Minhas Pautas"].buttons["addButton"], "addButton not found: SchedulesViewController")
+        XCTAssertTrue(app.navigationBars["Minhas Pautas"].buttons["addButton"].exists, "addButton not found: SchedulesViewController")
         addButton.tap()
         
         // Fields and Labels

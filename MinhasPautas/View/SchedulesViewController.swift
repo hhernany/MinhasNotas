@@ -56,15 +56,14 @@ class SchedulesViewController: UIViewController {
         self.configureNavigationBar(largeTitleColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
                                     backgoundColor: UIColor.init(named: "customBlue")!,
                                     tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                                    title: "Minhas Patuas",
+                                    title: "Minhas Pautas",
                                     preferredLargeTitle: true)
-        
-        addButton.accessibilityIdentifier = "addButton"
         noResultLabel.isHidden = true
         tableView.accessibilityIdentifier = "scheduleTableView"
         tableView.register(UINib(nibName: "SchedulesTableViewCell", bundle: nil), forCellReuseIdentifier: "scheduleCell")
         tableView.refreshControl = refreshControl
         tableView.tableFooterView = UIView() // Remove blank lines in tableView footer
+        addButton.accessibilityIdentifier = "addButton"
     }
     
     private func getSchedules() {
