@@ -48,3 +48,5 @@ Atenção: Para a execução dos testes de interface, é obrigatório desativar 
 - [ ] Layout para iPad
 - [ ] Tableview Animations and Transition Animations
 
+
+

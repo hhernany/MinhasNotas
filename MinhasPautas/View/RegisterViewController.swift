@@ -33,6 +33,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         setupObservers()
         self.setNeedsStatusBarAppearanceUpdate()
+        setupObservers()
         registerViewModel = RegisterViewModel(delegate: self)
     }
 
