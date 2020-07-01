@@ -23,18 +23,18 @@ Atenção: Para a execução dos testes de interface, é obrigatório desativar 
 ## Conhecimentos abordados
 - Arquitetura MVVM
 - Protocols e Extensions
-- Accessbility Identifiers
-- Stored e Computed Properties
+- Dependency Injection (DI)
 - Generics
 - Unit Tests e UITests
 - Abordagem de LaunchArguments e LaunchEnvironments nos UITests
+- Mocks e Stubbs para testes unitários e de interface
 - Closures
 - Weak e Strong para correto gerenciamento de memória com o ARC (Automatic Reference Counting)
+- Accessibility Identifiers
+- Stored e Computed Properties
 - Class e Structs (Mutating Structs)
 - Codable/Decodable
-- Mocks e Stubbs para testes unitários e de interface
-- Enumarations
-- Dependency Injection (DI)
+- Enumerations
 
 ## Backend
 - Google Cloud
