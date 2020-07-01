@@ -56,12 +56,13 @@ class LoginViewControllerUITests: XCTestCase {
         intercepetAndCloseAlerts(name: "Aviso", button: "Fechar")
     }
     
+    // Integration test - Need internet connection
     func testInvalidPassword() throws {
         // Check fields and buttons
         let emailTextField = try XCTUnwrap(app.textFields["emailTextField"], "emailTextField dont exist.")
         let passwordTextField = try XCTUnwrap(app.secureTextFields["passwordTextField"], "passwordTextField dont exist.")
         let connectButton = try XCTUnwrap(app.buttons["connectButton"], "connectButton dont exist.")
-        
+
         // Valid e-mail and invalid password
         emailTextField.tap()
         emailTextField.typeText("hugo@gmail.com")

@@ -93,32 +93,4 @@ class CreateScheduleWebServiceTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5)
     }
-    
-    // MARK: Custom Moya functions
-    func customSuccessWithInvalidStruct(_ target: SchedulesAPI) -> Endpoint {
-        return Endpoint(url: URL(target: target).absoluteString,
-                        sampleResponseClosure: {.networkResponse(200, Data("Invalid message to be parsed".utf8))},
-                        method: target.method,
-                        task: target.task,
-                        httpHeaderFields: target.headers)
-    }
-    
-    func customWebServiceValidatingError(_ target: SchedulesAPI) -> Endpoint {
-        let data = "{\"success\": false, \"message\": \"Result with success equal false.\"}"
-        let sampleData = Data(data.utf8)
-
-        return Endpoint(url: URL(target: target).absoluteString,
-                        sampleResponseClosure: {.networkResponse(200, sampleData)},
-                        method: target.method,
-                        task: target.task,
-                        httpHeaderFields: target.headers)
-    }
-    
-    func customErrorEndpoint(_ target: SchedulesAPI) -> Endpoint {
-        return Endpoint(url: URL(target: target).absoluteString,
-                        sampleResponseClosure: { .networkError(NSError(domain: "Error 500", code: 500)) },
-                        method: target.method,
-                        task: target.task,
-                        httpHeaderFields: target.headers)
-    }
 }

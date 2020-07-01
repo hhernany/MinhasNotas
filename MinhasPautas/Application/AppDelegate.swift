@@ -152,7 +152,7 @@ final class LaunchEnvironment {
         for (key, value) in launchDictionary
             where key.hasPrefix("FakeData_") {
                 // Truncate "UI-TestingKey_" part
-                let userDefaultsKey = key.truncateKey()
+                let userDefaultsKey = key.truncateKey(key: "FakeData_")
                 switch value {
                 case "true":
                     UserDefaults.standard.set(true, forKey: userDefaultsKey)
