@@ -26,7 +26,7 @@ class RegisterViewControllerUITests: XCTestCase {
     func testRegisterFieldsAndAlerts() throws {
         tapButton(app: app, identifier: "registerButton")
 
-        // Check if fields exists
+        // Check if fields has outlets
         let nameTextField = try XCTUnwrap(app.scrollViews.textFields["nameTextField"], "RegisterViewController: nameTextField dont exists")
         let emailTextField = try XCTUnwrap(app.scrollViews.textFields["emailTextField"], "RegisterViewController: emailTextField dont exists")
         let emailConfirmationTextField = try XCTUnwrap(app.scrollViews.textFields["emailConfirmationTextField"], "RegisterViewController: emailConfirmationTextField dont exists")

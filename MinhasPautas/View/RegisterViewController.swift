@@ -28,7 +28,7 @@ class RegisterViewController: UIViewController {
     // Variables and Constants
     var registerViewModel: RegisterViewModelProtocol?
     private var spinner: UIView? = nil
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupObservers()

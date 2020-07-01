@@ -76,12 +76,5 @@ class CreteScheduleViewModelTests: XCTestCase {
         // Assert
         XCTAssertEqual(viewDelegate.createErrorCounter, 1, "The createError() method was called more than one time")
     }
-    
-    func customErrorEndpoint(_ target: SchedulesAPI) -> Endpoint {
-        return Endpoint(url: URL(target: target).absoluteString,
-                        sampleResponseClosure: { .networkError(NSError(domain: "Error 500", code: 500)) },
-                        method: target.method,
-                        task: target.task,
-                        httpHeaderFields: target.headers)
-    }
+
 }

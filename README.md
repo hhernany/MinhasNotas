@@ -1,8 +1,6 @@
 # Minhas Pautas
 
-Aplicativo desenvolvido para a vaga de Desenvolvedor iOS (Home Office).
-
-O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas e fechadas). O mesmo possui um sistema de login/logout para que o usuário possa ter acesso ao aplicativo e suas funcionalidades.
+Aplicativo desenvolvido com o propósito de aplicar diversos padrões, práticas e guidelines de desenvolvimento.
 
 ## Arquitetura
 - MVVM
@@ -18,16 +16,37 @@ O Aplicativo Minhas Pautas permite que o usuário gerencie suas pautas (abertas 
 - pod 'Firebase/Auth' - Biblioteca de autenticação do Firebase
 
 ## Testes unitários e interface
-Testes unitários e de interface completos, utilizando XCTests e Moya (Stubbed responses).
+Testes completos utilizando XCTests e Moya (Stubbed Responses).
 
-Atenção: Para a execução dos Teste de interface, é obritório desativar a seguinte função no simulador: I/O --> Keyboard --> Connect Hardware Keyboard
+Atenção: Para a execução dos testes de interface, é obrigatório desativar a seguinte função no simulador: I/O --> Keyboard --> Connect Hardware Keyboard
+
+## Conhecimentos abordados
+- Arquitetura MVVM
+- Protocols e Extensions
+- Accessbility Identifiers
+- Stored e Computed Properties
+- Generics
+- Unit Tests e UITests
+- Abordagem de LaunchArguments e LaunchEnvironments nos UITests
+- Closures
+- Weak e Strong para correto gerenciamento de memória com o ARC (Automatic Reference Counting)
+- Class e Structs (Mutating Structs)
+- Codable/Decodable
+- Mocks e Stubbs para testes unitários e de interface
+- Enumarations
+- Dependency Injection (DI)
 
 ## Backend
 - Google Cloud
 - MySQL 5.7
 - NodeJS (APIs)
 
-## Informações Adicionais
-O sistema de login foi desenvolvido utilizando Firebase para o aproveitamento de diversas funcionalidades úteis para o usuário, como: Criação segura de novos logins; Recuperação de senha; Conferência de e-mail já existente; etc.
+## Atualizações futuras
+- [ ]  SFSymbols
+- [ ] Compositional Layout
+- [ ] Dark Theme
+- [ ] Layout para iPad
+- [ ] Tableview Animations and Transition Animations
 
-As senhas utilizadas no cadastro não são salvas no banco de dados, sendo assim gerenciadas pelo Firebase.
+
+
