@@ -137,7 +137,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" name="customBlue"/>
+                        <color key="backgroundColor" name="customBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cDI-DE-pNa" firstAttribute="centerY" secondItem="Kag-yk-I10" secondAttribute="centerY" id="Jxw-CG-NT1"/>
                             <constraint firstItem="cDI-DE-pNa" firstAttribute="centerX" secondItem="Kag-yk-I10" secondAttribute="centerX" id="hTQ-b8-sDF"/>
@@ -179,9 +179,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="2jf-3i-mQv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="customBlue"/>
+                        <color key="backgroundColor" name="customSecondaryColor"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="customBlue"/>
+                        <color key="barTintColor" name="customSecondaryColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -207,9 +207,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="uXp-2F-AMj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="customBlue"/>
+                        <color key="backgroundColor" name="customSecondaryColor"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="customBlue"/>
+                        <color key="barTintColor" name="customSecondaryColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -260,7 +260,6 @@
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="40" id="QNv-yK-g1b"/>
                                                                                 </constraints>
-                                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                                                                                 <connections>
@@ -269,7 +268,7 @@
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FlE-9i-MCt">
                                                                                 <rect key="frame" x="10" y="60" width="335" height="2"/>
-                                                                                <color key="backgroundColor" name="customMediumGray"/>
+                                                                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="2" id="cVk-Pg-gym"/>
                                                                                 </constraints>
@@ -297,7 +296,6 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="40" id="mde-3V-zHy"/>
                                                                         </constraints>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue"/>
                                                                         <connections>
@@ -306,7 +304,7 @@
                                                                     </textField>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skq-eR-tir">
                                                                         <rect key="frame" x="10" y="60" width="335" height="2"/>
-                                                                        <color key="backgroundColor" name="customMediumGray"/>
+                                                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="2" id="iaX-9L-ZhW"/>
                                                                         </constraints>
@@ -332,7 +330,6 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="40" id="qwU-gp-5nv"/>
                                                                         </constraints>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue"/>
                                                                         <connections>
@@ -341,7 +338,7 @@
                                                                     </textField>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ei2-UT-D1i">
                                                                         <rect key="frame" x="10" y="60" width="335" height="2"/>
-                                                                        <color key="backgroundColor" name="customMediumGray"/>
+                                                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="2" id="JY4-wq-2G0"/>
                                                                         </constraints>
@@ -370,7 +367,6 @@
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="40" id="RuL-p7-d21"/>
                                                                                 </constraints>
-                                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES"/>
                                                                                 <connections>
@@ -379,7 +375,7 @@
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXH-nF-jEm">
                                                                                 <rect key="frame" x="10" y="60" width="157.5" height="2"/>
-                                                                                <color key="backgroundColor" name="customMediumGray"/>
+                                                                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="2" id="hNn-U9-fff"/>
                                                                                 </constraints>
@@ -405,7 +401,6 @@
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="40" id="wU3-Ua-YRz"/>
                                                                                 </constraints>
-                                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES"/>
                                                                                 <connections>
@@ -414,7 +409,7 @@
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnH-o6-5rn">
                                                                                 <rect key="frame" x="10" y="60" width="157.5" height="2"/>
-                                                                                <color key="backgroundColor" name="customMediumGray"/>
+                                                                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="2" id="bal-RC-j6r"/>
                                                                                 </constraints>
@@ -440,7 +435,7 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="uMZ-tj-dg4" firstAttribute="top" secondItem="T5S-6u-ULy" secondAttribute="top" constant="10" id="6bc-8w-usz"/>
                                                     <constraint firstAttribute="trailing" secondItem="uMZ-tj-dg4" secondAttribute="trailing" constant="10" id="OMI-MG-H8A"/>
@@ -449,7 +444,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="T5S-6u-ULy" secondAttribute="trailing" id="0Nv-hp-yXA"/>
                                             <constraint firstAttribute="bottom" secondItem="T5S-6u-ULy" secondAttribute="bottom" id="HAm-iy-ctj"/>
@@ -482,7 +477,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="8am-IX-Oji"/>
                                             <constraint firstAttribute="bottom" secondItem="dCn-hz-AmS" secondAttribute="bottom" constant="20" id="AHT-0I-AKn"/>
@@ -491,7 +486,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="ogU-eF-PNN" firstAttribute="leading" secondItem="Vy7-x7-ukZ" secondAttribute="leading" id="QuU-br-NZO"/>
                                     <constraint firstItem="h9O-74-9FC" firstAttribute="leading" secondItem="Vy7-x7-ukZ" secondAttribute="leading" id="c17-a4-Snv"/>
@@ -503,7 +498,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Vy7-x7-ukZ" firstAttribute="top" secondItem="4l5-bj-nkf" secondAttribute="top" id="1Yt-9H-r5N"/>
                             <constraint firstItem="4l5-bj-nkf" firstAttribute="bottom" secondItem="Vy7-x7-ukZ" secondAttribute="bottom" id="Nd7-G7-iaT"/>
@@ -558,13 +553,12 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="fkW-qg-zUQ"/>
                                                         </constraints>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3B-wH-PTA">
                                                         <rect key="frame" x="10" y="60" width="335" height="2"/>
-                                                        <color key="backgroundColor" name="customMediumGray"/>
+                                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="2" id="0G0-FT-9PV"/>
                                                         </constraints>
@@ -613,7 +607,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="pLc-mG-rh4" firstAttribute="top" secondItem="V29-wr-Qx7" secondAttribute="bottom" constant="20" id="9By-Hj-erk"/>
                             <constraint firstItem="V29-wr-Qx7" firstAttribute="top" secondItem="ZFR-hr-y3i" secondAttribute="top" id="Dfx-9X-F2G"/>
@@ -643,11 +637,14 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="customBackgroundColor">
+            <color red="0.0" green="0.55294117647058827" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="customBlue">
             <color red="0.0" green="0.55294117647058827" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="customMediumGray">
-            <color red="0.89411764705882357" green="0.89411764705882357" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="customSecondaryColor">
+            <color red="0.0" green="0.55294117647058827" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

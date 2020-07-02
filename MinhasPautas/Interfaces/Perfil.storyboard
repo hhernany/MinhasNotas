@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-rV-Hrg">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="10" width="375" height="70"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aLl-rv-Cyg">
                                         <rect key="frame" x="20" y="12" width="335" height="46"/>
@@ -40,7 +39,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="customLightGray"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="aLl-rv-Cyg" firstAttribute="centerY" secondItem="DeZ-rV-Hrg" secondAttribute="centerY" id="26I-Cm-Pty"/>
                                     <constraint firstAttribute="height" constant="70" id="MML-Cm-gKB"/>
@@ -49,8 +48,9 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxB-XD-3S6">
-                                <rect key="frame" x="0.0" y="70" width="375" height="553"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="533"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="perfilCell" id="4Qh-zJ-tDz">
                                         <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
@@ -59,6 +59,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
@@ -68,14 +69,14 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="MfE-PS-cAe" firstAttribute="trailing" secondItem="mxB-XD-3S6" secondAttribute="trailing" id="Cjd-Dr-p94"/>
                             <constraint firstItem="mxB-XD-3S6" firstAttribute="leading" secondItem="MfE-PS-cAe" secondAttribute="leading" id="EaX-FX-HhS"/>
                             <constraint firstItem="DeZ-rV-Hrg" firstAttribute="leading" secondItem="uDe-Pa-BcW" secondAttribute="leading" id="TZ4-Pk-VW2"/>
-                            <constraint firstItem="DeZ-rV-Hrg" firstAttribute="top" secondItem="MfE-PS-cAe" secondAttribute="top" id="YfS-vz-eDg"/>
+                            <constraint firstItem="DeZ-rV-Hrg" firstAttribute="top" secondItem="MfE-PS-cAe" secondAttribute="top" constant="10" id="YfS-vz-eDg"/>
                             <constraint firstItem="MfE-PS-cAe" firstAttribute="trailing" secondItem="DeZ-rV-Hrg" secondAttribute="trailing" id="cV4-YS-8pg"/>
-                            <constraint firstItem="mxB-XD-3S6" firstAttribute="top" secondItem="DeZ-rV-Hrg" secondAttribute="bottom" id="vyU-4E-5m2"/>
+                            <constraint firstItem="mxB-XD-3S6" firstAttribute="top" secondItem="DeZ-rV-Hrg" secondAttribute="bottom" constant="10" id="vyU-4E-5m2"/>
                             <constraint firstItem="MfE-PS-cAe" firstAttribute="bottom" secondItem="mxB-XD-3S6" secondAttribute="bottom" id="y0d-nw-TZb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MfE-PS-cAe"/>
@@ -93,9 +94,4 @@
             <point key="canvasLocation" x="817" y="1638"/>
         </scene>
     </scenes>
-    <resources>
-        <namedColor name="customLightGray">
-            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

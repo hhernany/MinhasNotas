@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Load Firebase
         FirebaseApp.configure()
-        window?.backgroundColor = UIColor.init(named: "customBlue")
+        window?.backgroundColor = UIColor.init(named: "customBackgroundColor")
         
         // Check if is testing
         if AppDelegate.isUITestingEnabled {

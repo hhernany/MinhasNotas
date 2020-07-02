@@ -32,7 +32,7 @@ class PerfilViewController: UIViewController {
         tableView.tableFooterView = UIView() // Remove blank cells
         self.setNeedsStatusBarAppearanceUpdate()
         self.configureNavigationBar(largeTitleColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                                    backgoundColor: UIColor.init(named: "customBlue")!,
+                                    backgoundColor: UIColor.init(named: "customSecondaryColor")!,
                                     tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
                                     title: "Perfil",
                                     preferredLargeTitle: true)
