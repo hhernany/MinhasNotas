@@ -41,14 +41,14 @@
         <scene sceneID="5Vp-Ve-yFJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="TIb-KV-SKx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Pautas" image="listIcon" id="GN3-5G-6Rx"/>
+                    <tabBarItem key="tabBarItem" title="Pautas" image="listIcon" selectedImage="listIcon" id="GN3-5G-6Rx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="LAv-c1-Nw6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="customBlue"/>
+                        <color key="backgroundColor" name="customSecondaryColor"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="customBlue"/>
+                        <color key="barTintColor" name="customSecondaryColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -69,13 +69,14 @@
         <scene sceneID="gcj-hd-VY7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="HM1-D4-UHC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Perfil" image="personIcon" id="J8g-N0-D49"/>
+                    <tabBarItem key="tabBarItem" title="Perfil" image="personIcon" selectedImage="personIcon" id="J8g-N0-D49"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="kED-0w-S1d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="customBlue"/>
-                        <color key="barTintColor" name="customBlue"/>
+                        <color key="backgroundColor" name="customSecondaryColor"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="customSecondaryColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -108,6 +109,9 @@
         <image name="listIcon" width="25" height="25"/>
         <image name="personIcon" width="25" height="25"/>
         <namedColor name="customBlue">
+            <color red="0.0" green="0.55294117647058827" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="customSecondaryColor">
             <color red="0.0" green="0.55294117647058827" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

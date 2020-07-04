@@ -1,52 +1,50 @@
 # Minhas Pautas
 
-Aplicativo desenvolvido com o propósito de aplicar diversos padrões, práticas e guidelines de desenvolvimento.
+Application developed with the objective of applying and testing knowledge, implementing good practices, guidelines, design patterns, and other development standards.
 
-## Arquitetura
-- MVVM
-
-## Ambiente de desenvolvimento
+## Development Environment
 - Xcode 11.5
 - Swift 5
 - iOS 13.5
 
-## Pods utilizados (Dependências)
-- pod 'Moya' - Biblioteca de network
-- pod 'Firebase/Analytics' - Biblioteca para insights do Firebase (Obrigatório para o uso do Auth)
-- pod 'Firebase/Auth' - Biblioteca de autenticação do Firebase
+## Pods (Libraries)
+- pod 'Moya' - Networking Library and Stubbed Responses
+- pod 'Firebase/Analytics' - Firebase Insights (Required for Firebase/Auth)
+- pod 'Firebase/Auth' - Firebase Authentication
 
-## Testes unitários e interface
-Testes completos utilizando XCTests e Moya (Stubbed Responses).
+## Unit tests and UITests
+Tests developed with XCTests/XCUITests and Moya (Stubbed Responses).
 
-Atenção: Para a execução dos testes de interface, é obrigatório desativar a seguinte função no simulador: I/O --> Keyboard --> Connect Hardware Keyboard
+Before run UITests, disable the following option in simulator: I/O --> Keyboard --> Connect Hardware Keyboard
 
-## Conhecimentos abordados
-- Arquitetura MVVM
-- Protocols e Extensions
+## Technical specifications
+- MVVM Architecture
+- Protocols and Extensions
 - Dependency Injection (DI)
 - Generics
-- Unit Tests e UITests
-- Abordagem de LaunchArguments e LaunchEnvironments nos UITests
-- Mocks e Stubbs para testes unitários e de interface
+- Unit Tests and UITests
+- LaunchArguments and LaunchEnvironments
+- Mocks and Stubbs with Moya
 - Closures
-- Weak e Strong para correto gerenciamento de memória com o ARC (Automatic Reference Counting)
+- Weak and Strong for memory management with ARC (Automatic Reference Counting)
 - Accessibility Identifiers
-- Stored e Computed Properties
-- Class e Structs (Mutating Structs)
+- Stored and Computed Properties
+- Class and Structs (Mutating Structs)
 - Codable/Decodable
 - Enumerations
+- Observer pattern (Notifications)
 
 ## Backend
 - Google Cloud
 - MySQL 5.7
 - NodeJS (APIs)
 
-## Atualizações futuras
-- [ ]  SFSymbols
-- [ ] Compositional Layout
-- [ ] Dark Theme
-- [ ] Layout para iPad
+## Improvements
+- [X]  SFSymbols
+- [X] Dark Theme
 - [ ] Tableview Animations and Transition Animations
-
+- [ ] Compositional Layout
+- [ ] IPad Laout
+- [ ] Localization (English and Brazilian Portuguese)
 
 

@@ -54,8 +54,8 @@ class SchedulesViewController: UIViewController {
     private func setupLayout() {
         self.setNeedsStatusBarAppearanceUpdate()
         self.configureNavigationBar(largeTitleColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                                    backgoundColor: UIColor.init(named: "customBlue")!,
-                                    tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                    backgoundColor: UIColor.init(named: "customSecondaryColor")!,
+                                    tintColor: UIColor.init(named: "customNavbarButtonsColor")!,
                                     title: "Minhas Pautas",
                                     preferredLargeTitle: true)
         noResultLabel.isHidden = true
