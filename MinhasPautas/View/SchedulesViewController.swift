@@ -169,6 +169,12 @@ extension SchedulesViewController: UITableViewDelegate {
             lastCellOpenInCloseTab = indexPath
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let animation: TableAnimation = .fadeIn(duration: 0.85, delay: 0.03)
+        let animator = TableViewAnimator(animation: animation.getAnimation())
+        animator.animate(cell: cell, at: indexPath, in: tableView)
+    }
 }
 
 // Loading more content while scrolling
