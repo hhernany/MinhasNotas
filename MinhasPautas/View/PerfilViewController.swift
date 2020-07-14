@@ -62,7 +62,10 @@ extension PerfilViewController: UITableViewDataSource {
             fatalError("Invalid dequeueReusableCell - Not Found: perfilCell")
         }
         cell.textLabel?.text = optionsList[indexPath.row].rawValue
-        cell.accessoryType = .disclosureIndicator
+        let chevronImageView = UIImageView(image: UIImage(named: "rightArrow"))
+        chevronImageView.tintColor = #colorLiteral(red: 0.03921568627, green: 0.5176470588, blue: 1, alpha: 1)
+        cell.accessoryView = chevronImageView
+        cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
         return cell
     }
 }

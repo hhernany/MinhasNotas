@@ -1,6 +1,6 @@
 # Minhas Pautas
 
-Application developed with the objective of applying and testing knowledge, implementing good practices, guidelines, design patterns, and other development standards.
+Application developed with the objective of applying and testing knowledge, implementing good practices, guidelines, frameworks, design patterns, and other development standards.
 
 ## Development Environment
 - Xcode 11.5
@@ -40,11 +40,9 @@ Before run UITests, disable the following option in simulator: I/O --> Keyboard 
 - NodeJS (APIs)
 
 ## Improvements
-- [X]  SFSymbols
+- [X] SFSymbols
 - [X] Dark Theme
-- [ ] Tableview Animations and Transition Animations
-- [ ] Compositional Layout
-- [ ] IPad Laout
+- [X] Tableview cells animation
 - [ ] Localization (English and Brazilian Portuguese)
-
+- [ ] IPad Layout
 

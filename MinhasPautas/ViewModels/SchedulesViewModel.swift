@@ -33,6 +33,7 @@ class SchedulesViewModel {
     var schedulesListClose: [SchedulesModel] = []
     fileprivate var page = 0
     fileprivate var isLoading = false
+    fileprivate var reachEndOfData = false
     
     // Dependency Injection
     init(delegate: SchedulesViewControlerProtocol?,
@@ -53,6 +54,11 @@ class SchedulesViewModel {
     private func getData() {
         webService?.getData(page: page, completionHandler: { [weak self] (schedulesList, resultModel, error) in
             if schedulesList != nil {
+                // If list came empty, then reach the end of content
+                if schedulesList?.count == 0 {
+                    self?.reachEndOfData = true
+                    return
+                }
                 self?.schedulesList += schedulesList!
                 self?.schedulesListOpen = self?.schedulesList.filter { $0.status == "Aberto" } ?? []
                 self?.schedulesListClose = self?.schedulesList.filter { $0.status == "Fechado" } ?? []
@@ -84,12 +90,14 @@ extension SchedulesViewModel: SchedulesViewModelProtocol {
         //viewModelDelegate?.resultLabelIsHidden(state: true, message: "")
         page = 0
         isLoading = true
+        reachEndOfData = false
         getData()
     }
     
     func getMoreData() {
         // Dont make recursive call while scrolling tableView/collectionView.
-        if isLoading {
+        // Dont load more data if dont have more data to get
+        if isLoading || reachEndOfData {
             return
         }
         isLoading = true

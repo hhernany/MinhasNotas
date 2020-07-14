@@ -46,6 +46,8 @@
 		0F5894CA24AC0D8200CD48E9 /* XCTestExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5894C924AC0D8200CD48E9 /* XCTestExt.swift */; };
 		0F76B7192465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F76B7182465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift */; };
 		0F76B71B246630D700C3EB62 /* RegisterViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F76B71A246630D700C3EB62 /* RegisterViewControllerUITests.swift */; };
+		0F7894A724BA060100ADF67F /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7894A624BA060100ADF67F /* Table.swift */; };
+		0F7894AA24BA062300ADF67F /* TableAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7894A924BA062300ADF67F /* TableAnimations.swift */; };
 		0F7A691E24815FB3002DCB4E /* CreateScheduleWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7A691D24815FB3002DCB4E /* CreateScheduleWebService.swift */; };
 		0F7A692124819F72002DCB4E /* MockCreateScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7A692024819F72002DCB4E /* MockCreateScheduleViewModel.swift */; };
 		0F7A69242481A129002DCB4E /* CreteScheduleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7A69232481A129002DCB4E /* CreteScheduleViewModelTests.swift */; };
@@ -170,6 +172,8 @@
 		0F5894C924AC0D8200CD48E9 /* XCTestExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestExt.swift; sourceTree = "<group>"; };
 		0F76B7182465FDAE00C3EB62 /* ResetPasswordViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewControllerUITests.swift; sourceTree = "<group>"; };
 		0F76B71A246630D700C3EB62 /* RegisterViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerUITests.swift; sourceTree = "<group>"; };
+		0F7894A624BA060100ADF67F /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		0F7894A924BA062300ADF67F /* TableAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableAnimations.swift; sourceTree = "<group>"; };
 		0F7A691D24815FB3002DCB4E /* CreateScheduleWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleWebService.swift; sourceTree = "<group>"; };
 		0F7A692024819F72002DCB4E /* MockCreateScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCreateScheduleViewModel.swift; sourceTree = "<group>"; };
 		0F7A69232481A129002DCB4E /* CreteScheduleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreteScheduleViewModelTests.swift; sourceTree = "<group>"; };
@@ -301,6 +305,7 @@
 		0F3BB65D245B32C400CFF81D /* MinhasPautas */ = {
 			isa = PBXGroup;
 			children = (
+				0F7894A824BA061200ADF67F /* Animations */,
 				0F7A69252481A4A7002DCB4E /* Validators */,
 				0FF86380246DF13A00E657BD /* Stubbed Responses */,
 				0FA6639E246C7ABF00D5A972 /* Configuration */,
@@ -431,6 +436,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		0F7894A824BA061200ADF67F /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				0F7894A924BA062300ADF67F /* TableAnimations.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		0F7A691F24819F5F002DCB4E /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +540,7 @@
 				0F9A8D2C245C9E48005B2E2B /* RegisterModel.swift */,
 				0FB2EB24245E13D800B8F18A /* CreateScheduleModel.swift */,
 				0FEBF48E245CFED7009E3F19 /* SchedulesModel.swift */,
+				0F7894A624BA060100ADF67F /* Table.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -867,6 +881,7 @@
 				0F9FBB2F245F67070009C9CC /* ApplicationExt.swift in Sources */,
 				0F52BA392488357200C51E65 /* RegisterError.swift in Sources */,
 				0FB2EB27245E13EC00B8F18A /* CreateScheduleViewModel.swift in Sources */,
+				0F7894A724BA060100ADF67F /* Table.swift in Sources */,
 				0F9A8D32245CBBA1005B2E2B /* UIViewExt.swift in Sources */,
 				0F3BB69D245BC07A00CFF81D /* RegisterViewController.swift in Sources */,
 				0F9A8D25245C72AE005B2E2B /* StringExt.swift in Sources */,
@@ -887,6 +902,7 @@
 				0F7A69292481B243002DCB4E /* CreateScheduleError.swift in Sources */,
 				0F3BB667245B32C400CFF81D /* MinhasPautas.xcdatamodeld in Sources */,
 				0F3BB692245B72D200CFF81D /* LoginViewModel.swift in Sources */,
+				0F7894AA24BA062300ADF67F /* TableAnimations.swift in Sources */,
 				0F9A8D2D245C9E48005B2E2B /* RegisterModel.swift in Sources */,
 				0F9A8D30245CB26D005B2E2B /* ResetPasswordViewModel.swift in Sources */,
 				0F3BB69F245BC09F00CFF81D /* ResetPasswordViewController.swift in Sources */,
