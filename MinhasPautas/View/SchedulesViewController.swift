@@ -187,18 +187,6 @@ extension SchedulesViewController: UITableViewDelegate {
     }
 }
 
-// Loading more content while scrolling
-//extension SchedulesViewController: UIScrollViewDelegate {
-//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height) {
-//            if refreshControl.isRefreshing {
-//                return
-//            }
-//            schedulesViewModel?.getMoreData()
-//        }
-//    }
-//}
-
 extension SchedulesViewController: SchedulesViewControlerProtocol {
     func reloadTableView() {
         spinner?.removeSpinner() // Só vai ser chamado se tiver um spinner ativo. Então não tem problema ser chamado aqui sempre.
