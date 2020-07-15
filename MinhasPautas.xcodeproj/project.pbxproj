@@ -13,6 +13,7 @@
 		0F0280AB24872A4D00811BA9 /* CreateScheduleViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0280AA24872A4D00811BA9 /* CreateScheduleViewControllerTests.swift */; };
 		0F0714892469C5E6008978A4 /* SchedulesViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0714882469C5E6008978A4 /* SchedulesViewControllerUITests.swift */; };
 		0F07148B2469FB19008978A4 /* PerfilViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07148A2469FB19008978A4 /* PerfilViewControllerUITests.swift */; };
+		0F1A140824BEACD70018FC03 /* MinhasPautas.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0F1A140724BEACD70018FC03 /* MinhasPautas.gif */; };
 		0F3BB65F245B32C400CFF81D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3BB65E245B32C400CFF81D /* AppDelegate.swift */; };
 		0F3BB664245B32C400CFF81D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F3BB662245B32C400CFF81D /* Main.storyboard */; };
 		0F3BB667245B32C400CFF81D /* MinhasPautas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F3BB665245B32C400CFF81D /* MinhasPautas.xcdatamodeld */; };
@@ -133,6 +134,7 @@
 		0F0280AA24872A4D00811BA9 /* CreateScheduleViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleViewControllerTests.swift; sourceTree = "<group>"; };
 		0F0714882469C5E6008978A4 /* SchedulesViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesViewControllerUITests.swift; sourceTree = "<group>"; };
 		0F07148A2469FB19008978A4 /* PerfilViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilViewControllerUITests.swift; sourceTree = "<group>"; };
+		0F1A140724BEACD70018FC03 /* MinhasPautas.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = MinhasPautas.gif; sourceTree = "<group>"; };
 		0F3BB65B245B32C400CFF81D /* MinhasPautas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinhasPautas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F3BB65E245B32C400CFF81D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F3BB663245B32C400CFF81D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -279,9 +281,18 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		0F1A140424BEAB090018FC03 /* Previews */ = {
+			isa = PBXGroup;
+			children = (
+				0F1A140724BEACD70018FC03 /* MinhasPautas.gif */,
+			);
+			path = Previews;
+			sourceTree = "<group>";
+		};
 		0F3BB652245B32C400CFF81D = {
 			isa = PBXGroup;
 			children = (
+				0F1A140424BEAB090018FC03 /* Previews */,
 				0FE7B41F24ACD40400686762 /* README.md */,
 				0F3BB65D245B32C400CFF81D /* MinhasPautas */,
 				0F3BB675245B32C500CFF81D /* MinhasPautasTests */,
@@ -762,6 +773,7 @@
 				0F52BA452488807E00C51E65 /* LoginSuccessReturn.json in Resources */,
 				0F3BB66C245B32C500CFF81D /* LaunchScreen.storyboard in Resources */,
 				0F9A8D27245C8A3A005B2E2B /* GoogleService-Info.plist in Resources */,
+				0F1A140824BEACD70018FC03 /* MinhasPautas.gif in Resources */,
 				0F3BB669245B32C500CFF81D /* Assets.xcassets in Resources */,
 				0F3BB664245B32C400CFF81D /* Main.storyboard in Resources */,
 				0FF86388246DFF0A00E657BD /* UpdateScheduleReturn.json in Resources */,

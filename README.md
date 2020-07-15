@@ -2,6 +2,8 @@
 
 Application developed with the objective of applying and testing knowledge, implementing good practices, guidelines, frameworks, design patterns, and other development standards.
 
+![](Previews/MinhasPautas.gif)
+
 ## Development Environment
 - Xcode 11.5
 - Swift 5
