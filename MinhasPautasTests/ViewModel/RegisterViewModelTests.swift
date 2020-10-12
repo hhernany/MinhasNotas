@@ -1,5 +1,5 @@
 //
-//  RegisterViewModelTests.swift
+//  RegisterPresenterTests.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 04/06/20.
@@ -9,9 +9,9 @@
 import XCTest
 @testable import MinhasPautas
 
-class RegisterViewModelTests: XCTestCase {
+class RegisterPresenterTests: XCTestCase {
 
-    var sut: RegisterViewModel!
+    var sut: RegisterPresenter!
     var viewDelegate: MockRegisterViewDelegate!
     var webservice: MockRegisterWebService!
     var registerModel: RegisterModel!
@@ -24,7 +24,7 @@ class RegisterViewModelTests: XCTestCase {
                               emailConfirmation: "newemail@gmail.com",
                               password: "123456",
                               passwordConfirmation: "123456")
-        sut = RegisterViewModel(delegate: viewDelegate, webserrvice: webservice)
+        sut = RegisterPresenter(delegate: viewDelegate, webserrvice: webservice)
     }
 
     override func tearDownWithError() throws {
@@ -34,7 +34,7 @@ class RegisterViewModelTests: XCTestCase {
         registerModel = nil
     }
 
-    func testViewModel_WhenRecieveEmptyData_ShouldCallRegisterError() throws {
+    func testPresenter_WhenRecieveEmptyData_ShouldCallRegisterError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the registerError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -47,7 +47,7 @@ class RegisterViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.registerErrorCounter, 1, "The registerError() method was called more than one time")
     }
     
-    func testViewModel_WhenRecieveValidData_FailedFirebaseRegistration() throws {
+    func testPresenter_WhenRecieveValidData_FailedFirebaseRegistration() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the registerError() method to be called when failed firebase registration")
         viewDelegate.expectation = myExpectation
@@ -61,7 +61,7 @@ class RegisterViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.registerErrorCounter, 1, "The registerError() method was called more than one time")
     }
     
-    func testViewModel_WhenRecieveValidData_FailedDatabaseRegistration() throws {
+    func testPresenter_WhenRecieveValidData_FailedDatabaseRegistration() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the registerError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -75,7 +75,7 @@ class RegisterViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.registerErrorCounter, 1, "The registerError() method was called more than one time")
     }
     
-    func testViewModel_WhenRemoteWebServiceReturnError_ShouldCallResetError() throws {
+    func testPresenter_WhenRemoteWebServiceReturnError_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         webservice.shouldReturnRemoteErrorMessage = true

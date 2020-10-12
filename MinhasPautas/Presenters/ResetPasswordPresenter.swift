@@ -1,5 +1,5 @@
 //
-//  ResetPasswordViewModel.swift
+//  ResetPasswordPresenter.swift
 //  MinhasPautas
 //
 //  Created by Hugo Hernany on 01/05/20.
@@ -10,11 +10,11 @@ import Foundation
 import Firebase
 
 // Add ": class"  if change struct by class
-protocol ResetPasswordViewModelProtocol {
+protocol ResetPasswordPresenterProtocol {
     func sendCredentials(email: String)
 }
 
-struct ResetPasswordViewModel {
+struct ResetPasswordPresenter {
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
     var viewDelegate: ResetPasswordViewControlerProtocol?
@@ -30,7 +30,7 @@ struct ResetPasswordViewModel {
     }
 }
 
-extension ResetPasswordViewModel: ResetPasswordViewModelProtocol {
+extension ResetPasswordPresenter: ResetPasswordPresenterProtocol {
     func sendCredentials(email: String) {
         let resultValidation = validator.isEmailValid(email: email)
         if resultValidation.0 == false {

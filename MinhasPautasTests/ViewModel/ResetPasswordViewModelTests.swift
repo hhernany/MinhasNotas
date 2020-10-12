@@ -1,5 +1,5 @@
 //
-//  ResetPasswordViewModelTests.swift
+//  ResetPasswordPresenterTests.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 03/06/20.
@@ -9,16 +9,16 @@
 import XCTest
 @testable import MinhasPautas
 
-class ResetPasswordViewModelTests: XCTestCase {
+class ResetPasswordPresenterTests: XCTestCase {
 
-    var sut: ResetPasswordViewModel!
+    var sut: ResetPasswordPresenter!
     var viewDelegate: MockResetPasswordViewDelegate!
     var firebase: MockResetPasswordFirebaseService!
     
     override func setUpWithError() throws {
         viewDelegate = MockResetPasswordViewDelegate()
         firebase = MockResetPasswordFirebaseService()
-        sut = ResetPasswordViewModel(delegate: viewDelegate, firebaseService: firebase)
+        sut = ResetPasswordPresenter(delegate: viewDelegate, firebaseService: firebase)
     }
 
     override func tearDownWithError() throws {
@@ -27,7 +27,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         firebase = nil
     }
 
-    func testViewModel_WhenEmailIsEmpty_ShouldCallResetError() throws {
+    func testPresenter_WhenEmailIsEmpty_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -40,7 +40,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resetErrorCounter, 1, "The resetError() method was called more than one time")
     }
     
-    func testViewModel_WhenEmailIsInvalid_ShouldCallResetError() throws {
+    func testPresenter_WhenEmailIsInvalid_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         viewDelegate.expectation = myExpectation
@@ -53,7 +53,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resetErrorCounter, 1, "The resetError() method was called more than one time")
     }
     
-    func testViewModel_WhenEmailIsValid_ShouldCallResetSuccess() throws {
+    func testPresenter_WhenEmailIsValid_ShouldCallResetSuccess() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetSuccess() method to be called")
         viewDelegate.expectation = myExpectation
@@ -66,7 +66,7 @@ class ResetPasswordViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resetSuccessCounter, 1, "The resetSuccess() method was called more than one time")
     }
     
-    func testViewModel_WhenRequestFaield_ShouldCallResetError() throws {
+    func testPresenter_WhenRequestFaield_ShouldCallResetError() throws {
         // Arrange
         let myExpectation = expectation(description: "Expected the resetError() method to be called")
         firebase.shoudReturnError = true

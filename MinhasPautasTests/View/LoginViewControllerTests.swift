@@ -71,12 +71,12 @@ class LoginViewControllerTests: XCTestCase {
     
     func testLoginViewController_WhenCreateTapped_InvokesLoginProcess() throws {
         let connectButton = try XCTUnwrap(sut.connectButton, "The connectButton is not connect to an IBOutlet")
-        let viewModel = MockLoginViewModel()
-        sut.loginViewModel = viewModel
+        let presenter = MockLoginPresenter()
+        sut.loginPresenter = presenter
 
         connectButton.sendActions(for: .touchUpInside)
 
         // Assert
-        XCTAssertTrue(viewModel.sendCredentialsCalled, "The sendCredentials() method was not called when tapped in confirmButton")
+        XCTAssertTrue(presenter.sendCredentialsCalled, "The sendCredentials() method was not called when tapped in confirmButton")
     }
 }

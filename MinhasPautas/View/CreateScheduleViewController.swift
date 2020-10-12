@@ -28,7 +28,7 @@ class CreateScheduleViewController: UIViewController {
     @IBOutlet weak var stackViewTopConstraint: NSLayoutConstraint!
     
     // Variables and Constants
-    var createScheduleViewModel: CreateScheduleViewModelProtocol?
+    var createSchedulePresenter: CreateSchedulePresenterProtocol?
     private var spinner: UIView? = nil
     private var textViewIsFocused = false
     
@@ -46,7 +46,7 @@ class CreateScheduleViewController: UIViewController {
         registerNotifications()
         setupLayoutAndDelegates()
         toolBarTextFields()
-        createScheduleViewModel = CreateScheduleViewModel(delegate: self, webservice: CreateScheduleWebService())
+        createSchedulePresenter = CreateSchedulePresenter(delegate: self, webservice: CreateScheduleWebService())
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -101,10 +101,10 @@ class CreateScheduleViewController: UIViewController {
     }
     
     @IBAction func didTapCreateButton(_ sender: UIBarButtonItem) {
-        guard let _ = createScheduleViewModel else { fatalError("ViewModel not implemented") }
+        guard let _ = createSchedulePresenter else { fatalError("Presenter not implemented") }
         spinner = self.view.showSpinnerGray()
         let formData = CreateScheduleModel(titulo: titleTextField.text ?? "", descricao: descriptionTextField.text ?? "", detalhes: contentTextView.text ?? "")
-        createScheduleViewModel?.sendFormData(formData: formData)
+        createSchedulePresenter?.sendFormData(formData: formData)
     }
 
     private func checkTextFieldIsNotEmpty() {

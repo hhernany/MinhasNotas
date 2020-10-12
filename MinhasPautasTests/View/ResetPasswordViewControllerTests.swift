@@ -46,12 +46,12 @@ class ResetPasswordViewControllerTests: XCTestCase {
 
     func testCreateScheduleViewController_WhenCreateTapped_InvokesResetProcess() throws {
         let confirmButton: UIButton = try XCTUnwrap(sut.confirmButton, "confirmButton is not connect to an IBOutlet")
-        let viewModel = MockResetPasswordViewModel()
-        sut.resetPasswordViewModel = viewModel
+        let presenter = MockResetPasswordPresenter()
+        sut.resetPasswordPresenter = presenter
 
         confirmButton.sendActions(for: .touchUpInside)
 
         // Assert
-        XCTAssertTrue(viewModel.sendCredentialsCalled, "The sendCredentials() method was not called when tapped in confirmButton")
+        XCTAssertTrue(presenter.sendCredentialsCalled, "The sendCredentials() method was not called when tapped in confirmButton")
     }
 }

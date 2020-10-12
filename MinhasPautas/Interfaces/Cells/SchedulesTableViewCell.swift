@@ -28,7 +28,7 @@ class SchedulesTableViewCell: UITableViewCell {
             setupLayout()
         }
     }
-    var schedulesViewModel: SchedulesViewModelProtocol?
+    var schedulesPresenter: SchedulesPresenterProtocol?
     var viewController: SchedulesViewControlerProtocol?
     var indexPath: IndexPath!
 
@@ -81,7 +81,7 @@ class SchedulesTableViewCell: UITableViewCell {
     
     @IBAction func didTapStatusButton(_ sender: UIButton) {
         viewController?.resetLastCellStatus(tab: scheduleModel.status)
-        schedulesViewModel?.updateScheduleStatus(index: indexPath.row, listType: scheduleModel.status)
+        schedulesPresenter?.updateScheduleStatus(index: indexPath.row, listType: scheduleModel.status)
     }
     
 //    override func draw(_ rect: CGRect) {

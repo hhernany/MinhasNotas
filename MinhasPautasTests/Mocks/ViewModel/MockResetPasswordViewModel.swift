@@ -1,5 +1,5 @@
 //
-//  MockResetPasswordViewModel.swift
+//  MockResetPasswordPresenter.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 03/06/20.
@@ -10,7 +10,7 @@ import Foundation
 @testable import MinhasPautas
 
 // Used to test ResetPasswordViewController
-class MockResetPasswordViewModel: ResetPasswordViewModelProtocol {
+class MockResetPasswordPresenter: ResetPasswordPresenterProtocol {
     var sendCredentialsCalled = false
 
     func sendCredentials(email: String) {
