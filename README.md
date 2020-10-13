@@ -20,7 +20,7 @@ Tests developed with XCTests/XCUITests and Moya (Stubbed Responses).
 Before run UITests, disable the following option in simulator: I/O --> Keyboard --> Connect Hardware Keyboard
 
 ## Technical specifications
-- MVVM Architecture
+- MVP Architecture
 - Protocols and Extensions
 - Dependency Injection (DI)
 - Generics
