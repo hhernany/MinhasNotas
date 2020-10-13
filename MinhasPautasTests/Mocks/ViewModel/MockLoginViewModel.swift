@@ -1,5 +1,5 @@
 //
-//  MockLoginViewModel.swift
+//  MockLoginPresenter.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 04/06/20.
@@ -10,7 +10,7 @@ import Foundation
 @testable import MinhasPautas
 
 // Used to test LoginViewController
-class MockLoginViewModel: LoginViewModelProtocol {
+class MockLoginPresenter: LoginPresenterProtocol {
     var sendCredentialsCalled = false
 
     func sendCredentials(email: String, password: String) {

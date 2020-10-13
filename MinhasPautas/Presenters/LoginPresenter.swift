@@ -1,5 +1,5 @@
 //
-//  LoginViewModel.swift
+//  LoginPresenter.swift
 //  MinhasPautas
 //
 //  Created by Hugo Hernany on 30/04/20.
@@ -11,15 +11,15 @@ import Moya
 import Firebase
 
 // Add ": class"  if change struct by class
-protocol LoginViewModelProtocol {
+protocol LoginPresenterProtocol {
     func sendCredentials(email: String, password: String)
 }
 
-struct LoginViewModel {
+struct LoginPresenter {
     
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
-    var viewModelDelegate: LoginViewControlerProtocol?
+    var presenterDelegate: LoginViewControlerProtocol?
     var validator = LoginValidator()
     var webService: LoginWebserviceProtocol?
     var firebaseValidator = FirebaseErrorCodeValidator()
@@ -27,7 +27,7 @@ struct LoginViewModel {
     // Dependency Injection
     init(delegate: LoginViewControlerProtocol?,
          webservice: LoginWebserviceProtocol = LoginWebService()) {
-        viewModelDelegate = delegate
+        presenterDelegate = delegate
         webService = webservice
         
         self.logoutUserFirebase()
@@ -64,31 +64,31 @@ struct LoginViewModel {
     }
 }
 
-extension LoginViewModel: LoginViewModelProtocol {
+extension LoginPresenter: LoginPresenterProtocol {
     func sendCredentials(email: String, password: String) {
         let returnValidation = validator.validateData(email: email, password: password)
         if returnValidation.0 == false {
-            viewModelDelegate?.loginError(message: returnValidation.1)
+            presenterDelegate?.loginError(message: returnValidation.1)
             return
         }
         
         webService?.loginFirebase(email: email, password: password, completionHandler: { (resultData, error) in
             if error != nil {
                 let err = error! as NSError
-                self.viewModelDelegate?.loginError(message: err.domain)
+                self.presenterDelegate?.loginError(message: err.domain)
             } else {
                 self.webService?.performLogin(resultData!, completionHandler: { (loginModel, resultModel, error) in
                     if loginModel == nil && resultModel == nil {
-                        self.viewModelDelegate?.loginError(message: error?.localizedDescription ?? "Erro desconhecido durante o login. Tente novamente.")
+                        self.presenterDelegate?.loginError(message: error?.localizedDescription ?? "Erro desconhecido durante o login. Tente novamente.")
                         return
                     }
                     if resultModel?.success == false && loginModel == nil {
-                        self.viewModelDelegate?.loginError(message: resultModel?.message ?? "Erro desconhecido durante o login. Tente novamente.")
+                        self.presenterDelegate?.loginError(message: resultModel?.message ?? "Erro desconhecido durante o login. Tente novamente.")
                         return
                     }
                     
                     self.saveLocalData(data: loginModel!)
-                    self.viewModelDelegate?.loginSuccess()
+                    self.presenterDelegate?.loginSuccess()
                 })
             }
         })

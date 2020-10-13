@@ -13,19 +13,19 @@ class SchedulesViewControllerTests: XCTestCase {
 
     var storyboard: UIStoryboard!
     var sut: SchedulesViewController!
-    var viewModel: MockSchedulesViewModel!
+    var presenter: MockSchedulesPresenter!
     
     override func setUpWithError() throws {
         storyboard = UIStoryboard(name: "Schedules", bundle: nil)
         sut = storyboard.instantiateViewController(withIdentifier: "SchedulesVC") as? SchedulesViewController
-        viewModel = MockSchedulesViewModel()
+        presenter = MockSchedulesPresenter()
         sut.loadViewIfNeeded()
     }
 
     override func tearDownWithError() throws{
         storyboard = nil
         sut = nil
-        viewModel = nil
+        presenter = nil
     }
     
     func testSchedulesViewController_WhenCreated_HasRequiredOutlets() throws {
@@ -36,9 +36,9 @@ class SchedulesViewControllerTests: XCTestCase {
     }
     
     func testSchedulesViewController_WhenUpdateSchedulesHandleRefresh_CallGetInitialData() throws {
-        sut.schedulesViewModel = viewModel
+        sut.schedulesPresenter = presenter
         sut.updateSchedules()
         
-        XCTAssertTrue(viewModel.getInitialDataCalled)
+        XCTAssertTrue(presenter.getInitialDataCalled)
     }
 }

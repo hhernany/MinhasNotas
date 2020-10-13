@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     // Variables and Constants
-    var registerViewModel: RegisterViewModelProtocol?
+    var registerPresenter: RegisterPresenterProtocol?
     private var spinner: UIView? = nil
     
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class RegisterViewController: UIViewController {
         setupObservers()
         self.setNeedsStatusBarAppearanceUpdate()
         setupObservers()
-        registerViewModel = RegisterViewModel(delegate: self)
+        registerPresenter = RegisterPresenter(delegate: self)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func didTapRegisterButton(_ sender: UIButton) {
-        guard let _ = registerViewModel else { fatalError("ViewModel not implemented") }
+        guard let _ = registerPresenter else { fatalError("Presenter not implemented") }
         spinner = self.view.showSpinnerGray()
         let registerData = RegisterModel(
             name: name.text ?? "",
@@ -80,7 +80,7 @@ class RegisterViewController: UIViewController {
             password: password.text ?? "",
             passwordConfirmation: passwordConfirmation.text ?? ""
             )
-        registerViewModel?.sendCredentials(data: registerData)
+        registerPresenter?.sendCredentials(data: registerData)
     }
 }
 

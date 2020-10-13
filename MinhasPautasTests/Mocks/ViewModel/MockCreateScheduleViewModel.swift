@@ -1,5 +1,5 @@
 //
-//  MockCreateScheduleViewModel.swift
+//  MockCreateSchedulePresenter.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 29/05/20.
@@ -9,7 +9,7 @@
 import Foundation
 @testable import MinhasPautas
 
-class MockCreateScheduleViewModel: CreateScheduleViewModelProtocol {
+class MockCreateSchedulePresenter: CreateSchedulePresenterProtocol {
     var sendFormDataCalled = false
     
     required init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol) {

@@ -65,12 +65,12 @@ class RegisterViewControllerTests: XCTestCase {
     
     func testRegisterViewController_WhenCreateTapped_InvokesRegisterProcess() throws {
         let registerButton: UIButton = try XCTUnwrap(sut.registerButton, "registerButton is not connect to an IBOutlet")
-        let viewModel = MockRegisterViewModel()
-        sut.registerViewModel = viewModel
+        let presenter = MockRegisterPresenter()
+        sut.registerPresenter = presenter
 
         registerButton.sendActions(for: .touchUpInside)
 
         // Assert
-        XCTAssertTrue(viewModel.sendCredentialsCalled, "The sendCredentials() method was not called when tapped in confirmButton")
+        XCTAssertTrue(presenter.sendCredentialsCalled, "The sendCredentials() method was not called when tapped in confirmButton")
     }
 }

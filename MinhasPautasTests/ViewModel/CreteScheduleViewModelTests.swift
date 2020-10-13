@@ -1,5 +1,5 @@
 //
-//  CreteScheduleViewModelTests.swift
+//  CreteSchedulePresenterTests.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 29/05/20.
@@ -10,9 +10,9 @@ import XCTest
 import Moya
 @testable import MinhasPautas
 
-class CreteScheduleViewModelTests: XCTestCase {
+class CreteSchedulePresenterTests: XCTestCase {
 
-    var sut: CreateScheduleViewModel!
+    var sut: CreateSchedulePresenter!
     var viewDelegate: MockCreateScheduleViewDelegate!
     var webservice: CreateScheduleWebServiceProtocol!
     var createScheduleModel: CreateScheduleModel!
@@ -20,7 +20,7 @@ class CreteScheduleViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         viewDelegate = MockCreateScheduleViewDelegate()
         webservice = CreateScheduleWebService(moyaProvider: MoyaProvider<SchedulesAPI>(stubClosure: MoyaProvider.immediatelyStub))
-        sut = CreateScheduleViewModel(delegate: viewDelegate, webservice: webservice)
+        sut = CreateSchedulePresenter(delegate: viewDelegate, webservice: webservice)
     }
 
     override func tearDownWithError() throws {
@@ -30,7 +30,7 @@ class CreteScheduleViewModelTests: XCTestCase {
         createScheduleModel = nil
     }
 
-    func testViewModel_WhenOperationSuccess_ShouldCallCreateSuccess() throws {
+    func testPresenter_WhenOperationSuccess_ShouldCallCreateSuccess() throws {
         // Arrange
         createScheduleModel = CreateScheduleModel(titulo: "Titulo", descricao: "Descricao", detalhes: "Detalhes")
         let myExpectation = expectation(description: "Expected the createSuccess() method to be called")
@@ -44,7 +44,7 @@ class CreteScheduleViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.createSuccessCounter, 1, "The createSuccess() method was called more than one time")
     }
     
-    func testViewModel_WhenModelValidatorFail_ShouldCallCreateError() throws {
+    func testPresenter_WhenModelValidatorFail_ShouldCallCreateError() throws {
         // Arrange
         createScheduleModel = CreateScheduleModel(titulo: "", descricao: "", detalhes: "")
         let myExpectation = expectation(description: "Expected the createError() method to be called")
@@ -58,11 +58,11 @@ class CreteScheduleViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.createErrorCounter, 1, "The createError() method was called more than one time")
     }
     
-    func testViewModel_WhenOperationFail_ShouldCallCreateError() throws {
+    func testPresenter_WhenOperationFail_ShouldCallCreateError() throws {
         // Arrange
         let provider = MoyaProvider<SchedulesAPI>(endpointClosure: customErrorEndpoint, stubClosure: MoyaProvider.immediatelyStub)
         webservice = CreateScheduleWebService(moyaProvider: provider)
-        sut = CreateScheduleViewModel(delegate: viewDelegate, webservice: webservice)
+        sut = CreateSchedulePresenter(delegate: viewDelegate, webservice: webservice)
         
         createScheduleModel = CreateScheduleModel(titulo: "Titulo", descricao: "Descricao", detalhes: "Detalhes")
         let myExpectation = expectation(description: "Expected the createError() method to be called")

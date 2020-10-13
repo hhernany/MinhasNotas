@@ -1,5 +1,5 @@
 //
-//  MockSchedulesViewModel.swift
+//  MockSchedulesPresenter.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 05/06/20.
@@ -10,7 +10,7 @@ import Foundation
 @testable import MinhasPautas
 
 // Used to test LoginViewController
-class MockSchedulesViewModel: SchedulesViewModelProtocol {
+class MockSchedulesPresenter: SchedulesPresenterProtocol {
     var schedulesList: [SchedulesModel] = []
     var schedulesListOpen: [SchedulesModel] = []
     var schedulesListClose: [SchedulesModel] = []

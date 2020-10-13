@@ -1,5 +1,5 @@
 //
-//  SchedulesViewModelTests.swift
+//  SchedulesPresenterTests.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 05/06/20.
@@ -9,9 +9,9 @@
 import XCTest
 @testable import MinhasPautas
 
-class SchedulesViewModelTests: XCTestCase {
+class SchedulesPresenterTests: XCTestCase {
 
-    var sut: SchedulesViewModel!
+    var sut: SchedulesPresenter!
     var viewDelegate: MockSchedulesViewDelegate!
     var webservice: MockSchedulesWebService!
     var schedulesModel: SchedulesModel!
@@ -19,7 +19,7 @@ class SchedulesViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         viewDelegate = MockSchedulesViewDelegate()
         webservice = MockSchedulesWebService()
-        sut = SchedulesViewModel(delegate: viewDelegate, webservice: webservice)
+        sut = SchedulesPresenter(delegate: viewDelegate, webservice: webservice)
         
         sut.schedulesList = [SchedulesModel(id_pauta: 1, titulo: "Title 1", descricao: "Description 1", detalhes: "Detail 1", nome_usuario: "User 1", status: "Aberto", expanded: true)]
         sut.schedulesListOpen = [SchedulesModel(id_pauta: 2, titulo: "Title 2", descricao: "Description 2", detalhes: "Detail 2", nome_usuario: "User 2", status: "Aberto", expanded: true)]
@@ -33,7 +33,7 @@ class SchedulesViewModelTests: XCTestCase {
         schedulesModel = nil
     }
 
-    func testViewModel_WhenGetInitialDataSucceed_ShouldCallReloadTableView() throws {
+    func testPresenter_WhenGetInitialDataSucceed_ShouldCallReloadTableView() throws {
         // Act
         sut.getInitialData()
         
@@ -41,7 +41,7 @@ class SchedulesViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.reloadTableViewCounter, 1, "The reloadTableView() method was called more than one time")
     }
     
-    func testViewModel_WhenGetInitialDataReturnError_ShouldCallReloadTableView() throws {
+    func testPresenter_WhenGetInitialDataReturnError_ShouldCallReloadTableView() throws {
         // Act
         webservice.getDataReturnResultErrorMessage = true
         sut.getInitialData()
@@ -51,7 +51,7 @@ class SchedulesViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resultLabelIsHiddenCounter, 1, "The resultLabelIsHidden() method was called more than one time")
     }
     
-    func testViewModel_WhenGetInitialDataWebServiceError_ShouldCallReloadTableView() throws {
+    func testPresenter_WhenGetInitialDataWebServiceError_ShouldCallReloadTableView() throws {
         // Act
         webservice.getDataRemoteErrorMessage = true
         sut.getInitialData()
@@ -61,7 +61,7 @@ class SchedulesViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.resultLabelIsHiddenCounter, 1, "The resultLabelIsHidden() method was called more than one time")
     }
     
-    func testViewModel_WhenUpdataStatusOpenSucceed_MustContainCorrectData() throws {
+    func testPresenter_WhenUpdataStatusOpenSucceed_MustContainCorrectData() throws {
         sut.updateScheduleStatus(index: 0, listType: "Aberto")
         
         XCTAssertEqual(sut.schedulesListOpen.count, 0, "After update list must be updated")
@@ -69,7 +69,7 @@ class SchedulesViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.reloadTableViewCounter, 1, "The reloadTableView() method was called more than one time")
     }
     
-    func testViewModel_WhenUpdataStatusClosedSucceed_MustContainCorrectData() throws {
+    func testPresenter_WhenUpdataStatusClosedSucceed_MustContainCorrectData() throws {
         sut.updateScheduleStatus(index: 0, listType: "Fechado")
         
         XCTAssertEqual(sut.schedulesListClose.count, 0, "After update list must be updated")
@@ -77,7 +77,7 @@ class SchedulesViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.reloadTableViewCounter, 1, "The reloadTableView() method was called more than one time")
     }
     
-    func testViewModel_WhenUpdataStatusReturnFalse_ShouldCallUpdateError() throws {
+    func testPresenter_WhenUpdataStatusReturnFalse_ShouldCallUpdateError() throws {
         webservice.updateDataReturnError = true
         sut.updateScheduleStatus(index: 0, listType: "Fechado")
         
@@ -87,7 +87,7 @@ class SchedulesViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.reloadTableViewCounter, 1, "The reloadTableView() method was called more than one time")
     }
     
-    func testViewModel_WhenUpdataStatusReturnRemoteError_ShouldCallUpdateError() throws {
+    func testPresenter_WhenUpdataStatusReturnRemoteError_ShouldCallUpdateError() throws {
         webservice.updateDataRemoteErrorMessage = true
         sut.updateScheduleStatus(index: 0, listType: "Fechado")
         
@@ -97,19 +97,19 @@ class SchedulesViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.reloadTableViewCounter, 1, "The reloadTableView() method was called more than one time")
     }
     
-    func testViewModel_WhenCollapseCell_ExpandedMustBeFalse() throws {
+    func testPresenter_WhenCollapseCell_ExpandedMustBeFalse() throws {
         sut.expandedCell(index: 0, type: "Aberto", status: false)
         
         XCTAssertFalse(sut.schedulesListOpen[0].expanded, "Cell must collapse after update status. Status must be false")
     }
     
-    func testViewModel_WhenCollapseCell_ExpandedMustBeTrue() throws {
+    func testPresenter_WhenCollapseCell_ExpandedMustBeTrue() throws {
         sut.expandedCell(index: 0, type: "Fechado", status: true)
         
         XCTAssertTrue(sut.schedulesListClose[0].expanded, "Cell must expand after update status. Status must be true")
     }
     
-    func testViewModel_WhenGetMoreDataSuccess_ShouldCallReloadTableView() throws {
+    func testPresenter_WhenGetMoreDataSuccess_ShouldCallReloadTableView() throws {
         sut.getMoreData()
         
         XCTAssertEqual(viewDelegate.reloadTableViewCounter, 1, "The reloadTableView() method was called more than one time")

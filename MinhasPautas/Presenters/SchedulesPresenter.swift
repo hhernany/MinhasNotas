@@ -1,5 +1,5 @@
 //
-//  SchedulesViewModel.swift
+//  SchedulesPresenter.swift
 //  MinhasPautas
 //
 //  Created by Hugo Hernany on 01/05/20.
@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 // Add ": class"  if change struct by class
-protocol SchedulesViewModelProtocol: class {
+protocol SchedulesPresenterProtocol: class {
     var schedulesList: [SchedulesModel] { get set }
     var schedulesListOpen: [SchedulesModel] { get set }
     var schedulesListClose: [SchedulesModel] { get set }
@@ -23,8 +23,8 @@ protocol SchedulesViewModelProtocol: class {
     func updateScheduleStatus(index: Int, listType: String)
 }
 
-class SchedulesViewModel {
-    var viewModelDelegate: SchedulesViewControlerProtocol?
+class SchedulesPresenter {
+    var presenterDelegate: SchedulesViewControlerProtocol?
     var webService: SchedulesWebServiceProtocol?
     
     fileprivate var provider: MoyaProvider<SchedulesAPI>!
@@ -38,7 +38,7 @@ class SchedulesViewModel {
     // Dependency Injection
     init(delegate: SchedulesViewControlerProtocol?,
          webservice: SchedulesWebServiceProtocol = SchedulesWebService()) {
-        viewModelDelegate = delegate
+        presenterDelegate = delegate
         webService = webservice
     }
     
@@ -74,20 +74,20 @@ class SchedulesViewModel {
     private func updateStatus(data: [String:Any]) {
         webService?.updateStatus(data: data, completionHandler: { [weak self] (resultModel, error) in
             if error != nil {
-                self?.viewModelDelegate?.updateError(message: "Não possível atualizar o status. Tente novamente.")
+                self?.presenterDelegate?.updateError(message: "Não possível atualizar o status. Tente novamente.")
             } else if resultModel?.success == false {
-                self?.viewModelDelegate?.updateError(message: resultModel?.message ?? "Não foi possível atualizar o status. Tente novamente.")
+                self?.presenterDelegate?.updateError(message: resultModel?.message ?? "Não foi possível atualizar o status. Tente novamente.")
             }
         })
     }
 }
 
-extension SchedulesViewModel: SchedulesViewModelProtocol {
+extension SchedulesPresenter: SchedulesPresenterProtocol {
     func getInitialData() {
         schedulesList.removeAll()
         schedulesListClose.removeAll()
         schedulesListOpen.removeAll()
-        //viewModelDelegate?.resultLabelIsHidden(state: true, message: "")
+        //presenterDelegate?.resultLabelIsHidden(state: true, message: "")
         page = 0
         isLoading = true
         reachEndOfData = false
@@ -107,17 +107,17 @@ extension SchedulesViewModel: SchedulesViewModelProtocol {
     
     func updateTableView() {
         isLoading = false
-        viewModelDelegate?.reloadTableView()
+        presenterDelegate?.reloadTableView()
     }
     
     // Show message only when there are no results (when list is empty).
     func controlResultLabel() {
         isLoading = false
         if schedulesList.count == 0 {
-            viewModelDelegate?.reloadTableView()
-            viewModelDelegate?.resultLabelIsHidden(state: false, message: "Você ainda não possui nenhuma pauta cadastrada.")
+            presenterDelegate?.reloadTableView()
+            presenterDelegate?.resultLabelIsHidden(state: false, message: "Você ainda não possui nenhuma pauta cadastrada.")
         } else {
-            viewModelDelegate?.reloadTableView()
+            presenterDelegate?.reloadTableView()
         }
     }
     
@@ -157,7 +157,7 @@ extension SchedulesViewModel: SchedulesViewModelProtocol {
             "status": newStatus
         ]
         updateStatus(data: data)
-        viewModelDelegate?.reloadTableView()
+        presenterDelegate?.reloadTableView()
     }
 }
 

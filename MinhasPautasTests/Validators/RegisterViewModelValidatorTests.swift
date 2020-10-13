@@ -1,5 +1,5 @@
 //
-//  RegisterViewModelValidatorTests.swift
+//  RegisterPresenterValidatorTests.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 03/06/20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import MinhasPautas
 
-class RegisterViewModelValidatorTests: XCTestCase {
+class RegisterPresenterValidatorTests: XCTestCase {
     
     var sut: RegisterValidator!
     var registerModel: RegisterModel!
@@ -23,7 +23,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         registerModel = nil
     }
     
-    func testRegisterViewModelValidator_WithEmptyName() throws {
+    func testRegisterPresenterValidator_WithEmptyName() throws {
         registerModel = RegisterModel(name: "", email: "", emailConfirmation: "", password: "", passwordConfirmation: "")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -36,7 +36,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_WithEmptyEmail() throws {
+    func testRegisterPresenterValidator_WithEmptyEmail() throws {
         registerModel = RegisterModel(name: "First Name", email: "", emailConfirmation: "", password: "", passwordConfirmation: "")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -49,7 +49,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_WithInvalidEmail() throws {
+    func testRegisterPresenterValidator_WithInvalidEmail() throws {
         registerModel = RegisterModel(name: "First Name", email: "invalidemail", emailConfirmation: "", password: "", passwordConfirmation: "")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -62,7 +62,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_WithEmailConfirmationEmpty() throws {
+    func testRegisterPresenterValidator_WithEmailConfirmationEmpty() throws {
         registerModel = RegisterModel(name: "First Name", email: "validemail@gmail.com", emailConfirmation: "", password: "", passwordConfirmation: "")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -75,7 +75,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_EmailConfirmationDontMatch() throws {
+    func testRegisterPresenterValidator_EmailConfirmationDontMatch() throws {
         registerModel = RegisterModel(name: "First Name", email: "validemail@gmail.com", emailConfirmation: "123", password: "", passwordConfirmation: "")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -88,7 +88,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_WithEmptyPassword() throws {
+    func testRegisterPresenterValidator_WithEmptyPassword() throws {
         registerModel = RegisterModel(name: "First Name", email: "validemail@gmail.com", emailConfirmation: "validemail@gmail.com", password: "", passwordConfirmation: "")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -101,7 +101,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_WithEmptyConfirmationPassword() throws {
+    func testRegisterPresenterValidator_WithEmptyConfirmationPassword() throws {
         registerModel = RegisterModel(name: "First Name", email: "validemail@gmail.com", emailConfirmation: "validemail@gmail.com", password: "test123456", passwordConfirmation: "")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -114,7 +114,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_PasswordsDontMatch() throws {
+    func testRegisterPresenterValidator_PasswordsDontMatch() throws {
         registerModel = RegisterModel(name: "First Name", email: "validemail@gmail.com", emailConfirmation: "validemail@gmail.com", password: "test123456", passwordConfirmation: "test")
         let resultValidation = sut.validateModel(data: registerModel)
 
@@ -127,7 +127,7 @@ class RegisterViewModelValidatorTests: XCTestCase {
         }
     }
     
-    func testRegisterViewModelValidator_WithValidInformations() throws {
+    func testRegisterPresenterValidator_WithValidInformations() throws {
         registerModel = RegisterModel(name: "First Name", email: "validemail@gmail.com", emailConfirmation: "validemail@gmail.com", password: "test123456", passwordConfirmation: "test123456")
         let resultValidation = sut.validateModel(data: registerModel)
 

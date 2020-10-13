@@ -21,12 +21,12 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     
     // Variables and Constants
-    var resetPasswordViewModel: ResetPasswordViewModelProtocol?
+    var resetPasswordPresenter: ResetPasswordPresenterProtocol?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetPasswordViewModel = ResetPasswordViewModel(delegate: self)
+        resetPasswordPresenter = ResetPasswordPresenter(delegate: self)
         self.setNeedsStatusBarAppearanceUpdate()
         self.view.window?.backgroundColor = UIColor.red
         self.view.window?.tintColor = UIColor.red
@@ -41,9 +41,9 @@ class ResetPasswordViewController: UIViewController {
     }
 
     @IBAction func didtapCofirmButton(_ sender: UIButton) {
-        guard let _ = resetPasswordViewModel else { fatalError("ViewModel not implemented") }
+        guard let _ = resetPasswordPresenter else { fatalError("Presenter not implemented") }
         spinner = self.view.showSpinnerGray()
-        resetPasswordViewModel?.sendCredentials(email: emailTextField.text ?? "")
+        resetPasswordPresenter?.sendCredentials(email: emailTextField.text ?? "")
     }
 }
 

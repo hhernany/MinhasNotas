@@ -53,13 +53,13 @@ class CreateScheduleViewControllerTests: XCTestCase {
 
         let viewDelegate = MockCreateScheduleViewDelegate()
         let webservice = CreateScheduleWebService()
-        let viewModel = MockCreateScheduleViewModel(delegate: viewDelegate, webservice: webservice)
-        sut.createScheduleViewModel = viewModel
+        let presenter = MockCreateSchedulePresenter(delegate: viewDelegate, webservice: webservice)
+        sut.createSchedulePresenter = presenter
         
         // Act
         _ = sut.createButton.target?.perform(buttonSelector, with: nil)
         
         // Assert
-        XCTAssertTrue(viewModel.sendFormDataCalled, "The sendFormData() method was not called when tapped in createButton")
+        XCTAssertTrue(presenter.sendFormDataCalled, "The sendFormData() method was not called when tapped in createButton")
     }
 }

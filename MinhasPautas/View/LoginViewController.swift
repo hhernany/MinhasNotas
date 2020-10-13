@@ -24,14 +24,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var bottomStackView: NSLayoutConstraint!
     
     // Variables and Constants
-    var loginViewModel: LoginViewModelProtocol?
+    var loginPresenter: LoginPresenterProtocol?
     private var spinner: UIView? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         setupKeyboard()
-        loginViewModel = LoginViewModel(delegate: self)
+        loginPresenter = LoginPresenter(delegate: self)
         self.setNeedsStatusBarAppearanceUpdate()
         self.view.window?.backgroundColor = UIColor.red
         self.view.window?.tintColor = UIColor.red
@@ -64,9 +64,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func didTapConnectButton(_ sender: UIButton) {
-        guard let _ = loginViewModel else { fatalError("ViewModel not implemented")}
+        guard let _ = loginPresenter else { fatalError("Presenter not implemented")}
         spinner = self.view.showSpinnerGray()
-        loginViewModel?.sendCredentials(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
+        loginPresenter?.sendCredentials(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  MockRegisterViewModel.swift
+//  MockRegisterPresenter.swift
 //  MinhasPautasTests
 //
 //  Created by Hugo Hernany on 04/06/20.
@@ -10,7 +10,7 @@ import Foundation
 @testable import MinhasPautas
 
 // Used to test RegisterViewController
-class MockRegisterViewModel: RegisterViewModelProtocol {
+class MockRegisterPresenter: RegisterPresenterProtocol {
     var sendCredentialsCalled = false
 
     func sendCredentials(data: RegisterModel) {

@@ -1,5 +1,5 @@
 //
-//  RegisterViewModelValidator.swift
+//  RegisterPresenterValidator.swift
 //  MinhasPautas
 //
 //  Created by Hugo Hernany on 03/06/20.

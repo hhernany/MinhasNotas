@@ -25,7 +25,7 @@ class SchedulesViewController: UIViewController {
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     // Variables and Constants
-    var schedulesViewModel: SchedulesViewModelProtocol?
+    var schedulesPresenter: SchedulesPresenterProtocol?
     private var spinner: UIView? = nil
     private var lastCellOpenInOpenTab: IndexPath?
     private var lastCellOpenInCloseTab: IndexPath?
@@ -40,8 +40,8 @@ class SchedulesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if schedulesViewModel == nil {
-            schedulesViewModel = SchedulesViewModel(delegate: self)
+        if schedulesPresenter == nil {
+            schedulesPresenter = SchedulesPresenter(delegate: self)
         }
         setupLayout()
         getSchedules()
@@ -67,15 +67,15 @@ class SchedulesViewController: UIViewController {
     }
     
     private func getSchedules() {
-        guard let _ = schedulesViewModel else { fatalError("ViewModel not implemented")}
+        guard let _ = schedulesPresenter else { fatalError("Presenter not implemented")}
         spinner = self.view.showSpinnerGray()
         noResultLabel.isHidden = true // Hide while getting data
-        schedulesViewModel?.getInitialData()
+        schedulesPresenter?.getInitialData()
     }
     
     // Handle Refresh
     @objc func updateSchedules() {
-        schedulesViewModel?.getInitialData()
+        schedulesPresenter?.getInitialData()
     }
     
     @IBAction private func changeTab(_ sender: UISegmentedControl) {
@@ -96,7 +96,7 @@ class SchedulesViewController: UIViewController {
             self.segmentedControl.sendActions(for: UIControl.Event.valueChanged) // Send update action
 
             self.spinner = self.view.showSpinnerGray()
-            self.schedulesViewModel?.getInitialData()
+            self.schedulesPresenter?.getInitialData()
         }
     }
 }
@@ -112,26 +112,26 @@ extension SchedulesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tabStatus == "Aberto" {
-            return schedulesViewModel?.schedulesListOpen.count ?? 0
+            return schedulesPresenter?.schedulesListOpen.count ?? 0
         } else {
-            return schedulesViewModel?.schedulesListClose.count ?? 0
+            return schedulesPresenter?.schedulesListClose.count ?? 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if schedulesViewModel?.schedulesList.count == 0 {
+        if schedulesPresenter?.schedulesList.count == 0 {
             return UITableViewCell()
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! SchedulesTableViewCell
-        cell.schedulesViewModel = schedulesViewModel // Pass viewModel to the cell
+        cell.schedulesPresenter = schedulesPresenter // Pass presenter to the cell
         cell.viewController = self
         cell.indexPath = indexPath
         
         if tabStatus == "Aberto" {
-            cell.scheduleModel = schedulesViewModel?.schedulesListOpen[indexPath.row]
+            cell.scheduleModel = schedulesPresenter?.schedulesListOpen[indexPath.row]
         } else {
-            cell.scheduleModel = schedulesViewModel?.schedulesListClose[indexPath.row]
+            cell.scheduleModel = schedulesPresenter?.schedulesListClose[indexPath.row]
         }
         return cell
     }
@@ -142,19 +142,19 @@ extension SchedulesViewController: UITableViewDelegate {
         // Colapse last cell open
         let lastCellOpen = tabStatus == "Aberto" ? lastCellOpenInOpenTab : lastCellOpenInCloseTab
         if lastCellOpen != nil && lastCellOpen?.row != indexPath.row {
-            schedulesViewModel?.expandedCell(index: lastCellOpen!.row, type: tabStatus, status: false)
+            schedulesPresenter?.expandedCell(index: lastCellOpen!.row, type: tabStatus, status: false)
             tableView.reloadRows(at: [lastCellOpen!], with: .fade)
         }
         
         // Expand/Colapse cell
         var newStatus: Bool
         if tabStatus == "Aberto" {
-            newStatus = !schedulesViewModel!.schedulesListOpen[indexPath.row].expanded
+            newStatus = !schedulesPresenter!.schedulesListOpen[indexPath.row].expanded
         } else {
-            newStatus = !schedulesViewModel!.schedulesListClose[indexPath.row].expanded
+            newStatus = !schedulesPresenter!.schedulesListClose[indexPath.row].expanded
 
         }
-        schedulesViewModel?.expandedCell(index: indexPath.row, type: tabStatus, status: newStatus)
+        schedulesPresenter?.expandedCell(index: indexPath.row, type: tabStatus, status: newStatus)
         tableView.reloadRows(at: [indexPath], with: .fade)
 
         // Animate when scroll to top (Nedd some more test)
@@ -177,12 +177,12 @@ extension SchedulesViewController: UITableViewDelegate {
         animator.animate(cell: cell, at: indexPath, in: tableView)
         
         // Loading more data when scrolling
-        let totalCells = tabStatus == "Aberto" ? schedulesViewModel!.schedulesListOpen.count : schedulesViewModel!.schedulesListClose.count
+        let totalCells = tabStatus == "Aberto" ? schedulesPresenter!.schedulesListOpen.count : schedulesPresenter!.schedulesListClose.count
         if indexPath.row == totalCells - 1 {
             if refreshControl.isRefreshing {
                 return
             }
-            schedulesViewModel?.getMoreData()
+            schedulesPresenter?.getMoreData()
         }
     }
 }
@@ -215,10 +215,10 @@ extension SchedulesViewController: SchedulesViewControlerProtocol {
     }
     
     func controlMessageStatus() {
-        if segmentedControl.selectedSegmentIndex == 0 && schedulesViewModel?.schedulesListOpen.count == 0 {
+        if segmentedControl.selectedSegmentIndex == 0 && schedulesPresenter?.schedulesListOpen.count == 0 {
             resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta em aberto")
         }
-        if segmentedControl.selectedSegmentIndex == 1 && schedulesViewModel?.schedulesListClose.count == 0 {
+        if segmentedControl.selectedSegmentIndex == 1 && schedulesPresenter?.schedulesListClose.count == 0 {
             resultLabelIsHidden(state: false, message: "Você não possui nenhuma pauta fechada")
         }
     }

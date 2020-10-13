@@ -1,5 +1,5 @@
 //
-//  CreateScheduleViewModel.swift
+//  CreateSchedulePresenter.swift
 //  MinhasPautas
 //
 //  Created by Hugo Hernany on 02/05/20.
@@ -10,30 +10,30 @@ import Foundation
 import Moya
 
 // Add ": class"  if change struct by class
-protocol CreateScheduleViewModelProtocol {
+protocol CreateSchedulePresenterProtocol {
     init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol)
     func sendFormData(formData: CreateScheduleModel)
 }
 
-struct CreateScheduleViewModel {
+struct CreateSchedulePresenter {
     // weak var is not necessary. Because we are using Struct instead of Class.
     // If using class instead struct, change for weak var because of reference cycles.
-    var viewModelDelegate: CreateScheduleViewControllerProtocol?
+    var presenterDelegate: CreateScheduleViewControllerProtocol?
     var webService: CreateScheduleWebServiceProtocol?
     let validator = CreateScheduleValidator()
     
     // Dependency Injection
     init(delegate: CreateScheduleViewControllerProtocol?, webservice: CreateScheduleWebServiceProtocol) {
-        viewModelDelegate = delegate
+        presenterDelegate = delegate
         webService = webservice
     }
 }
 
-extension CreateScheduleViewModel: CreateScheduleViewModelProtocol {
+extension CreateSchedulePresenter: CreateSchedulePresenterProtocol {
     func sendFormData(formData: CreateScheduleModel) {
         let validationError = validator.validateScheduleModel(formData: formData)
         if validationError != nil {
-            viewModelDelegate?.createError(message: validationError?.localizedDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
+            presenterDelegate?.createError(message: validationError?.localizedDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
             return
         }
 
@@ -46,9 +46,9 @@ extension CreateScheduleViewModel: CreateScheduleViewModelProtocol {
         
         webService?.insertSchedule(postData) { (result, error) in
             if error == nil && result?.success == true {
-                self.viewModelDelegate?.createSuccess()
+                self.presenterDelegate?.createSuccess()
             } else {
-                self.viewModelDelegate?.createError(message: error?.errorDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
+                self.presenterDelegate?.createError(message: error?.errorDescription ?? "Erro desconhecido. Tente novamente mais tarde.")
             }
         }
     }
